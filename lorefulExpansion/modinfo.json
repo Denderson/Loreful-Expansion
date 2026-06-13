@@ -1,0 +1,11 @@
+{
+	"id": "lorefulExpansion",
+	"name": "The Browncat",
+	"version": "0.9",
+	"hide_version": false,
+	"authors": "loreful misc team",
+	"description": "Adds lore to rain world",
+	"requirements": ["slime-cubed.slugbase", "watcher", "regionkit", "crs", "fisobs"],
+	"requirements_names": ["SlugBase", "The Watcher", "RegionKit", "Custom Regions Support", "Fisobs"],
+	"checksum_override_version": false
+}
