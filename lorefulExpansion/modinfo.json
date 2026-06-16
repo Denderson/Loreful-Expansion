@@ -1,11 +1,12 @@
 {
-	"id": "lorefulExpansion",
-	"name": "The Browncat",
-	"version": "0.9",
-	"hide_version": false,
-	"authors": "loreful misc team",
-	"description": "Adds lore to rain world",
-	"requirements": ["slime-cubed.slugbase", "watcher", "regionkit", "crs", "fisobs"],
-	"requirements_names": ["SlugBase", "The Watcher", "RegionKit", "Custom Regions Support", "Fisobs"],
-	"checksum_override_version": false
+  "id": "loremiscExpansion",
+  "name": "More Lore Expansion",
+  "version": "1.0.0",
+  "hide_version": true,
+  "authors": "sliverOfOcean group chat",
+  "description": "Hey guys did you know that the three Daemons pillars in the Rain World: The Watcher DLC Daemon sequence<LINE> during the final ending represent the three canons, vanilla, Rain World: Downpour and Rain World: The Watcher?<LINE> I know this is pretty cool, so creative and daring of Videocult and Akupara Games to introduce this neat piece of lore and ",
+  "requirements": [ "slime-cubed.slugbase", "watcher", "regionkit", "crs", "fisobs"],
+  "requirements_names": [ "SlugBase", "The Watcher", "RegionKit", "Custom Regions Support", "Fisobs"],
+  "checksum_override_version": false,
+  "tags": [ "Regions", "Tools" ]
 }

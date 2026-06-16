@@ -1,0 +1,32 @@
+{
+	"id": "protag",
+	"name": "John Protagonist",
+	"description": "Hey guys did you know that the three Daemons pillars in the Rain World: The Watcher DLC Daemon sequence<LINE> during the final ending represent the three canons, vanilla, Rain World: Downpour and Rain World: The Watcher?<LINE> I know this is pretty cool, so creative and daring of Videocult and Akupara Games to introduce this neat piece of lore and ",
+	"features": {
+		"color": "695532",
+		"custom_colors": [
+			{ "name": "Body", "story": "865B5F" },
+			{ "name": "Eyes", "story": "FFFFFF" },
+			{ "name": "Gills", "story": "3D2C2F" }
+		],
+		"food_min": 3,
+		"food_max": 6,
+		"diet": {
+			"base": "White",
+			"corpses": 0.25
+		},
+		"auto_grab_batflies": true,
+		"tunnel_speed": [ 0.8, 0.7 ],
+		"throw_skill": 0,
+		"weight": [ 1.12, 0.9 ],
+		"lung_capacity": 1,
+		"start_room": "SU_S01",
+		"world_state": [ "protag", "Watcher" ],
+		"the_mark": false,
+		"select_menu_scene": "Slugcat_protag",
+		"sleep_scene": "Sleep_protag",
+		"starve_scene": "Sleep_protag",
+		"death_scene": "Sleep_protag",
+		"expedition_enabled": false
+	}
+}
