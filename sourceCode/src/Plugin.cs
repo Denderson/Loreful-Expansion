@@ -1,27 +1,71 @@
-﻿using System;
-using BepInEx;
-using UnityEngine;
+﻿using BepInEx;
+using BepInEx.Logging;
+using Menu;
 using SlugBase.Features;
-using static SlugBase.Features.FeatureTypes;
+using System;
+using UnityEngine;
+using LizardCosmetics;
+using Menu.Remix.MixedUI;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using MonoMod.RuntimeDetour;
+using RWCustom;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Contexts;
+using System.Security.Permissions;
 
-namespace SlugTemplate
+namespace loremiscExpansion
 {
-    [BepInPlugin(MOD_ID, "loremiscExpansion", "0.1.0")]
     [BepInDependency("slime-cubed.slugbase")]
-    class Plugin : BaseUnityPlugin
+    [BepInPlugin("loremiscExpansion", "loremiscExpansion", "0.1.0")]
+    public class Plugin : BaseUnityPlugin
     {
-        private const string MOD_ID = "loremiscExpansion";
+        public static ManualLogSource Log { get; private set; }
 
-        // Add hooks
+        public static RemixMenu remixMenu;
+        public bool remixInit;
+        public bool isInit;
+
         public void OnEnable()
         {
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
+            On.RainWorld.OnModsInit += LoadRemixMenu;
 
-            // Put your custom hooks here!
+            try
+            {
+                On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
+                Logger.LogMessage("loremisc hooks success!");
+            }
+            catch (Exception e)
+            {
+                Logger.LogMessage("loremisc hooks fail!!!");
+                Logger.LogError(e);
+            }
         }
-        
-        // Load any resources, such as sprites or sounds
+
+        private void LoadRemixMenu(On.RainWorld.orig_OnModsInit orig, RainWorld self)
+        {
+            orig(self);
+            if (remixInit)
+            {
+                return;
+            }
+            remixInit = true;
+            remixMenu = new RemixMenu(this);
+            try
+            {
+                MachineConnector.SetRegisteredOI("invedwatcher", remixMenu);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log($"The Looker: Hook_OnModsInit options failed init error {remixMenu}{ex}");
+                Logger.LogError(ex);
+            }
+            Enums.RegisterValues();
+        }
         private void LoadResources(RainWorld rainWorld)
         {
         }
