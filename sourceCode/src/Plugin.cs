@@ -37,12 +37,23 @@ namespace loremiscExpansion
             {
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
+                On.Player.Update += Player_Update;
+
                 Logger.LogMessage("loremisc hooks success!");
             }
             catch (Exception e)
             {
                 Logger.LogMessage("loremisc hooks fail!!!");
                 Logger.LogError(e);
+            }
+        }
+
+        public static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
+        {
+            orig(self, eu);
+            if (self?.SlugCatClass == Enums.protagName)
+            {
+                self.airInLungs = 1f;
             }
         }
 
@@ -57,11 +68,11 @@ namespace loremiscExpansion
             remixMenu = new RemixMenu(this);
             try
             {
-                MachineConnector.SetRegisteredOI("invedwatcher", remixMenu);
+                MachineConnector.SetRegisteredOI("loremiscExpansion", remixMenu);
             }
             catch (Exception ex)
             {
-                Debug.Log($"The Looker: Hook_OnModsInit options failed init error {remixMenu}{ex}");
+                Debug.Log($"Loremisc: Hook_OnModsInit options failed init error {remixMenu}{ex}");
                 Logger.LogError(ex);
             }
             Enums.RegisterValues();
