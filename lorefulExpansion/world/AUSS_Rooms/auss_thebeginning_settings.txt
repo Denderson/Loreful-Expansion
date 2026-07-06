@@ -1,0 +1,8 @@
+Template: NONE
+Grime: 0.173913
+Palette: 5651
+EffectColorA: 18
+EffectColorB: 21
+Effects: Bloom-0.7065217-20-20, WaterDepth-0.3043478-30-30, 
+PlacedObjects: AdjustableFan><272.8049><2988.456><5~8.660254~0~0.2695651~0.8913044~0.8478261, AdjustableFan><439><2989><5~8.660254~0~0.1608694~0.8913044~0.8478261, LightSource><829.3522><3046.365><0.2717391~Environment~59~-74~50~86.60254~1~0~None~0~0, AirPocket><78.70358><1321.945><256~175~30~30~Y~56, AirPocket><658.1483><1144.384><252~351~30~30~Y~38, AirPocket><-73.05066><2194.557><290~197~30~30~Y~59, LightSource><369.7357><1585.949><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, LightSource><592><1585><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, LightSource><369><1078><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, LightSource><592><1078><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, LightSource><102><2944><0.1521739~EffectColor1~43~60~50~86.60254~1~1~None~0~0, LightSource><347><2559><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, LightSource><611><2557><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, LightSource><370><2204><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, LightSource><592><2206><0.1847826~EffectColor1~4~40~50~86.60254~1~1~None~0~0, GreenToken><815.7><1460.501><-24~-134~0~0~0~Watcher~~1~0~0~0~1~0~0~0~1~0~0~0, 
+FadePalette: 10, 0, 0.3043478, 0.5543478, 0.7065217
