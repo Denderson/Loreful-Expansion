@@ -10,10 +10,23 @@ namespace loremiscExpansion
     {
         EntityID ID;
         int WanderingScore = 2;
+        string VisitedRegions;
+        string NextRegion = null;
+        int PersonalReputation = 0;
 
         public CollectorStats(AbstractCreature Host)
         {
             ID = Host.ID;
+        }
+        public void WanderToRegion ()
+        {
+           
+        }
+
+        public void CreatureState_CycleTick(On.CreatureState.orig_CycleTick orig, CreatureState self)
+        {
+            //See comment in Plugin.cs for why this is not currently used
+            throw new NotImplementedException();
         }
     }
 }
