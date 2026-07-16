@@ -1,0 +1,9 @@
+Template: NONE
+Clouds: 0.3369565
+Grime: 0.1086956
+Palette: 42067
+EffectColorA: 14
+EffectColorB: 13
+Effects: Fog-0.3043478-20-20, LightRain-0.05434782-290-25, 
+PlacedObjects: InsectGroup><1241.692><241.3049><971~415~0~0~RockFlea~0.8043478, InsectGroup><1224.747><376.8><1041~238~0~0~TinyDragonFly~0.6630435, 
+AmbientSounds: OMNI><AM_ENV-Woods.ogg><496.1089><111.3322><0.6086956><1, OMNI><AM_ENV-Pasture.ogg><676.1558><114.9264><0.3043478><1, 

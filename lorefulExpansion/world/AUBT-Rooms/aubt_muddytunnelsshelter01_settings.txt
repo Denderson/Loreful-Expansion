@@ -1,0 +1,12 @@
+Template: NONE
+DangerType: None
+Clouds: 0.8043478
+Grime: 0.25
+RandomItemDensity: 0
+RandomItemSpearChance: 0
+WaterReflectionAlpha: 0
+Palette: 42068
+EffectColorA: 14
+EffectColorB: 13
+Effects: ModifyEffectColorA-0.8043478,0.3586957,0.5652174-254-69, 
+PlacedObjects: LightSource><691.6915><418.0587><0.2065217~EffectColor2~-23~125~193~-87.39746~0~1~None~0~0, LightSource><772><410><0.2065217~EffectColor1~-23~125~-261~-402.3975~0~1~None~0~0, LightSource><671><266><0.1521739~EffectColor1~-6~54~-494~124.6025~0~1~None~0~0, LightSource><712><267><0.1521739~EffectColor1~-6~54~-494~124.6025~0~1~None~0~0, LightSource><792><265><0.1521739~EffectColor1~-6~54~-478~282.6025~0~1~None~0~0, LightSource><752><265><0.1521739~EffectColor2~-6~54~-458~176.6025~0~1~None~0~0, ShelterSpawnPoint><568.1359><283.6033><, AdjustableFan><631.3386><671.1793><5~8.660254~0~0.1630435~0.2391304~0.1086956, 

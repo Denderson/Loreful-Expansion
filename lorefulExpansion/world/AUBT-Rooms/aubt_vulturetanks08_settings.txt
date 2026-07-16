@@ -1,0 +1,10 @@
+Template: NONE
+DangerType: FloodAndRain
+Clouds: 0.25
+Grime: 0.1847826
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: LightSource><700.7448><548.55><0.1630435~Environment~705~-136~50~86.60254~0~1~None~0~0, InsectGroup><805.3481><263.6199><-103~210~0~0~RockFlea~0.6086954, LightSource><294.9025><427.8706><0.1195652~EffectColor1~-204~162~16~183.6025~0~0~None~0~0, LightSource><714><677><0.1195652~EffectColor1~-204~162~-137~-91.39746~0~0~None~0~0, LightSource><1157><321><0.1195652~EffectColor1~-204~162~-215~-253.3975~0~0~None~0~0, ReliableSpear><1277.223><350.1981><, ReliableSpear><1246.496><353.3><, ReliableSpear><1263.506><352.9499><, ReliableSpear><1295.644><348.361><, ReliableSpear><1200.061><289.3155><, ReliableSpear><1158.3><224.0041><, ReliableSpear><1134.302><220.2225><, 
+AmbientSounds: OMNI><RWTW_AmbDrips_02.ogg><702.8303><43.3559><0.2826087><1, OMNI><RWTW_AmbDrips_04.ogg><519.6706><8.316437><0.2282609><1, SPOT><AM_IND-ElectricHum02.ogg><21.19556><108.2918><0.25><0.823913><123.1956><348.2918><36.64466><-46.35535><0><0.1, 
+FadePalette: 8, 0.1521739

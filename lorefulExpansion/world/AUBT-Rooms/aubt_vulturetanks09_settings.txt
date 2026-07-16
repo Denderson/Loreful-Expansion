@@ -1,0 +1,8 @@
+Template: NONE
+Grime: 0.1521739
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: LightSource><465.9012><1281.674><0.1413043~Environment~669~315~50~86.60254~0~1~None~0~0, LightSource><432.6201><1166.652><0.1847826~EffectColor1~-11~162~-277~147.6025~0~0~None~0~0, LightSource><612><1181><0.423913~EffectColor1~-19~180~307~139.6025~0~0~None~0~0, LightSource><797><1186><0.1630435~EffectColor1~36~173~139~255.6025~0~0~None~0~0, LightSource><224.8675><243.6498><0.1195652~EffectColor1~11~142~-108~167.6025~1~1~None~0~0, LightSource><224><320><0.08695652~EffectColor2~11~142~-104~206.6025~1~1~None~0~0, LightSource><773><792><0.1195652~EffectColor2~11~142~-155~-104.3975~1~1~None~0~0, LightSource><1289><676><0.1413043~EffectColor2~-67~162~-139~53.60254~1~1~None~0~0, LightSource><1154><263><0.08695652~EffectColor1~11~142~-31~61.60248~1~1~None~0~0, LightSource><1144><181><0.08695652~EffectColor1~11~142~-33~49.60248~1~1~None~0~0, DeadHazer><268.6615><1114.929><-75~107~7~10, CosmeticSlimeMold><1276.307><1211.697><0~100, CosmeticSlimeMold2><1285.874><1218.157><0~100, SlimeMold><1274.696><1187.96><-192~65~2~3, SlimeMold><1217.583><1185.932><-163~45~2~3, Mushroom><411.0775><1101.566><-187~-122~2~3, Mushroom><445.1084><1102.832><-253~-151~2~3, InsectGroup><910.9006><1033.174><18~251~0~0~RockFlea~0.5, 
+AmbientSounds: OMNI><AM_IND-Factory03.ogg><19.25122><502.3><0.4021739><1, OMNI><RWTW_AmbDrips_01.ogg><20.39435><426.1384><0.2065217><1, 
+FadePalette: 8, 0.2065217, 0.5

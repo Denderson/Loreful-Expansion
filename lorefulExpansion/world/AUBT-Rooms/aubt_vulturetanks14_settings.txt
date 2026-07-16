@@ -1,0 +1,12 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.5652174
+Clouds: 0.6956522
+Grime: 0.1086956
+RandomItemDensity: 0.6630435
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: LightSource><722.3807><443.9014><0.1413043~Environment~465~200~386~228.6025~0~1~None~0~0, HugeTurbine><710.4792><431.0511><5~8.660254~0.2717391~0.6304348, InsectGroup><711.1949><335.7947><118~238~0~0~RockFlea~0.5, 
+AmbientSounds: OMNI><AM_IND-Factory01.ogg><50.34821><496.0758><0.3043478><1, OMNI><RWTW_AmbDrips_01.ogg><52.38965><422.4168><0.25><1, OMNI><RWTW_AmbFan.ogg><50.05328><343.9428><0.6521739><0.3347826, SPOT><RWTW_AmbEmpty.ogg><765.4921><455.3001><0.6630435><1><1007.492><409.3002><-35.35534><-35.35534><0><0.1, SPOT><RWTW_AmbEmpty.ogg><519.8057><391.7973><0.6630435><1.254348><435.8057><406.7974><-35.35534><-35.35534><0><0.1, 
+FadePalette: 8, 0.1086956

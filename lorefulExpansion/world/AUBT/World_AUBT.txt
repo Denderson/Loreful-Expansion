@@ -1,0 +1,77 @@
+CONDITIONAL LINKS
+END CONDITIONAL LINKS
+
+ROOMS
+AUBT_vulturetanksshelter01 : AUBT_vulturetanks04 : SHELTER
+AUBT_vulturetanks01 : AUBT_vulturetanks02, DISCONNECTED, AUBT_muddytunnels01
+AUBT_vulturetanks02 : AUBT_vulturetanks03, AUBT_vulturetanks01
+AUBT_vulturetanks03 : AUBT_vulturetanks15, AUBT_vulturetanks11, AUBT_vulturetanks04, AUBT_vulturetanks02
+AUBT_vulturetanks04 : AUBT_vulturetanks07, AUBT_vulturetanks03, AUBT_vulturetanksshelter01, AUBT_vulturetanks05
+AUBT_vulturetanks05 : AUBT_vulturetanks06, AUBT_vulturetanks08, AUBT_vulturetanks04
+AUBT_vulturetanks06 : AUBT_vulturetanks11, AUBT_vulturetanks07, AUBT_vulturetanks12, AUBT_vulturetanks05
+AUBT_vulturetanks07 : DISCONNECTED, AUBT_vulturetanks06, AUBT_vulturetanks04
+AUBT_vulturetanks08 : AUBT_vulturetanks09, AUBT_vulturetanks05
+AUBT_vulturetanks09 : AUBT_vulturetanks10, AUBT_vulturetanks08
+AUBT_vulturetanks10 : AUBT_vulturetanks13, AUBT_vulturetanks11, AUBT_vulturetanks09
+AUBT_vulturetanks11 : AUBT_vulturetanks10, DISCONNECTED, AUBT_vulturetanks03, AUBT_vulturetanks06
+AUBT_vulturetanks12 : AUBT_vulturetanks13, AUBT_vulturetanks06
+AUBT_vulturetanks13 : AUBT_vulturetanks14, AUBT_vulturetanks10, AUBT_vulturetanks12
+AUBT_vulturetanks14 : DISCONNECTED, AUBT_vulturetanks13
+AUBT_vulturetanks15 : AUBT_vulturetanks26, AUBT_vulturetanks17, AUBT_vulturetanks03, AUBT_vulturetanks16
+AUBT_vulturetanks16 : AUBT_vulturetanks26, AUBT_vulturetanks15
+AUBT_vulturetanks17 : DISCONNECTED, AUBT_vulturetanks18, DISCONNECTED, AUBT_vulturetanks15
+AUBT_vulturetanks18 : DISCONNECTED, AUBT_vulturetanks17, DISCONNECTED
+
+AUBT_vulturetanks26 : AUBT_vulturetanks16, AUBT_vulturetanks15
+
+AUBT_muddytunnelsshelter01 : AUBT_muddytunnels01 : SHELTER
+AUBT_muddytunnels01 : AUBT_muddytunnelsshelter01, AUBT_vulturetanks01, AUBT_muddytunnels02
+AUBT_muddytunnels02 : AUBT_muddytunnels01, AUBT_muddytunnels03
+AUBT_muddytunnels03 : AUBT_muddytunnels04, AUBT_muddytunnels02, AUBT_muddytunnels06
+AUBT_muddytunnels04 : AUBT_muddytunnels07, AUBT_muddytunnels03, AUBT_muddytunnels10, AUBT_muddytunnels05
+AUBT_muddytunnels05 : AUBT_muddytunnels04, AUBT_muddytunnels06, AUBT_muddytunnels08
+AUBT_muddytunnels06 : AUBT_muddytunnels03, AUBT_muddytunnels05
+AUBT_muddytunnels07 : AUBT_muddytunnels04, AUBT_muddytunnels09 : SWARMROOM
+AUBT_muddytunnels08 : AUBT_muddytunnels09, AUBT_muddytunnels05
+AUBT_muddytunnels09 : AUBT_muddytunnels07, AUBT_muddytunnels08 : SWARMROOM
+AUBT_muddytunnels10 : AUBT_muddytunnels04, DISCONNECTED
+
+AUBT_buildingaskysail : DISCONNECTED
+END ROOMS
+
+CREATURES
+AUBT_vulturetanks04 : 4-Black-2
+AUBT_vulturetanks05 : 3-Black-1
+AUBT_vulturetanks05 : 4-Black-1
+AUBT_vulturetanks08 : 2-Black-1
+AUBT_vulturetanks09 : 2-Black-1
+AUBT_vulturetanks11 : 4-Black-1
+AUBT_vulturetanks11 : 5-Black-1
+AUBT_vulturetanks12 : 2-Black-1
+AUBT_vulturetanks12 : 3-Black-1
+AUBT_vulturetanks12 : 4-Black-1
+AUBT_vulturetanks12 : 5-Black-1
+AUBT_vulturetanks13 : 3-Black-1
+AUBT_vulturetanks13 : 4-Black-1
+AUBT_vulturetanks13 : 5-Black-1
+
+AUBT_vulturetanks26 : 2-White-1
+AUBT_vulturetanks26 : 2-White-1
+
+AUBT_muddytunnels03 : 3-Scavenger-3
+AUBT_muddytunnels03 : 4-Scavenger-2
+AUBT_muddytunnels03 : 5-Scavenger-3
+AUBT_muddytunnels03 : 6-Scavenger-2
+AUBT_muddytunnels03 : 7-BigNeedle-2
+AUBT_muddytunnels03 : 7-SmallNeedle-5
+AUBT_muddytunnels04 : 4-DropWig-1
+AUBT_muddytunnels05 : 3-Leech-2
+AUBT_muddytunnels05 : 4-Leech-3
+AUBT_muddytunnels10 : 2-White-1
+
+OFFSCREEN : 0-Vulture-3
+OFFSCREEN : 1-Scavenger-4
+END CREATURES
+
+BAT MIGRATION BLOCKAGES
+END BAT MIGRATION BLOCKAGES

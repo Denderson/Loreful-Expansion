@@ -1,0 +1,14 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.6630435
+Clouds: 0.25
+Grime: 0
+BkgDroneVolume: 0
+RandomItemDensity: 0.6086956
+RandomItemSpearChance: 0.1021738
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: DeadSeedCob><1047.74><247.1998><, DeadSeedCob><990.4099><281.1298><, Mushroom><240.5683><519.688><-195~143~2~3, Mushroom><261.1014><517.1339><-220~157~2~3, LightBeam><678.5433><355.0547><737~1~736~-225~3~-223~449.9999~-383~0.5086955~0.1630435~0.8043478~1~None~0~0, MudPit><1024.847><401.9247><330~99~162, MudPit><401.1587><88.3221><516~66~240, FirecrackerPlant><1135.486><698.5505><-10~35~2~3, FirecrackerPlant><1168.697><695.5345><-31~36~2~3, FirecrackerPlant><1226.067><698.9193><-97~28~2~3, PlacedFrog><938.1992><222.518><, CustomDecal><457.813><147.5709><0~191~250~191~253~0~-53~-372~0.2065217~1~0.4021739~iknowwhereyoulive~1~0.25~1~0.25~1~0.25~1~0.25, CustomDecal><1025.313><503.8218><1~163~301~165~301~-1~103~-394~0.2065217~1~0.1956522~punchfacetag~1~0.1086956~1~0.1086956~1~0.1086956~1~0.1086956, CustomDecal><115.3655><202.8981><2~145~232~150~232~7~115~272~0.2173913~1~0.1413043~happytag~0.5~0.2826087~0.5~0.2826087~0.5~0.2826087~0.5~0.2826087, InsectGroup><390.2831><532.1973><23~105~0~0~RockFlea~0.9782609, InsectGroup><685.3835><234.0874><80~152~0~0~StandardFly~0.5, PlacedFrog><577.4464><515.7878><, DataPearl><380.8026><474.6947><-85.00409~183~0~0~Misc~0, 
+AmbientSounds: OMNI><RWTW_AmbDrips_01.ogg><471.3037><610.3074><0.25><0.7652174, OMNI><RWTW_AmbDrips_04.ogg><471.7><537.9994><0.1413043><1, 
+FadePalette: 42067, 0.1630435

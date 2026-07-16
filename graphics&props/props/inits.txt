@@ -1,0 +1,9 @@
+-["TreeSparrow Props", color(50, 200, 100)]
+[#nm:"blimpdorsalsailpole", #tp:"standard", #colorTreatment:"standard", #sz:point(42,42), #repeatL:[1], #tags:[], #layerExceptions:[], #notes:[]]
+[#nm:"blimpventralsailpole", #tp:"standard", #colorTreatment:"standard", #sz:point(42,42), #repeatL:[1], #tags:[], #layerExceptions:[], #notes:[]]
+
+[#nm:"blimpdorsalsail", #tp:"variedSoft", #pxlSize:point(840, 840), #random:0, #depth:0, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:1.0, #depthAffectHilites:0.2, #shadowBorder:0.8, #smoothShading:2, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"blimpventralsail", #tp:"variedSoft", #pxlSize:point(840, 840), #random:0, #depth:0, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:1.0, #depthAffectHilites:0.2, #shadowBorder:0.8, #smoothShading:2, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"blimpdorsalsailsmall", #tp:"variedSoft", #pxlSize:point(700, 400), #random:0, #depth:0, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:1.0, #depthAffectHilites:0.2, #shadowBorder:0.8, #smoothShading:2, #colorize:1, #tags:["postEffects"], #notes:[]]
+
+[#nm:"laminariakelp", #tp:"variedSoft", #pxlSize:point(140, 200), #vars:9, #random:0, #depth:0, #round:1, #contourExp:0, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:1, #colorize:1, #tags:["postEffects"], #notes:[]]

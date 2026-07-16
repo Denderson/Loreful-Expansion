@@ -1,0 +1,17 @@
+Template: NONE
+DangerType: FloodAndRain
+WaveSpeed: 0.5026656
+WaveLength: 0.9986672
+WaveAmplitude: 0.03523571
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+Grime: 0.1086956
+RandomItemDensity: 0.7065217
+RandomItemSpearChance: 0.2543478
+WaterReflectionAlpha: 0
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: CosmeticSlimeMold><511.3768><218.0954><-37~93, CosmeticSlimeMold2><372.1125><214.8548><37~95, CosmeticSlimeMold2><1069.896><195.4206><-25~84, SlimeMold><532.0759><207.3483><-55~-153~2~3, SlimeMold><365.669><191.3931><-66~-201~2~3, SlimeMold><1024.054><190.29><-21~-113~2~3, SlimeMold><1050.849><191.6737><-75~-101~2~3, SlimeMold><443.9236><191.3494><-29~-137~2~3, ReliableSpear><663.9073><421.6772><, ReliableSpear><458.641><436.8323><, LightSource><484.3825><231.6002><0.3369565~EffectColor1~0~100~50~86.60254~0~0~None~0~0, LightSource><404><231><0.3369565~EffectColor1~0~100~50~86.60254~0~0~None~0~0, LightSource><994><235><0.3369565~EffectColor1~0~100~50~86.60254~0~0~None~0~0, InsectGroup><722.8383><457.6177><0~100~0~0~RockFlea~0.2065217, LightBeam><606.6238><537.4052><-1~234~223~234~223~0~-267~58~0.3999999~0.25~0~1~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory02.ogg><345.3654><15.3521><0.2065217><1, OMNI><RWTW_AmbDrips_02.ogg><535.0687><17.58447><0.2826087><1, 
+FadePalette: 8, 0.3369565

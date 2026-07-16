@@ -1,0 +1,12 @@
+Template: NONE
+DangerType: Flood
+CeilingDrips: 0.5543478
+Grime: 0.08695652
+RandomItemDensity: 0.4565217
+RandomItemSpearChance: 0.1021738
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: MudPit><215.7133><162.4466><622~26~76, MudPit><362.6851><301.6742><314~83~131, LightSource><921.5601><518.4371><0.8586956~EffectColor2~-143~210~50~86.60254~0~0~None~0~0, LightSource><513.0502><460.0078><0.1521739~Environment~-215~454~50~86.60254~0~1~None~0~0, LightSource><1074.431><524.086><0.1521739~Environment~-317~263~50~86.60254~0~1~None~0~0, 
+AmbientSounds: OMNI><RWTW_AmbDrips_02.ogg><812.4172><276.1402><0.5543478><1, OMNI><RWTW_AmbDrips_03.ogg><809.8656><197.3368><0.4021739><1.41087, 
+FadePalette: 42067, 0.4021739

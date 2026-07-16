@@ -1,0 +1,13 @@
+Template: NONE
+DangerType: Flood
+Grime: 0.2065217
+RandomItemDensity: 0.6413044
+RandomItemSpearChance: 0.1021738
+WaterReflectionAlpha: 0.3369565
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: WaterDepth-0.09782609-20-20, Fog-0.7065217-275-21, 
+PlacedObjects: LightSource><528.3187><301.5846><0.1521739~Environment~100~379~-195~-287.3975~1~1~None~0~0, LightSource><899.566><334.4215><0.1847826~Environment~16~373~50~86.60254~1~1~None~0~0, InsectGroup><693.1556><203.8757><0~100~0~0~WaterGlowworm~0.5, AirPocket><113.8611><230.4163><118~77~30~30~Y~-8, 
+AmbientSounds: OMNI><RWTW_AmbFlowMed.ogg><810.3009><616.2308><0.2065217><0.7065217, OMNI><RWTW_AmbDrips_01.ogg><624.5751><615.3469><0.4565217><1.41087, 
+FadePalette: 42067, 0.2065217

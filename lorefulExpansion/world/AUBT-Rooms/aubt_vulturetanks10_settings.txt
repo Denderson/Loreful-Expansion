@@ -1,0 +1,11 @@
+Template: NONE
+Clouds: 0.8804348
+Grime: 0.2065217
+RandomItemDensity: 0
+RandomItemSpearChance: 0
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: LightSource><340.6198><748.1517><0.1521739~EffectColor1~308~-186~-234~-176.3975~0~0~None~0~0, Mushroom><559.3665><167.4126><-66~-122~2~3, Mushroom><818.7452><177.45><-270~-139~2~3, InsectGroup><999.3276><668.3986><0~100~0~0~RockFlea~0.3369565, 
+AmbientSounds: OMNI><RWTW_AmbDrips_01.ogg><83.14172><470.3318><0.3369565><1, OMNI><RWTW_AmbDrips_02.ogg><57.84625><389.6753><0.3043478><1, OMNI><RWTW_AmbLot.ogg><33.8371><307.384><0.3043478><1, SPOT><AM_IND-ElectricHum03.ogg><798.8333><531.1105><0.3369565><1><699.8333><699.1105><-54.35535><-45.35535><0><0.05652187, SPOT><AM_IND-ElectricHum03.ogg><1144.831><253.1438><0.3369565><1><1013.831><207.1438><-49.35535><-70.35535><0><0.05652187, 
+FadePalette: 8, 0.25

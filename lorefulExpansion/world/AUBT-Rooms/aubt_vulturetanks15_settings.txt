@@ -1,0 +1,18 @@
+Template: NONE
+DangerType: Flood
+CeilingDrips: 0
+WaveSpeed: 0.5978261
+WaveLength: 0.75
+WaveAmplitude: 0.3380074
+SecondWaveLength: 0.03623199
+SecondWaveAmplitude: 0.8043478
+Clouds: 0.3369565
+Grime: 0.1413043
+WaterReflectionAlpha: 0
+Palette: 42069
+EffectColorA: 0
+EffectColorB: 13
+Effects: WaterFluxMinLevel-0.6956522-51-123, WaterFluxMaxLevel-0.6739131-51-67, SilenceWater-1-52-12, WaterViscosity-0.3043478-301-125, DirtyWater-0.8586956-307-67, InvertedWater-1-312-11, WaterDepth-0.1304348-1076-74, 
+PlacedObjects: AirPocket><1135.108><1185.168><135~411~30~30~Y~385, AirPocket><57.13788><1022.855><245~575~30~30~Y~579, AirPocket><609.3635><1527.415><163~291~30~30~Y~235, AirPocket><396.2851><1560.803><751~239~30~30~Y~234, AirPocket><441.0748><1466.904><95~200~30~30~Y~249, WaterCurrent><692.801><1215.77><-1~399~-57.15847~154.2076, DeadVultureGrub><374.2345><733.8007><-233~-90~7~10, PlacedFrog><787.269><248.0509><, PlacedFrog><536.0068><253.6999><, PlacedFrog><1035.658><233.877><, DataPearl><332.8><214.995><-116~45~0~0~Misc~0, DataPearl><1000.552><235.4686><65~36~0~0~Misc~0, DataPearl><781.051><290.27><0~0~0~0~Misc~0, Mushroom><695.5513><752.9774><0~0~2~3, DeadSeedCob><535.9446><815.4536><, DeadSeedCob><971.291><828.4458><, DeadSeedCob><791.3075><1117.304><, ColoredLightBeam><296.8465><861.996><0~392~836~390~830~1~225~37~0.4434775~0.2065217~0~0~None~0~0~EffectColor1~EffectColor1~EffectColor1~EffectColor1~EffectColor1~EffectColor1~EffectColor1, LightBeam><943.8423><397.8771><296~55~300~-19~18~-67~51~105~0.5413049~0.3043478~0~1~None~0~0, FloatMud><273.8879><75.14487><928~138~990, 
+AmbientSounds: OMNI><MSC-LowGroans.ogg><63.6665><519.5682><0.3043478><0.7065217, OMNI><AM_IND-Factory03.ogg><61.96844><443.0525><0.3043478><1, OMNI><RWTW_AmbDrips_01.ogg><65.92725><369.4073><0.25><1, OMNI><RWTW_AmbDrips_03.ogg><65.69849><291.2744><0.173913><0.7652174, DIR><RWTW_AmbSubBubble.ogg><755.5838><602.1387><0.3043478><0.7652174><0><0, SPOT><RWTW_AmbFlowMed.ogg><724.1508><357.8263><0.6630435><0.1><684.1508><1362.826><-78.35535><-126.3553><0><0.3065219, SPOT><AM_ENV-Woods.ogg><1125.748><417.3><0.6086956><1><1235.748><440.3><-188.3553><-25.35535><0><0.2521734, 
+FadePalette: 8, 0.0326087, 0.1086956

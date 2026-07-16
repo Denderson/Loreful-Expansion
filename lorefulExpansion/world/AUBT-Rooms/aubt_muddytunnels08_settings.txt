@@ -1,0 +1,11 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.6630435
+Clouds: 0.25
+Grime: 0.1086956
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: MudPit><139.8113><74.9336><1213~87~168, LightSource><710.9041><374.3726><0.25~Environment~-641~413~50~86.60254~0~1~None~0~0, LightSource><722.585><1278.887><0.1847826~Environment~-327~248~50~86.60254~0~1~None~0~0, FirecrackerPlant><592.3845><209.648><-251~-149~2~3, FirecrackerPlant><615.5584><215.4426><-242~-143~2~3, FirecrackerPlant><889.6835><186.2946><-416.9994~-120~2~3, DeadVultureGrub><645.9852><1096.7><-521~111~7~10, PlacedFrog><550.6631><735.1161><, DeadSeedCob><712.1684><1183.642><, LightBeam><652.2299><2014.55><0~404~133~404~133~1~174.9987~127~0.2804353~0.1521739~0~1~None~0~0, 
+AmbientSounds: OMNI><MSC-LowGroans.ogg><627.1002><255.6324><0.2065217><1, SPOT><RWTW_AmbFlowMed.ogg><122.9306><255.9141><0.1956522><0.7065217><167.9312><250.9141><161.6447><-29.35535><0><0.2521739, OMNI><RWTW_AmbDrips_04.ogg><622.8728><181.0921><0.3369565><1, OMNI><RWTW_AmbLot.ogg><622.0873><328.6164><0.5><1, 
+FadePalette: 42067, 0.5, 0.3369565, 0.1086956

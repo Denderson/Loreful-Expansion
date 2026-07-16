@@ -1,0 +1,9 @@
+Template: NONE
+Clouds: 0.25
+Grime: 0.1086956
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: MudPit><663.5254><1298.302><138~94~60, LightSource><625.9586><1133.804><0.5~EffectColor1~4~129~-560~-16.39746~0~0~None~0~0, LightSource><720><1125><0.423913~EffectColor1~4~129~-647~218.6025~0~0~None~0~0, LightSource><821><1130><0.3804348~EffectColor1~4~129~-755~111.6025~0~0~None~0~0, CosmeticSlimeMold><1067.638><978.355><17~126, CosmeticSlimeMold2><1072.409><977.5717><30~119, SlimeMold><1009.344><909.3748><142~26~2~3, CosmeticSlimeMold><384.9487><1258.273><40~116, CosmeticSlimeMold2><382.9678><1264.197><88~102, SlimeMold><446.1751><1253.097><-64~46~2~3, CosmeticSlimeMold><1022.635><635.8525><75~63, CosmeticSlimeMold2><621.6019><433.3279><6~63, CosmeticSlimeMold><325.9194><315.067><40~99, CosmeticSlimeMold2><413.7304><325.449><1~90, SlimeMold><376.8651><339.3524><64~7~2~3, SlimeMold><309.029><347.4479><0~0~2~3, CosmeticSlimeMold><1114.643><643.6687><0~100, SlimeMold><1110.81><617.3092><0~0~2~3, LightSource><1175><337><0.08695652~EffectColor1~11~68~-189~147.6025~0~1~None~0~0, LightSource><1177><1465><0.1413043~EffectColor1~11~68~-66~-184.3975~0~1~None~0~0, 
+AmbientSounds: OMNI><RWTW_AmbDrips_01.ogg><32.48389><494.1993><0.1521739><1, OMNI><RWTW_AmbDrips_02.ogg><21.05884><414.9412><0.2608696><1, OMNI><AM_IND-Factory02.ogg><12.60974><324.6426><0.2717391><1, 
+FadePalette: 8, 0.2391304, 0.3043478

@@ -1,0 +1,10 @@
+Template: NONE
+Clouds: 0.3369565
+Grime: 0.1086956
+RandomItemSpearChance: 0.5043477
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: LightSource><713.807><485.9475><0.1630432~EffectColor1~0~159~-119~17.60257~0~1~None~0~0, LightSource><731><362><0.1630432~EffectColor2~0~159~-153~138.6025~0~1~None~0~0, ReliableSpear><466.3457><205.6228><, ReliableSpear><1024.552><248.2192><, CosmeticSlimeMold2><448.8033><225.7862><62~94, CosmeticSlimeMold2><972.0702><478.5875><0~100, 
+AmbientSounds: OMNI><AM_IND-Factory02.ogg><77.13849><448.334><0.2065217><1, OMNI><RWTW_AmbDrips_01.ogg><63.86298><370.3956><0.2065217><1, SPOT><Mech Basic.wav><709.3078><351.4415><0.4021739><1><719.3078><435.4415><-243.3553><-140.3553><0><0.1652175, 
+FadePalette: 42067, 0.3043478

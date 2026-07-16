@@ -1,0 +1,13 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.6630435
+Clouds: 0.75
+Grime: 0.1086956
+RandomItemDensity: 0.6086956
+RandomItemSpearChance: 0.1782608
+Palette: 42068
+EffectColorB: 13
+Effects: DirtyWater-0.25-4-24, WaterDepth-0.08695652-11-71, 
+PlacedObjects: AirPocket><30.37723><112.3422><141~100~30~30~Y~-11, AirPocket><1180.433><124.9204><155~125~30~30~Y~-9, VultureGrub><198.1008><1254.467><-4~30~7~10, Mushroom><1148.18><1264.438><-6~183~2~3, Mushroom><1162.06><1270.691><-22~156~2~3, Mushroom><1204.998><1259.55><-69~147~2~3, LightSource><148.3992><1108.328><1~Environment~226~49~50~86.60254~1~0~None~0~0, LightSource><1284><1067><1~Environment~226~49~50~86.60254~1~0~None~0~0, PlacedFrog><1142.841><327.8782><, PlacedFrog><330.0394><275.804><, SeedCob><1100.387><653.6077><-17~123~7~10, DeadSeedCob><482.9318><452.9166><, DeadSeedCob><483.589><1110.869><, DeadSeedCob><600.4429><1088.948><, InsectGroup><593.1223><1342.658><103~136~-202~63~RockFlea~0.5, AdjustableFan><990.4495><1086.736><5~8.660254~0~0~0.6956522~0.6956522, AdjustableFan><721.6648><1338.363><5~8.660254~0~0.3478261~0.6956522~0.6956522, 
+AmbientSounds: OMNI><AM_ENV-Woods.ogg><37.41107><499.6186><0.5><1, SPOT><RWTW_AmbFlowDrip.ogg><730.4286><411.1601><0.3369565><1.254348><711.4286><1190.985><-111.3553><-184.3553><0><0.252174, 
+FadePalette: 42067, 0.4565217, 0.3043478

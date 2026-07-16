@@ -1,0 +1,2 @@
+-TreeSparrow's Effects
+[#nm:"Wrack Grower", #tp:"grower", #vars:5, #pxlSz:point(30,30), #pickColor:1, #randomFlip:1, #szVar:[0.5, 7], #rotVar:80, #hasGrad: 1, #rootAmt:5, #initRotVar: 15, #segmentRotVar:100, #segmentRotPull: 0.5, #segmentMoveAmt: 15]

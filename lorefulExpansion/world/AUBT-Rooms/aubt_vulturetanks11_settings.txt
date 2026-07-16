@@ -1,0 +1,10 @@
+Template: NONE
+CeilingDrips: 0.6086956
+Grime: 0.1630435
+RandomItemSpearChance: 0.3304347
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: LightSource><714.7823><414.5526><0.1413043~Environment~-659~-367~-141~-360.3975~0~1~None~0~0, InsectGroup><708.3049><312.706><-489~-85~-129~-138~RockFlea~0.5, LightSource><891.8352><809.3633><0.5~EffectColor1~35~104~176~-96.39746~0~0~None~0~0, LightSource><507><816><0.5~EffectColor1~61~-106~-115~-159.3975~0~0~None~0~0, LightSource><1097><45><0.5~EffectColor1~61~-106~26~-20.39752~0~0~None~0~0, LightSource><299><47><0.5~EffectColor1~61~-106~-116~-22.39752~0~0~None~0~0, LightBeam><557.8665><695.9126><1~-400~333~-400~332~0~376~-152~0.3782614~0.2065217~0~0~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory03.ogg><604.5661><180.4388><0.4456522><1, OMNI><RWTW_AmbDrips_02.ogg><602.4719><103.302><0.25><1, 
+FadePalette: 8, 0.1630435
