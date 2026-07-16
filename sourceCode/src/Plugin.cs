@@ -19,7 +19,7 @@ using System.Security.Permissions;
 namespace loremiscExpansion
 {
     [BepInDependency("slime-cubed.slugbase")]
-    [BepInPlugin("loremiscExpansion", "loremiscExpansion", "0.1.0")]
+    [BepInPlugin("loremiscExpansion", "loremiscExpansion", "0.1.00")]
     public class Plugin : BaseUnityPlugin
     {
         public static ManualLogSource Log { get; private set; }
