@@ -32,6 +32,7 @@ namespace loremiscExpansion
         {
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
             On.RainWorld.OnModsInit += LoadRemixMenu;
+            //On.CreatureState.CycleTick += CreatureState_CycleTick; Will be used by CollectorStats in the future once that class can be connected to a creature instance
 
             try
             {
@@ -47,6 +48,8 @@ namespace loremiscExpansion
                 Logger.LogError(e);
             }
         }
+
+  
 
         public static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
         {
