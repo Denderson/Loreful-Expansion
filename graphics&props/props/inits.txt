@@ -7,3 +7,4 @@
 [#nm:"blimpdorsalsailsmall", #tp:"variedSoft", #pxlSize:point(700, 400), #random:0, #depth:0, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:1.0, #depthAffectHilites:0.2, #shadowBorder:0.8, #smoothShading:2, #colorize:1, #tags:["postEffects"], #notes:[]]
 
 [#nm:"laminariakelp", #tp:"variedSoft", #pxlSize:point(140, 200), #vars:9, #random:0, #depth:0, #round:1, #contourExp:0, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:1, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"slimemoldgrowths", #tp:"variedSoft", #pxlSize:point(140, 200), #vars:9, #random:0, #depth:3, #round:1, #contourExp:0, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:1, #colorize:1, #tags:["postEffects"], #notes:[]]
