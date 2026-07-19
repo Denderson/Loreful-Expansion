@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace loremiscExpansion.Creature
+namespace loremiscExpansion.Creatures.Scavs.Collector
 {
         public class Collector : Scavenger
         {
+            CollectorStats myStats = null;
 
             public Collector(AbstractCreature abstractCreature, World world) : base(abstractCreature, world)
             {
-
+                CollectorStats myStats = new CollectorStats(abstractCreature);
             }
             public override void InitiateGraphicsModule()
             {
@@ -23,5 +24,5 @@ namespace loremiscExpansion.Creature
                 ReleaseGrasp(0);
             }
 
-        }
+    }
 }

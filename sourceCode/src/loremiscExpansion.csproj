@@ -16,6 +16,12 @@
       <Folder Include="CWTs\" />
     </ItemGroup>
     
+    <ItemGroup>
+      <Reference Include="Fisobs">
+        <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\312520\2920541687\newest\plugins\Fisobs.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+    
     <Target Name="GenerateMod" AfterTargets="PostBuildEvent">
 		<ItemGroup>
 			<RemovePlugins Include="../mod/plugins/*.dll" />

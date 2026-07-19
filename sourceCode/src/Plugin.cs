@@ -32,13 +32,15 @@ namespace loremiscExpansion
         {
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
             On.RainWorld.OnModsInit += LoadRemixMenu;
-            On.CreatureState.CycleTick += loremiscExpansion.Creature.CollectorStats.CreatureState_CycleTick;
+            
 
             try
             {
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
                 On.Player.Update += Player_Update;
+
+                On.CreatureState.CycleTick += Creatures.Scavs.Collector.CollectorStats.CreatureState_CycleTick;
 
                 Logger.LogMessage("loremisc hooks success!");
             }
@@ -48,8 +50,6 @@ namespace loremiscExpansion
                 Logger.LogError(e);
             }
         }
-
-  
 
         public static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
         {
