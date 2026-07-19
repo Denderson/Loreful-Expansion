@@ -10,7 +10,7 @@ namespace loremiscExpansion.Creatures.Scavs.Collector
     {
         EntityID ID;
         public int WanderingScore = 2;
-        public string VisitedRegions;
+        public List<string> VisitedRegions = new List<string>();
         public string NextRegion = null;
         int PersonalReputation = 0;
 
@@ -19,17 +19,8 @@ namespace loremiscExpansion.Creatures.Scavs.Collector
             ID = Host.ID;
         }
 
-        public void WanderToRegion ()
+        static public void LoadRegions()
         {
-           
-        }
-        static public void CreatureState_CycleTick(On.CreatureState.orig_CycleTick orig, CreatureState self)
-        {
-            orig(self);
-            if (self.creature.creatureTemplate.type == Enums.ScavCollector)
-            {           
-                //WanderingScore--;
-            }
 
         }
     }

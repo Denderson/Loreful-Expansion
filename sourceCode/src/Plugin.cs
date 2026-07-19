@@ -32,7 +32,8 @@ namespace loremiscExpansion
         {
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
             On.RainWorld.OnModsInit += LoadRemixMenu;
-            
+            On.RainWorld.Start += Creatures.Scavs.Collector.CollectorHooks.RainWorld_Start;
+
 
             try
             {
@@ -40,7 +41,7 @@ namespace loremiscExpansion
 
                 On.Player.Update += Player_Update;
 
-                On.CreatureState.CycleTick += Creatures.Scavs.Collector.CollectorStats.CreatureState_CycleTick;
+                On.RegionState.RainCycleTick += Creatures.Scavs.Collector.CollectorHooks.RegionState_CycleTick;
 
                 Logger.LogMessage("loremisc hooks success!");
             }

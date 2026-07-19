@@ -8,7 +8,7 @@ namespace loremiscExpansion.Creatures.Scavs.Collector
 {
         public class Collector : Scavenger
         {
-            CollectorStats myStats = null;
+            public CollectorStats myStats = null;
 
             public Collector(AbstractCreature abstractCreature, World world) : base(abstractCreature, world)
             {

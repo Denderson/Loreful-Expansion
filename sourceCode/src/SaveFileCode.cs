@@ -33,7 +33,7 @@ namespace loremiscExpansion
             if (self?.saveStateNumber != Enums.protagName) return;
             if (self.miscWorldSaveData == null || self.deathPersistentSaveData == null)
             {
-                Log.LogMessage("SaveState_LoadGame: save data not ready, skipping Looker setup");
+                Log.LogMessage("SaveState_LoadGame: save data not ready, skipping loremiscExpansion setup");
                 return;
             }
 
