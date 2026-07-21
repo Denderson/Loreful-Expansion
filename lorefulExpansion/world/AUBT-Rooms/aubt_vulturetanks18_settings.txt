@@ -1,10 +1,17 @@
 Template: NONE
-Clouds: 0.3369565
+DangerType: FloodAndRain
+WaveSpeed: 0.5760869
+WaveLength: 0.3804348
+WaveAmplitude: 0.2717391
+SecondWaveLength: 0.05797079
+SecondWaveAmplitude: 1
+Clouds: 0.6956522
 Grime: 0.1086956
 RandomItemSpearChance: 0.5043477
-Palette: 42068
+Palette: 42069
 EffectColorA: 0
 EffectColorB: 13
-PlacedObjects: LightSource><713.807><485.9475><0.1630432~EffectColor1~0~159~-119~17.60257~0~1~None~0~0, LightSource><731><362><0.1630432~EffectColor2~0~159~-153~138.6025~0~1~None~0~0, ReliableSpear><466.3457><205.6228><, ReliableSpear><1024.552><248.2192><, CosmeticSlimeMold2><448.8033><225.7862><62~94, CosmeticSlimeMold2><972.0702><478.5875><0~100, 
-AmbientSounds: OMNI><AM_IND-Factory02.ogg><77.13849><448.334><0.2065217><1, OMNI><RWTW_AmbDrips_01.ogg><63.86298><370.3956><0.2065217><1, SPOT><Mech Basic.wav><709.3078><351.4415><0.4021739><1><719.3078><435.4415><-243.3553><-140.3553><0><0.1652175, 
-FadePalette: 42067, 0.3043478
+Effects: InvertedWater-1-14-119, WaterFluxMinLevel-0.5-20-20, WaterFluxMaxLevel-0.5-12-70, SilenceWater-1-267-125, WaterDepth-0.08695652-268-69, DirtyWater-0.8586956-272-10, WaterViscosity-0.3043478-1058-89, 
+PlacedObjects: CosmeticSlimeMold2><448.8033><225.7862><62~94, CosmeticSlimeMold2><972.0702><478.5875><0~100, AirPocket><32.83258><350.6406><578~574~30~30~N~571, AirPocket><835><352><578~574~30~30~N~571, AirPocket><415><588><578~574~-371~-299~N~571, AirPocket><480><507><140~313~-499~-189~N~571, AirPocket><523><554><143~267~-462~-240~N~571, AirPocket><592><579><316~243~-515~-285~N~571, AirPocket><778><558><144~264~-724~-326~N~571, AirPocket><819><517><140~302~-741~-198~N~571, CosmeticSlimeMold2><1182.935><262.4237><0~100, CosmeticSlimeMold><962.7429><209.9499><0~67, CosmeticSlimeMold2><945.3392><680.429><-42~62, LightBeam><974.0829><262.3599><413~193~423~-30~16~-108~96~149~0.5086962~0.2065217~0~1~None~0~0, CustomDecal><982.8032><139.2145><5~251~415~385~416~11~101~-66~0.1630435~1~0~bigredtag~0.3369565~1~0.3369565~1~0.3369565~1~0.3369565~1, LightSource><608.0812><571.3173><0.1521739~EffectColor1~14~46~-528~-63.39746~0~1~None~0~0, LightSource><830><570><0.1521739~EffectColor1~14~46~-739~-60.39746~0~1~None~0~0, LightSource><831><307><0.1521739~EffectColor1~14~46~-739~-60.39746~0~1~None~0~0, LightSource><609><309><0.1521739~EffectColor1~14~46~-513~65.60254~0~1~None~0~0, CustomDecal><375><115><-35~611~762~613~823~-34~-178~-43~0~1~0~bigredtag~0.09782609~1~0.09782609~1~0.09782609~1~0.09782609~1, CosmeticSlimeMold><248.0157><379.4494><0~100, CosmeticSlimeMold2><306.5123><506.4496><0~100, LightFixture><462.2465><242.3><SlimeMoldLight~-171.6795~103~21, LightFixture><976.801><479.4805><SlimeMoldLight~-360.6795~34~22, WallLight><593.35><474.3823><1~52~593.35~474.3823~-2~-206~254~-1~254~-202~0~0.5~0.4347826~True~WaterColor1~False~False~Always~Soft, 
+AmbientSounds: OMNI><AM_IND-Factory02.ogg><-1.861511><114.334><0.2065217><1, OMNI><RWTW_AmbDrips_01.ogg><5.862976><206.3956><0.326087><0.8043478, SPOT><Mech Basic.wav><182.3078><88.4415><0.4021739><1><419.3078><173.4415><52.64471><40.64471><0><0.1000001, SPOT><AM_ENV-Woods.ogg><1169.305><469.7047><0.5><1><1353.305><349.7047><-154.3553><-50.35535><0><0.2086958, SPOT><RWTW_AmbSubBubble.ogg><609.605><205.8623><0.4021739><0.8043478><717.605><447.8623><-186.3553><-136.3553><0><0.3608697, SPOT><RWTW_AmbSeaside.ogg><283.2177><471.6974><0.5326087><0.5108696><186.2177><630.6974><144.6447><-66.35535><0><0.154348, 
+FadePalette: 42067, 0.5543478

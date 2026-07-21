@@ -1,7 +1,7 @@
 Template: NONE
 DangerType: FloodAndRain
 Clouds: 0.1630435
-Grime: 0.1521739
+Grime: 0
 RandomItemDensity: 0.6086956
 RandomItemSpearChance: 0.3086956
 WaterReflectionAlpha: 0

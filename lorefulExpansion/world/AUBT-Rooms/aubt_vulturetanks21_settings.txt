@@ -1,0 +1,15 @@
+Template: NONE
+DangerType: Flood
+WaveSpeed: 0.5
+WaveLength: 1
+WaveAmplitude: 0.2914986
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+Grime: 0.1195652
+WaterReflectionAlpha: 0
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+PlacedObjects: LightSource><801.9465><594.963><0.1413043~EffectColor1~2~96~-451~-71.39746~0~1~None~0~0, LightSource><894><632><0.1413043~EffectColor1~2~96~-595~-402.3975~0~1~None~0~0, LightSource><1013><289><0.1086956~EffectColor1~3~59~-451~-71.39746~0~1~None~0~0, LightSource><1052><288><0.1086956~EffectColor1~3~59~-451~-71.39746~0~1~None~0~0, LightSource><1096><285><0.1086956~EffectColor1~3~59~-451~-71.39746~0~1~None~0~0, LightSource><346><542><0.3369565~EffectColor1~27~142~84~-178.3975~0~0~None~0~0, DataPearl><1293.448><495.5244><-319~-18~0~0~Misc~0, ReliableSpear><1265.303><178.533><, ReliableSpear><1283.353><179.1713><, InsectGroup><1268.071><199.6614><0~100~0~0~RockFlea~0.5, InsectGroup><175.8708><392.1594><5~77~0~0~RockFlea~0.5, 
+AmbientSounds: OMNI><AM_IND-Factory01.ogg><539.6968><321.7144><0.2065217><1, OMNI><RWTW_AmbDrips_04.ogg><629.71><420.804><0.1847826><1, OMNI><RWTW_AmbDrips_01.ogg><428.2571><406.8002><0.1847826><1, OMNI><RWTW_AmbInterior.ogg><717.6599><331.0715><0.5><1, 
+FadePalette: 8, 0.326087

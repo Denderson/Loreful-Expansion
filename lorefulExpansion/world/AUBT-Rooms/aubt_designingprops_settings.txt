@@ -1,0 +1,10 @@
+Template: NONE
+DangerType: None
+CeilingDrips: 0
+Clouds: 0
+Grime: 0.1086956
+RandomItemDensity: 0
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+FadePalette: 42067, 0.2065217

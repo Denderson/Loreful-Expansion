@@ -1,0 +1,10 @@
+Template: NONE
+Clouds: 0.25
+Grime: 0.06521739
+WaterReflectionAlpha: 0
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: Fog-0.6630435-23-130, Bloom-0.4021739-24-75, LightRain-0.04347826-20-20, SilenceWater-1-286-136, WaterViscosity-0.6086956-284-74, DirtyWater-0.25-280-16, 
+PlacedObjects: AirPocket><42.14117><39.60834><631~352~30~30~Y~3, AirPocket><35.26584><357.3006><151~193~30~30~Y~-314, FlyLure><907.6774><208.8422><0~0~4~9, FlyLure><889.7939><211.6951><0~0~4~9, DeadSeedCob><411.8196><595.5864><, DeadSeedCob><485.1316><563.0994><, LightSource><1317.395><704.3619><1~Environment~-1069~-288~-417~-24.39746~0~1~None~0~0, InsectGroup><527.5913><439.8783><272~119~0~0~RockFlea~0.5, LightSource><171.2588><274.5502><0.1630435~EffectColor1~167~16~50~86.60254~0~1~None~0~0, LightSource><270><273><0.1630435~EffectColor1~167~16~50~86.60254~0~1~None~0~0, LightSource><372><275><0.1630435~EffectColor1~167~16~50~86.60254~0~1~None~0~0, InsectGroup><1099.654><88.82452><-97~442~-294~45.00002~TinyDragonFly~0.5, CustomDecal><567.6409><134.3324><0~241~109~241~109~0~-358~175~0~1~0~unalomey~0.6413044~0.3804348~0.6413044~0.3804348~0.6413044~0.3804348~0.6413044~0.3804348, KarmaFlower><714.891><470.5823><0~0~5~7, AirPocket><667.1591><445.0728><806~-470~30~30~N~-473, 
+AmbientSounds: OMNI><AM_ENV-Pasture.ogg><632.5101><607.4497><0.4021739><1, OMNI><AM_ENV-Woods.ogg><813.3214><607.5631><0.5652174><1, OMNI><AM_ENV-Forest.ogg><805.5988><525.8261><0.4021739><1, OMNI><AM_ENV-CricketsWnd.ogg><624.0503><525.0104><0.3043478><1, 

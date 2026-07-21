@@ -1,0 +1,17 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.7065217
+WaveSpeed: 0.6630435
+WaveLength: 0.7173913
+WaveAmplitude: 0.1086956
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+Clouds: 0.75
+Grime: 0.1521739
+Palette: 42067
+EffectColorA: 13
+EffectColorB: 13
+Effects: Bloom-0.3369565-25-144, WaterDepth-0.1413043-23-86, WaterViscosity-0.2065217-20-20, DirtyWater-0.3043478-276-148, SilenceWater-0.6956522-283-88, 
+PlacedObjects: CosmeticSlimeMold><116.5622><563.3188><0~100, CosmeticSlimeMold2><258.665><448.387><0~100, CosmeticSlimeMold2><788.0364><458.5533><0~100, CosmeticSlimeMold><1001.29><458.946><0~100, CosmeticSlimeMold2><1306.893><653.36><0~100, CosmeticSlimeMold><1321.38><596.9016><0~100, SlimeMold><295.2784><492.802><0~0~2~3, SlimeMold><117.6999><490.2575><0~0~2~3, SlimeMold><770.3698><490.0898><0~0~2~3, SlimeMold><1332.1><651.8747><-310~15~2~3, SlimeMold><1261.34><450.3212><-200~80~2~3, InsectGroup><557.3676><217.6001><1202~155~-115~35~WaterGlowworm~0.5, InsectGroup><615.0955><496.4258><1216~217~-166~7~RockFlea~0.5, LightBeam><163.0443><519.5549><0~338~101~335~101~0~345~-38~0.5304347~0.2065224~0~1~None~0~0, LightBeam><502><496><0~338~101~335~101~0~345~-38~0.4869564~0.2065224~0~1~None~0~0, LightBeam><1177><500><0~338~101~335~101~0~345~-38~0.6282607~0.2065224~0~1~None~0~0, LightBeam><844><513><0~338~101~335~101~0~345~-38~0.4543484~0.2065224~0~1~None~0~0, LightSource><392.9144><619.0685><0.4021739~Environment~-158~165~-221~-225.3975~1~1~None~0~0, LightSource><723><614><0.4021739~Environment~-158~165~-221~-225.3975~1~1~None~0~0, LightSource><1054.002><614><0.4021739~Environment~-158~165~-221~-225.3975~1~1~None~0~0, LightSource><588.1978><598.7201><0.4565217~EffectColor2~73~70~-499~15.60254~0~0~None~0~0, LightSource><759.0037><611><0.4021739~EffectColor2~52~55~-499~15.60254~0~0~None~0~0, LightSource><1146.993><591><0.3695652~EffectColor2~52~55~-499~15.60254~0~0~None~0~1, LightSource><1183><529><0.3369565~EffectColor2~52~55~-499~15.60254~0~0~None~0~0, LightSource><225><538><0.2282609~EffectColor2~32~34~-357~-45.39746~0~0~None~0~0, LightSource><195><577><0.2282609~EffectColor2~32~34~-319.0001~-23.39746~0~0~None~0~0, LightSource><785><498><0.2282609~EffectColor2~32~34~-319.0001~-23.39746~0~0~None~0~0, LightSource><1126><497><0.2282609~EffectColor2~32~34~-319.0001~-23.39746~0~0~None~0~0, AirPocket><130.3238><270.1554><308~148~30~30~Y~4, AirPocket><812.4424><274.4416><238~156~30~30~Y~40, AirPocket><1069.174><238.0982><320~187~30~30~Y~14, 
+AmbientSounds: SPOT><AM_ENV-Woods.ogg><745.9124><365.3202><0.5><1><1386.912><553.3202><-137.3553><-12.35535><0><0.2956523, OMNI><AM_ENV-WallHum.ogg><591.9329><582.6691><0.4021739><1, OMNI><AM_IND-Factory03.ogg><517.0951><499.074><0.2391304><1, OMNI><RWTW_AmbDrips_01.ogg><766.5879><556.8671><0.326087><1, OMNI><RWTW_AmbDrips_02.ogg><703.3194><480.5859><0.3804348><1, 
+FadePalette: 42068, 0.3369565

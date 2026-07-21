@@ -1,0 +1,11 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.7065217
+Clouds: 0.75
+Grime: 0.1521739
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: Bloom-0.3369565-25-144, WaterDepth-0.1413043-23-86, WaterViscosity-0.2065217-20-20, DirtyWater-0.3043478-276-148, 
+PlacedObjects: CosmeticSlimeMold><116.5622><563.3188><0~100, CosmeticSlimeMold2><258.665><448.387><0~100, CosmeticSlimeMold2><788.0364><458.5533><0~100, CosmeticSlimeMold><1001.29><458.946><0~100, CosmeticSlimeMold2><1306.893><653.36><0~100, CosmeticSlimeMold><1321.38><596.9016><0~100, SlimeMold><288.2784><490.802><0~0~2~3, SlimeMold><117.6999><490.2575><0~0~2~3, SlimeMold><770.3698><490.0898><0~0~2~3, SlimeMold><1342.1><624.8747><-310~15~2~3, SlimeMold><1270.34><443.3212><-200~80~2~3, InsectGroup><187.3676><230.6001><1202~155~-115~35~WaterGlowworm~0.5, InsectGroup><183.0955><194.4258><1216~217~-166~7~RockFlea~0.5, LightBeam><163.0443><519.5549><0~338~101~335~101~0~345~-38~0.5304347~0.2065224~0~1~None~0~0, LightBeam><502><496><0~338~101~335~101~0~345~-38~0.4869564~0.2065224~0~1~None~0~0, LightBeam><1177><500><0~338~101~335~101~0~345~-38~0.6282607~0.2065224~0~1~None~0~0, LightBeam><844><513><0~338~101~335~101~0~345~-38~0.4543484~0.2065224~0~1~None~0~0, LightSource><392.9144><619.0685><1~Environment~-158~165~-221~-225.3975~1~0~None~0~0, LightSource><723><614><1~Environment~-158~165~-221~-225.3975~1~0~None~0~0, LightSource><1054.002><614><1~Environment~-158~165~-221~-225.3975~1~0~None~0~0, LightSource><585.1978><596.7201><1~EffectColor2~44~63~50~86.60254~0~0~None~0~0, 
+FadePalette: 42068, 0.3369565
