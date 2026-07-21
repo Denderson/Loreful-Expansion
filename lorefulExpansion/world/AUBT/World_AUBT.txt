@@ -20,12 +20,12 @@ AUBT_vulturetanks13 : AUBT_vulturetanks14, AUBT_vulturetanks10, AUBT_vulturetank
 AUBT_vulturetanks14 : DISCONNECTED, AUBT_vulturetanks13
 AUBT_vulturetanks15 : AUBT_vulturetanks26, AUBT_vulturetanks17, AUBT_vulturetanks03, AUBT_vulturetanks16
 AUBT_vulturetanks16 : AUBT_vulturetanks26, AUBT_vulturetanks15
-AUBT_vulturetanks17 : DISCONNECTED, AUBT_vulturetanks18, AUBT_vulturetunnels22, AUBT_vulturetanks15
+AUBT_vulturetanks17 : DISCONNECTED, AUBT_vulturetanks18, AUBT_vulturetanks22, AUBT_vulturetanks15
 AUBT_vulturetanks18 : AUBT_vulturetanks19, AUBT_vulturetanks17, AUBT_vulturetanksshelter02
 AUBT_vulturetanks19 : AUBT_vulturetanks20, AUBT_vulturetanks18
 AUBT_vulturetanks20 : AUBT_vulturetanks19 : SWARMROOM
 AUBT_vulturetanks21 : AUBT_vulturetanks22, AUBT_vulturetanks11
-AUBT_vulturetanks22 : AUBT_vulturetanks21, AUBT_vulturetunnels17, AUBT_vulturetanks07
+AUBT_vulturetanks22 : AUBT_vulturetanks21, AUBT_vulturetanks17, AUBT_vulturetanks07
 AUBT_vulturetanks26 : AUBT_vulturetanks16, AUBT_vulturetanks15
 
 AUBT_muddytunnelsshelter01 : AUBT_muddytunnels01 : SHELTER
@@ -39,9 +39,6 @@ AUBT_muddytunnels07 : AUBT_muddytunnels04, AUBT_muddytunnels09 : SWARMROOM
 AUBT_muddytunnels08 : AUBT_muddytunnels09, AUBT_muddytunnels05
 AUBT_muddytunnels09 : AUBT_muddytunnels07, AUBT_muddytunnels08 : SWARMROOM
 AUBT_muddytunnels10 : AUBT_muddytunnels04, DISCONNECTED
-
-AUBT_buildingaskysail : DISCONNECTED
-AUBT_designingprops : DISCONNECTED
 END ROOMS
 
 CREATURES
