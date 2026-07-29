@@ -1,0 +1,5 @@
+Subregion: Forlorn Port
+Subregion: Unloading Station
+Subregion: Shipyard
+
+Room Setting Templates: Inland, Port, Warehouse, Gutter, ContainerInside
