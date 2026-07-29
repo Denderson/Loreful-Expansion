@@ -1,4 +1,4 @@
-mudColor: 38112B
+floatMudColor: 38112B
 
 batsPerActiveSwarmRoom: 6
 

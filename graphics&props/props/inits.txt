@@ -8,3 +8,12 @@
 
 [#nm:"laminariakelp", #tp:"variedSoft", #pxlSize:point(140, 200), #vars:9, #random:0, #depth:0, #round:1, #contourExp:0, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:1, #colorize:1, #tags:["postEffects"], #notes:[]]
 [#nm:"slimemoldgrowths", #tp:"variedSoft", #pxlSize:point(140, 200), #vars:9, #random:0, #depth:3, #round:1, #contourExp:0, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:1, #colorize:1, #tags:["postEffects"], #notes:[]]
+
+[#nm:"AnvilTrees", #tp:"variedSoft", #pxlSize:point(140, 140), #vars:10, #random:0, #depth:4, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:1.0, #depthAffectHilites:0.2, #shadowBorder:0.8, #smoothShading:1, #colorize:0, #tags:["postEffects"], #notes:[]]
+
+[#nm:"AnvilTreesLeavesRed", #tp:"variedSoft", #pxlSize:point(140, 140), #vars:10, #random:0, #depth:2, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"AnvilTreesLeavesBlue", #tp:"variedSoft", #pxlSize:point(140, 140), #vars:10, #random:0, #depth:2, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"AnvilTreesLeavesGreen", #tp:"variedSoft", #pxlSize:point(140, 140), #vars:10, #random:0, #depth:2, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"AnvilTreesLeavesYellow", #tp:"variedSoft", #pxlSize:point(140, 140), #vars:10, #random:0, #depth:2, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"AnvilTreesLeavesMagenta", #tp:"variedSoft", #pxlSize:point(140, 140), #vars:10, #random:0, #depth:2, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
+[#nm:"AnvilTreesLeavesCyan", #tp:"variedSoft", #pxlSize:point(140, 140), #vars:10, #random:0, #depth:2, #round:1, #contourExp:1, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]

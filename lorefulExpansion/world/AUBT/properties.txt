@@ -1,3 +1,5 @@
+floatMudColor: 38112B
+
 batsPerActiveSwarmRoom: 6
 
 overseersSpawnChance: 0
