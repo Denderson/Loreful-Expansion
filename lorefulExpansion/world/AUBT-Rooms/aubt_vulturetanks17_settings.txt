@@ -1,0 +1,18 @@
+Template: NONE
+DangerType: Flood
+CeilingDrips: 0
+WaveSpeed: 0.7065217
+WaveLength: 0.4782609
+WaveAmplitude: 0.3586957
+SecondWaveLength: 0.3478261
+SecondWaveAmplitude: 0.8043478
+Clouds: 0.25
+Grime: 0.1086956
+WaterReflectionAlpha: 0
+Palette: 42069
+EffectColorA: 0
+EffectColorB: 13
+Effects: WaterFluxMaxLevel-0.75-284-19, DirtyWater-0.8586956-25-133, SilenceWater-0.25-20-74, InvertedWater-1-16-18, WaterDepth-0.1521739-272-238, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-553-30, SkyBloom-1-271-293, WaterFluxSpeed-0.3043478-553-139, WaterFluxMinLevel-0.2065217-278-76, WaterFluxMinDelay-0.1630435-551-281, WaterFluxMaxDelay-0.25-555-214, WaterFluxRumble-0.25-696-362, ModifyEffectColorB-0,0.5,0.25-706-490, WaterViscosity-0.3043478-279-134, 
+PlacedObjects: AirPocket><364.1048><73.21061><705~2316~30~30~Y~2311, ReliableSpear><335.3013><599.7731><, ReliableSpear><313.8156><569.6726><, ReliableSpear><235.8375><415.1799><, ReliableSpear><1178.339><311.5711><, ReliableSpear><1199.351><419.3829><, ReliableSpear><1127.222><563.6981><, ReliableSpear><1104.383><599.3998><, AirPocket><36><78.00003><115~2316~30~30~Y~2310, AirPocket><1292><81><115~2316~30~30~Y~2314, AirPocket><1048.332><2151.359><101~240~-236~62~Y~239, AirPocket><1164.729><2290.449><136~102~30~30~Y~102, LightSource><512.1635><1987.32><0.3369565~EffectColor1~58~162~50~86.60254~0~0~None~0~0, LightSource><634><1989><0.3369565~EffectColor1~58~162~50~86.60254~0~0~None~0~0, LightSource><927><1989><0.3369565~EffectColor1~58~162~50~86.60254~0~0~None~0~0, WallLight><145.0608><2169.065><220~-74~145.0608~2169.065~-4~-2091~219~0~218~-2070~0~0.5~0.3043476~True~EffectColor1~False~False~Always~Soft, WallLight><1075><2174><-259~-59~1075~2174~-2~-2091~219~0~218~-2070~0~0.5~0.3043476~True~EffectColor1~False~False~Always~Soft, LightSource><699.317><1194.312><0.4565217~EffectColor1~-12~420~50~86.60254~0~0~None~0~0, 
+AmbientSounds: DIR><RWTW_AmbSubBubble.ogg><733.6307><572.4105><0.3804348><0.8434783><0><0, OMNI><AM_IND-Factory03.ogg><907.9059><631.8747><0.4021739><1, DIR><AM_WAT-Shoreline.ogg><525.3667><565.1624><0.75><0.6086956><0><0, 
+FadePalette: 8, 0.1086956, 0.1413043, 0.1630435

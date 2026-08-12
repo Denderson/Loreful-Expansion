@@ -1,0 +1,13 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.5652174
+Clouds: 0.6630435
+Grime: 0.05434782
+RandomItemDensity: 0.6630435
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: SkyBloom-1-19-125, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-20-20, ModifyEffectColorB-0,0.5,0.3369565-284-30, 
+PlacedObjects: LightSource><976.3807><439.9014><0.2065217~Environment~465~200~-120.0001~145.6025~0~1~None~0~0, HugeTurbine><980.4792><441.0511><5~8.660254~0.2717391~1, InsectGroup><1009.195><355.7947><118~238~0~0~RockFlea~0.5, LightSource><224.9214><433.103><0.4565217~Environment~5~140~50~86.60254~0~0~None~0~0, LightSource><219><154><0.4565217~Environment~5~140~50~86.60254~0~0~None~0~0, LightSource><212><705><0.4565217~Environment~5~140~50~86.60254~0~0~None~0~0, LightSource><1095><536><0.4565217~EffectColor1~5~140~-365~2.602539~0~1~None~0~0, AdjustableFan><207.0781><140.3159><5~8.660254~0~0.1521739~1~0.2173913, AdjustableFan><209><427><5~8.660254~0~0.09782609~1~0.2173913, AdjustableFan><212><712><5~8.660254~0~0.3478261~1~0.2173913, 
+AmbientSounds: OMNI><AM_IND-Factory01.ogg><50.34821><496.0758><0.3043478><1, OMNI><RWTW_AmbDrips_01.ogg><52.38965><422.4168><0.25><1, OMNI><RWTW_AmbFan.ogg><50.05328><343.9428><0.6521739><0.3347826, SPOT><RWTW_AmbEmpty.ogg><765.4921><455.3001><0.6630435><1><1007.492><409.3002><-35.35534><-35.35534><0><0.1, SPOT><RWTW_AmbEmpty.ogg><519.8057><391.7973><0.6630435><1.254348><435.8057><406.7974><-35.35534><-35.35534><0><0.1, 
+FadePalette: 8, 0.1086956

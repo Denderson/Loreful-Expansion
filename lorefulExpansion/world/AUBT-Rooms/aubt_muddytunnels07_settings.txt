@@ -1,0 +1,9 @@
+Template: NONE
+Clouds: 0.3369565
+Grime: 0.1086956
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: LightRain-0.1086956-9-62, SkyBloom-0.9021739-15-124, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-294-93, 
+PlacedObjects: InsectGroup><1241.692><241.3049><971~415~0~0~RockFlea~0.8043478, InsectGroup><1224.747><376.8><1041~238~0~0~TinyDragonFly~0.6630435, Rainbow><1702.346><565.2107><362~154~154.0741~14~0.75,0.5,0.5978261,1,0.4456522,0.9456522, 
+AmbientSounds: OMNI><AM_ENV-Woods.ogg><496.1089><111.3322><0.6086956><1, OMNI><AM_ENV-Pasture.ogg><676.1558><114.9264><0.3043478><1, 

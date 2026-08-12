@@ -1,0 +1,9 @@
+Template: NONE
+Clouds: 0.3369565
+Grime: 0.1630435
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: LightRain-0.06521739-0-33, SkyBloom-0.7934783-6-93, 
+PlacedObjects: LightSource><1144.2><1507.738><0.25~Environment~-889~-442~-234~-163.3975~0~1~None~0~0, LightSource><1245><239><0.4021739~Environment~-815~326~-129~-133.3975~0~1~None~0~0, 
+AmbientSounds: OMNI><AM_ENV-Pasture.ogg><820.345><124.8736><0.4456522><1, OMNI><AM_ENV-Woods.ogg><820.3517><202.8278><0.4565217><1, OMNI><AM_ENV-Forest.ogg><822.5454><285.5552><0.4565217><1, OMNI><AM_NAT-ForestRain.ogg><831.1285><46.34674><0.5><1, 

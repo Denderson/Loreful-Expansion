@@ -1,0 +1,12 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.6956522
+Clouds: 1
+Grime: 0.05434782
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: ModifyEffectColorA-0.1086956,0.3043478,0.6086956-20-20, RockFlea-0.4565217-33-128, ModifyEffectColorB-0,0.5,0.2065217-306-87, 
+PlacedObjects: LightSource><515.5934><578.6244><0.1630435~EffectColor1~184~130~-444~22.60254~0~1~None~0~0, LightSource><659><573><0.2173913~EffectColor1~184~130~-575~-87.39746~0~1~None~0~0, LightSource><919><571><0.1413043~EffectColor1~184~130~-831~-191.3975~0~1~None~0~0, LightSource><777><564><0.1847826~EffectColor2~184~130~-430~63.60248~0~1~None~0~0, DeadSeedCob><157.5826><271.1406><, DeadSeedCob><1174.051><283.2675><, ReliableSpear><369.6652><189.6128><, LightSource><710.6996><270.4882><0.4021739~EffectColor1~128~228~-134~-157.3975~0~0~None~0~0, AdjustableFan><650.6193><387.6514><5~8.660254~0~0~0.2391304~0.1413043, 
+AmbientSounds: OMNI><RWTW_AmbDrips_02.ogg><780.5766><613.6503><0.3586957><1, OMNI><RWTW_AmbDrips_03.ogg><604.1068><616.1396><0.3369565><0.7065217, SPOT><MSC-HeavyCreaking.ogg><658.8731><365.9076><0.4673913><0.6673913><710.8731><277.9076><-81.35535><-72.35535><0><0.252174, 
+MorePalette0: 8, 0.2065217
