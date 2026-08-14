@@ -19,3 +19,5 @@
 
 [#nm:"SproutTreeTrunks", #tp:"variedSoft", #pxlSize:point(320, 600), #vars:7, #random:0, #depth:10, #round:1, #contourExp:6, #selfShade:1, #highLightBorder:1.2, #depthAffectHilites:0.2, #shadowBorder:1.2, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
 [#nm:"SproutTreeSprouts", #tp:"variedSoft", #pxlSize:point(400, 360), #vars:7, #random:0, #depth:5, #round:1, #contourExp:6, #selfShade:1, #highLightBorder:0.8, #depthAffectHilites:0.2, #shadowBorder:0.8, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
+
+[#nm:"moreMasks", #tp:"variedStandard", #colorTreatment:"standard", #sz:point(4,4), #repeatL:[1], #vars:5, #random:1, #tags:["effectColorA","effectColorB","notTrashProp"], #layerExceptions:[], #notes:[]]
