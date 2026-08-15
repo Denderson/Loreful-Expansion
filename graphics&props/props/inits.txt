@@ -11,6 +11,8 @@
 [#nm:"blimpskeletonring3", #tp:"variedStandard", #colorTreatment:"standard", #sz:point(10,21), #repeatL:[1,1,1,1,1,1,1,1,1,1], #vars:1, #random:1, #tags:[], #layerExceptions:[], #notes:[]]
 [#nm:"blimpskeletonring4", #tp:"variedStandard", #colorTreatment:"standard", #sz:point(10,21), #repeatL:[1,1,1,1,1,1,1,1,1,1], #vars:1, #random:1, #tags:[], #layerExceptions:[], #notes:[]]
 
+[#nm:"blimpskeletonplates", #tp:"variedStandard", #colorTreatment:"standard", #sz:point(4,5), #repeatL:[3], #vars:6, #random:1, #tags:[], #layerExceptions:[], #notes:[]]
+
 [#nm:"laminariakelp", #tp:"variedSoft", #pxlSize:point(140, 200), #vars:9, #random:0, #depth:0, #round:1, #contourExp:0, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
 [#nm:"slimemoldgrowths", #tp:"variedSoft", #pxlSize:point(140, 200), #vars:9, #random:0, #depth:3, #round:1, #contourExp:0, #selfShade:1, #highLightBorder:0, #depthAffectHilites:0.2, #shadowBorder:0, #smoothShading:3, #colorize:1, #tags:["postEffects"], #notes:[]]
 
