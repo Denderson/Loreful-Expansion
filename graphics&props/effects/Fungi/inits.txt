@@ -1,9 +1,0 @@
-[#nm:"funGrassSquat", #tp:"standardPlant", #vars: 10, #pxlSz:point(20, 20), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 14, #szVar:[0.5, 1.2], #rotVar: 15, #strengthAffectSize: 1, #strengthAffectVar: 0, #rootAmt: 1]
-
-[#nm:"funGrassWiggles", #tp:"standardPlant", #vars: 10, #pxlSz:point(20, 20), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 16, #szVar:[0.7, 1.5], #rotVar: 30, #strengthAffectSize: 1, #strengthAffectVar: 1, #rootAmt: 2]
-
-[#nm:"groovyMushrooms", #tp:"standardPlant", #vars: 10, #pxlSz:point(40, 40), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 6, #szVar:[0.6, 1.2], #rotVar: 15, #strengthAffectSize: 1, #strengthAffectVar: 0, #rootAmt: 2]
-[#nm:"groovyMushroomsTall", #tp:"standardPlant", #vars: 10, #pxlSz:point(40, 80), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 6, #szVar:[0.6, 1.2], #rotVar: 15, #strengthAffectSize: 1, #strengthAffectVar: 0, #rootAmt: 2]
-
-
-[#nm:"groovyRoots", #tp:"hanger", #vars: 10, #pxlSz:point(40, 40), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #initRotVar: 30, #segmentRotVar: 20, #segmentRotPull: 0.3, #segmentMoveAmt: 5, #effectFadeOut: 0.6, #effectFadeOut2: 0.15, #szChange: [1.4, 0.5, 0.2], #tipGraf:"groovyRootsEnds", #tipVars: 10, #tipPxlSize:point(40,40), #tipMoveAmt: 5, #heightAffectVar: 0.1]

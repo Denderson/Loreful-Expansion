@@ -1,0 +1,17 @@
+-Frog's Effects
+[#nm:"Kelp Grower", #tp:"grower", #vars:5, #pxlSz:point(30,30), #pickColor:1, #randomFlip:1, #szVar:[0.9, 7], #rotVar:60, #hasGrad: 1, #rootAmt:5, #initRotVar: 15, #segmentRotVar:40, #segmentRotPull: 0.35, #segmentMoveAmt: 15]
+
+-TreeSparrow's Effects
+[#nm:"Wrack Grower", #tp:"grower", #vars:5, #pxlSz:point(30,30), #pickColor:1, #randomFlip:1, #szVar:[0.5, 7], #rotVar:80, #hasGrad: 1, #rootAmt:5, #initRotVar: 15, #segmentRotVar:100, #segmentRotPull: 0.5, #segmentMoveAmt: 15]
+
+[#nm:"funGrassSquat", #tp:"standardPlant", #vars: 10, #pxlSz:point(20, 20), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 14, #szVar:[0.5, 1.2], #rotVar: 15, #strengthAffectSize: 1, #strengthAffectVar: 0, #rootAmt: 1]
+
+[#nm:"funGrassWiggles", #tp:"standardPlant", #vars: 10, #pxlSz:point(20, 20), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 16, #szVar:[0.7, 1.5], #rotVar: 30, #strengthAffectSize: 1, #strengthAffectVar: 1, #rootAmt: 2]
+
+[#nm:"groovyMushrooms", #tp:"standardPlant", #vars: 10, #pxlSz:point(40, 40), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 6, #szVar:[0.6, 1.2], #rotVar: 15, #strengthAffectSize: 1, #strengthAffectVar: 0, #rootAmt: 2]
+[#nm:"groovyMushroomsTall", #tp:"standardPlant", #vars: 10, #pxlSz:point(40, 80), #pickColor: 1, #hasGrad: 1, #randomFlip: 1, #placeAmt: 6, #szVar:[0.6, 1.2], #rotVar: 15, #strengthAffectSize: 1, #strengthAffectVar: 0, #rootAmt: 2]
+
+[#nm:"groovyRoots", #tp:"hanger", #vars:10,#pxlSz:point(40,40), #pickColor:1, #hasGrad:1, #randomFlip:1, #initRotVar:30, #segmentRotVar:20, #segmentRotPull:0.45, #segmentMoveAmt:30, #effectFadeOut:0.8, #szChange:[0.7,1.2,0.2], #tipGraf:"groovyRootsEnds", #tipVars:10, #tipPxlSz:point(40,40), #tipMoveAmt:36]
+
+[#nm:"theOldBallAndChain", #tp:"hanger", #vars:1, #pxlSz:point(80,80), #pickColor:1, #hasGrad:0, #randomFlip:0, #initRotVar:0, #segmentRotVar:0, #segmentRotPull:0, #segmentMoveAmt:30, #effectFadeOut:0.8, #szChange:[1.0,1.0,0.0], #tipGraf:"theOldBallAndChainEnds", #tipVars:5, #tipPxlSz:point(80,80), #tipMoveAmt:36]
+[#nm:"theOldChainNoBall", #tp:"hanger", #vars:1, #pxlSz:point(80,80), #pickColor:1, #hasGrad:0, #randomFlip:1, #initRotVar:0, #segmentRotVar:0, #segmentRotPull:0, #segmentMoveAmt:30, #effectFadeOut:0.8, #szChange:[1.0,1.0,0.0]]
