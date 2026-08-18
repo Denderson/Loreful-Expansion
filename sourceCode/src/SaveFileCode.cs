@@ -1,6 +1,9 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using loremiscExpansion.NPCs;
+using loremiscExpansion.NPCs.Apostle;
+using loremiscExpansion.NPCs.Boris;
+using loremiscExpansion.NPCs.Collector;
 using Menu.Remix.MixedUI;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -27,7 +30,9 @@ namespace loremiscExpansion
         public const string finishedTutorial = prefix + nameof(finishedTutorial);
         public const string visitedRegions = prefix + nameof(visitedRegions);
 
-        public const string npcmovements = prefix + nameof(npcmovements);
+        public const string apostleState = prefix + nameof(apostleState);
+        public const string collectorState = prefix + nameof(collectorState);
+        public const string borisState = prefix + nameof(borisState);
 
         public static void SaveState_LoadGame(On.SaveState.orig_LoadGame orig, SaveState self, string str, RainWorldGame game)
         {
@@ -99,29 +104,79 @@ namespace loremiscExpansion
             save.miscWorldSaveData.GetSlugBaseData().Set(name, value);
         }
 
-        public static List<NPCMovement> GetNPCMovements(this SaveState save)
+        public static ApostleState GetApostleState(this SaveState save)
         {
             if (save.miscWorldSaveData == null)
             {
-                Log.LogMessage("Save > miscData is null while grabbing NPC Movements!");
+                Log.LogMessage("Save > miscData is null while getting Apostle state!");
                 return null;
             }
-            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(npcmovements, out List<NPCMovement> movements))
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(apostleState, out ApostleState state))
             {
-                Log.LogMessage("Slugbase data grab is null while grabbing NPC Movements!");
+                Log.LogMessage("Slugbase data grab is null while getting Apostle state!");
                 return null;
             }
-            return movements;
+            return state;
         }
 
-        public static void SetNPCMovements(this SaveState save, List<NPCMovement> value)
+        public static void SetApostleState(this SaveState save, ApostleState state)
         {
             if (save.miscWorldSaveData == null)
             {
-                Log.LogMessage("Save > miscData is null while setting NPC Movements!");
+                Log.LogMessage("Save > miscData is null while setting Apostle state!");
                 return;
             }
-            save.miscWorldSaveData.GetSlugBaseData().Set(npcmovements, value);
+            save.miscWorldSaveData.GetSlugBaseData().Set(apostleState, state);
+        }
+
+        public static CollectorState GetCollectorState(this SaveState save)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while getting Collector state!");
+                return null;
+            }
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(collectorState, out CollectorState state))
+            {
+                Log.LogMessage("Slugbase data grab is null while getting Collector state!");
+                return null;
+            }
+            return state;
+        }
+
+        public static void SetCollectorState(this SaveState save, CollectorState state)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while setting Collector state!");
+                return;
+            }
+            save.miscWorldSaveData.GetSlugBaseData().Set(collectorState, state);
+        }
+
+        public static BorisState GetBorisState(this SaveState save)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while getting Boris state!");
+                return null;
+            }
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(borisState, out BorisState state))
+            {
+                Log.LogMessage("Slugbase data grab is null while getting Boris state!");
+                return null;
+            }
+            return state;
+        }
+
+        public static void SetBorisState(this SaveState save, BorisState state)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while setting Boris state!");
+                return;
+            }
+            save.miscWorldSaveData.GetSlugBaseData().Set(borisState, state);
         }
 
         public static bool NewRegion(this SaveState save, string target)

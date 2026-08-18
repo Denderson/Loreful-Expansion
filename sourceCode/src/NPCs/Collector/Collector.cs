@@ -8,11 +8,9 @@ namespace loremiscExpansion.NPCs.Collector
 {
         public class Collector : Scavenger
         {
-            public CollectorStats myStats = null;
-
             public Collector(AbstractCreature abstractCreature, World world) : base(abstractCreature, world)
             {
-                CollectorStats myStats = new CollectorStats(abstractCreature);
+
             }
             public override void InitiateGraphicsModule()
             {

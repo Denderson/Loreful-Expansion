@@ -33,16 +33,11 @@ namespace loremiscExpansion
         {
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
             On.RainWorld.OnModsInit += LoadRemixMenu;
-            On.RainWorld.Start += CollectorHooks.RainWorld_Start;
-
-
             try
             {
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
-               
-
-                On.RegionState.RainCycleTick += CollectorHooks.RegionState_CycleTick;
+                Conduit.ConduitHooks.ApplyHooks();
 
                 Logger.LogMessage("loremisc hooks success!");
             }
