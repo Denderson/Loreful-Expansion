@@ -1,8 +1,11 @@
-﻿using System;
+﻿using loremiscExpansion.NPCs.Apostle.lsfUtils.DevtoolsObjects.LocalGravity;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static loremiscExpansion.Plugin;
 
 namespace loremiscExpansion.NPCs.Boris
 {
@@ -11,6 +14,8 @@ namespace loremiscExpansion.NPCs.Boris
         public int residue = 0;
         public int cyclesSinceLastResidue = 0;
         public int questProgression = 0;
+
+        public static List<string> borisSpots = [];
         public override List<string> BannedRegions()
         {
             List<string> bannedRegions = base.BannedRegions();
@@ -22,6 +27,40 @@ namespace loremiscExpansion.NPCs.Boris
         public override void Tick()
         {
             base.Tick();
+        }
+
+        public override void SetWanderingScore(string region)
+        {
+            if (borisSpots == null || borisSpots.Count() <= 0)
+            {
+                Log.LogMessage("Boris spots are null!");
+                base.SetWanderingScore(region);
+                return;
+            }
+            wanderingScore = 0;
+            foreach (string spot in borisSpots) if (spot.StartsWith(region)) wanderingScore++;
+        }
+
+        public static void LoadBorisSpots()
+        {
+            string path;
+            try
+            {
+                path = AssetManager.ResolveFilePath("lorefulExpansion/sepulcherSpots.txt");
+            }
+            catch (Exception ex)
+            {
+                Log.LogWarning($"CollectorStats.LoadRegions: AssetManager not ready or path resolution failed: {ex.Message}");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(path) || !File.Exists(path))
+            {
+                Log.LogWarning("sepulcherSpots.txt not found.");
+                return;
+            }
+            StreamReader reader = new(path);
+            borisSpots = reader.ReadToEnd().Split('\r', '\n').ToList();
         }
     }
 }

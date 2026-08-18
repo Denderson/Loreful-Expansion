@@ -15,7 +15,7 @@ namespace loremiscExpansion.NPCs
 {
     public class NPCState
     {
-        public static List<string> listOfRegions = new() { "AUSS", "AUBT", "AUTS", "AUFH", "DZ1", "AUFD", "AUND", "AUHZ", "AUSG", "AUTT", "AUFN" };
+        public static List<string> listOfRegions = ["AUSS", "AUBT", "AUTS", "AUFH", "DZ1", "AUFD", "AUND", "AUHZ", "AUSG", "AUTT", "AUFN"];
         public static string playerCurrentRegion = string.Empty;
 
         public bool dead;
@@ -67,6 +67,7 @@ namespace loremiscExpansion.NPCs
             if (nextRegion == string.Empty) ChooseNextRegion();
             visitedRegions.Add(currentRegion);
             currentRegion = nextRegion;
+            SetWanderingScore(currentRegion);
             ChooseNextRegion();
         }
 
@@ -79,9 +80,11 @@ namespace loremiscExpansion.NPCs
             Random random = new();
             int randomIndex = random.Next(listOfRegions.Count);
             nextRegion = listOfRegions[randomIndex];
+        }
 
-            // get region complexity and set wanderingScore to that value here
-            wanderingScore = 3; // placeholder for now
+        public virtual void SetWanderingScore(string region)
+        {
+            wanderingScore = 3;
         }
 
         public virtual List<string> BannedRegions()
@@ -137,22 +140,9 @@ namespace loremiscExpansion.NPCs
         public static void RainWorld_Start(On.RainWorld.orig_Start orig, RainWorld self)
         {
             orig(self);
-            string path;
-            try
-            {
-                path = AssetManager.ResolveFilePath("lorefulExpansion/collectorSpots.txt");
-            }
-            catch (Exception ex)
-            {
-                Log.LogWarning($"CollectorStats.LoadRegions: AssetManager not ready or path resolution failed: {ex.Message}");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(path) || !File.Exists(path))
-            {
-                Log.LogWarning("collectorSpots.txt not found.");
-                return;
-            }
+            ApostleState.LoadApostleSpots();
+            CollectorState.LoadCollectorSpots();
+            BorisState.LoadBorisSpots();
         }
     }
 }
