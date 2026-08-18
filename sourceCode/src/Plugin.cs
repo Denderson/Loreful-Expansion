@@ -1,21 +1,25 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using Menu;
-using SlugBase.Features;
-using System;
-using UnityEngine;
 using LizardCosmetics;
+using loremiscExpansion.NPCs.Apostle.lsfUtils.DevtoolsObjects.LocalGravity;
+using loremiscExpansion.NPCs.Boris.lsfUtils.DevtoolsObjects.LocalGravity;
+using loremiscExpansion.NPCs.Collector;
+using loremiscExpansion.NPCs.Collector.lsfUtils.DevtoolsObjects.LocalGravity;
+using Menu;
 using Menu.Remix.MixedUI;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 using RWCustom;
+using SlugBase.Features;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Permissions;
-using loremiscExpansion.NPCs.Collector;
+using UnityEngine;
+using static Pom.Pom;
 
 namespace loremiscExpansion
 {
@@ -38,6 +42,10 @@ namespace loremiscExpansion
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
                 Conduit.ConduitHooks.ApplyHooks();
+
+                RegisterManagedObject<ApostleSpot, ApostleSpotData, ManagedRepresentation>("ApostleSpot", "Aurelia");
+                RegisterManagedObject<CollectorSpot, CollectorSpotData, ManagedRepresentation>("CollectorSpot", "Aurelia");
+                RegisterManagedObject<BorisSpot, BorisSpotData, ManagedRepresentation>("SepulcherSpot", "Aurelia");
 
                 Logger.LogMessage("loremisc hooks success!");
             }
