@@ -6,12 +6,16 @@ using System.IO;
 using System.Threading.Tasks;
 using static loremiscExpansion.Plugin;
 
-namespace loremiscExpansion.Creatures.Scavs.Collector
+namespace loremiscExpansion.NPCs.Collector
 {
-    internal class CollectorHooks
+    public static class CollectorHooks
     {
+        public static void ApplyHooks()
+        {
 
-        static public void RegionState_CycleTick(On.RegionState.orig_RainCycleTick orig, RegionState self, int ticks, int foodRepBonus)
+        }
+
+        public static void RegionState_CycleTick(On.RegionState.orig_RainCycleTick orig, RegionState self, int ticks, int foodRepBonus)
         {
             orig(self, ticks, foodRepBonus);
             /*if (self.creature.creatureTemplate.type == Enums.ScavCollector)
@@ -52,7 +56,6 @@ namespace loremiscExpansion.Creatures.Scavs.Collector
                 Log.LogWarning("collectorSpots.txt not found.");
                 return;
             }
-
             CollectorStats.LoadRegions();
         }
 

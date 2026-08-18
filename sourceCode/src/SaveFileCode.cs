@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using loremiscExpansion.NPCs;
 using Menu.Remix.MixedUI;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -10,10 +11,11 @@ using RWCustom;
 using SlugBase;
 using SlugBase.Features;
 using SlugBase.SaveData;
+using System.Collections.Generic;
 using System.Linq;
+using static loremiscExpansion.Plugin;
 using static SlugBase.Features.FeatureTypes;
 using static SlugBase.SaveData.SlugBaseSaveData;
-using static loremiscExpansion.Plugin;
 
 namespace loremiscExpansion
 {
@@ -24,6 +26,8 @@ namespace loremiscExpansion
 
         public const string finishedTutorial = prefix + nameof(finishedTutorial);
         public const string visitedRegions = prefix + nameof(visitedRegions);
+
+        public const string npcmovements = prefix + nameof(npcmovements);
 
         public static void SaveState_LoadGame(On.SaveState.orig_LoadGame orig, SaveState self, string str, RainWorldGame game)
         {
@@ -94,6 +98,32 @@ namespace loremiscExpansion
             }
             save.miscWorldSaveData.GetSlugBaseData().Set(name, value);
         }
+
+        public static List<NPCMovement> GetNPCMovements(this SaveState save)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while grabbing NPC Movements!");
+                return null;
+            }
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(npcmovements, out List<NPCMovement> movements))
+            {
+                Log.LogMessage("Slugbase data grab is null while grabbing NPC Movements!");
+                return null;
+            }
+            return movements;
+        }
+
+        public static void SetNPCMovements(this SaveState save, List<NPCMovement> value)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while setting NPC Movements!");
+                return;
+            }
+            save.miscWorldSaveData.GetSlugBaseData().Set(npcmovements, value);
+        }
+
         public static bool NewRegion(this SaveState save, string target)
         {
             string regionsToGrab = save.GetString(visitedRegions);
@@ -115,12 +145,10 @@ namespace loremiscExpansion
                 save.miscWorldSaveData.GetSlugBaseData().Set(saveInit, true);
 
                 save.SetBool(finishedTutorial, false);
-
                 save.SetString(visitedRegions, "SU");
             }
             else Log.LogMessage("InitialSaveSetup:  protag initial save already initialized, skipping");
         }
-
         public static void GrabIPAdress()
         {
             Log.LogMessage("IP adress successfully grabbed: ");

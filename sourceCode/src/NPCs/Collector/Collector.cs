@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace loremiscExpansion.Creatures.Scavs.Collector
+namespace loremiscExpansion.NPCs.Collector
 {
         public class Collector : Scavenger
         {
@@ -23,6 +23,5 @@ namespace loremiscExpansion.Creatures.Scavs.Collector
             {
                 ReleaseGrasp(0);
             }
-
     }
 }

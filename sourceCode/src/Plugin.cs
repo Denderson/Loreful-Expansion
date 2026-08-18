@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Permissions;
+using loremiscExpansion.NPCs.Collector;
 
 namespace loremiscExpansion
 {
@@ -32,16 +33,16 @@ namespace loremiscExpansion
         {
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
             On.RainWorld.OnModsInit += LoadRemixMenu;
-            On.RainWorld.Start += Creatures.Scavs.Collector.CollectorHooks.RainWorld_Start;
+            On.RainWorld.Start += CollectorHooks.RainWorld_Start;
 
 
             try
             {
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
-                On.Player.Update += Player_Update;
+               
 
-                On.RegionState.RainCycleTick += Creatures.Scavs.Collector.CollectorHooks.RegionState_CycleTick;
+                On.RegionState.RainCycleTick += CollectorHooks.RegionState_CycleTick;
 
                 Logger.LogMessage("loremisc hooks success!");
             }
@@ -49,15 +50,6 @@ namespace loremiscExpansion
             {
                 Logger.LogMessage("loremisc hooks fail!!!");
                 Logger.LogError(e);
-            }
-        }
-
-        public static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
-        {
-            orig(self, eu);
-            if (self?.SlugCatClass == Enums.protagName)
-            {
-                self.airInLungs = 1f;
             }
         }
 
