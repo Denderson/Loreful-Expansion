@@ -1,0 +1,13 @@
+Template: NONE
+DangerType: Flood
+CeilingDrips: 0.5543478
+Grime: 0.08695652
+RandomItemDensity: 0.4565217
+RandomItemSpearChance: 0.1021738
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: SkyBloom-0.3369565-20-20, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-26-86, ModifyEffectColorB-0,0.5,0.3369565-312-106, 
+PlacedObjects: LightSource><1063.05><381.0078><0.1630435~Environment~-476~58~-69~139.6025~0~1~None~0~0, LightSource><449.431><242.086><0.1630434~Environment~446~162~-124~160.6025~0~1~None~0~0, DangleFruit><758.017><560.1993><19~102~2~3, DangleFruit><778.1698><466.3556><5~119~2~3, 
+AmbientSounds: OMNI><RWTW_AmbDrips_02.ogg><756.4172><599.1402><0.5543478><1, OMNI><RWTW_AmbDrips_03.ogg><569.8656><603.3368><0.4021739><1.41087, OMNI><RWTW_AmbFlowMed.ogg><634.5504><510.2377><0.2065217><0.7065217, 
+FadePalette: 42067, 0.2065217

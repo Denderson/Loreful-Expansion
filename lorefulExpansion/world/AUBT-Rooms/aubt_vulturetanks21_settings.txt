@@ -1,0 +1,16 @@
+Template: NONE
+DangerType: Flood
+WaveSpeed: 0.5
+WaveLength: 1
+WaveAmplitude: 0.2914986
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+Grime: 0.1195652
+WaterReflectionAlpha: 0
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: SkyBloom-0.5-18-117, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-20-20, DirtyWater-1-275-276, SilenceWater-0.8043478-276-220, WaterViscosity-0.6086956-279-162, WaterDepth-0.1086956-552-232, ModifyEffectColorB-0,0.5,0.1521739-293-44, 
+PlacedObjects: ReliableSpear><171.303><247.533><, AirPocket><251.3177><78.83232><100~200~30~30~Y~-37, AirPocket><536.3024><41.28056><865~294~30~30~Y~1, AirPocket><33.55583><43.44206><204~74~30~30~Y~3, AirPocket><34.95226><42.80577><52~134~30~30~Y~4, LightSource><773.8132><429.3102><0.3369565~EffectColor1~20~220~54~-54.39746~0~0~None~0~0, LightSource><301><736><0.3369565~EffectColor1~8~156~54~-54.39746~0~0~None~0~0, LightSource><1338><754><0.3369565~EffectColor1~-124~-179~-422~-113.3975~0~0~None~0~0, ReliableSpear><428.6185><137.9111><, ReliableSpear><457.897><148.4214><, DataPearl><959.9019><462.3699><-228~13~0~0~Misc~0, MudPit><893.0616><106.0604><223~76~67, 
+AmbientSounds: OMNI><AM_IND-Factory01.ogg><527.6968><357.7144><0.2065217><1, OMNI><RWTW_AmbDrips_04.ogg><527.71><586.804><0.1847826><1, OMNI><RWTW_AmbDrips_01.ogg><532.2571><502.8002><0.1847826><1, OMNI><RWTW_AmbInterior.ogg><534.6599><434.0715><0.5><1, SPOT><RWTW_AmbFlowMed.ogg><794.8991><354.3833><0.3369565><0.3347826><274.8991><205.3833><118.6447><37.64465><0><0.6000001, 
+FadePalette: 8, 0.326087

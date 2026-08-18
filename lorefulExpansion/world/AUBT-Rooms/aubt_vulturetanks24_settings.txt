@@ -1,0 +1,12 @@
+Template: NONE
+DangerType: FloodAndRain
+CeilingDrips: 0.6082654
+Clouds: 1
+Grime: 0.1056044
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: ModifyEffectColorA-0.1086956,0.3043478,0.6086956-20-20, SkyBloom-1-14.34792-126, ModifyEffectColorB-0,0.5,0.2065217-313-88, 
+PlacedObjects: LightSource><461.9206><454.1653><0.1648095~Environment~398.1281~-81.53333~50~86.60254~0~1~None~0~0, LightSource><998.161><461.9555><0.1648095~Environment~-442.1833~-153.2889~-392.5272~121.4471~0~1~None~0~0, LightSource><252.0894><108.8692><0.25~EffectColor1~270~244~50~86.60254~0~0~None~0~0, LightSource><1182><130><0.25~EffectColor1~-243~192~-152~70.60254~0~0~None~0~0, LightSource><1144><736><0.3043478~EffectColor1~-122~-168~-171~-135.3975~0~0~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory03.ogg><55.26352><466.5084><0.4456522><1, OMNI><RWTW_AmbDrips_04.ogg><57.84547><386.5059><0.2525364><1, 
+FadePalette: 8, 0.1626585

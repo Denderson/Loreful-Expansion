@@ -1,0 +1,19 @@
+Template: NONE
+DangerType: None
+WaveSpeed: 0.5978261
+WaveLength: 1
+WaveAmplitude: 0
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+Clouds: 0.8530231
+Grime: 0.07445659
+RandomItemDensity: 0
+RandomItemSpearChance: 0
+WaterReflectionAlpha: 0
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: WaterDepth-0.1847826-346-61, SilenceWater-1-350-119, SkyBloom-1-46-123, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-20-20, ModifyEffectColorB-0,0.5,0.25-1112-113, 
+PlacedObjects: LightSource><856.6747><476.4026><0.1086956~Environment~-322~45~129~166.6025~0~1~None~0~0, HugeTurbine><843.9499><492.7564><5~8.660254~0.25~0.7608696, DeadTokenStalk><750.9056><549.8744><-15~88, InsectGroup><848.5775><426.6012><-85~116~0~0~RockFlea~0.3043478, MudPit><1056.245><599.7><94~33~24, 
+AmbientSounds: OMNI><AM_IND-Factory01.ogg><45.00229><521.2388><0.3066685><1, 
+FadePalette: 8, 0.1086956
