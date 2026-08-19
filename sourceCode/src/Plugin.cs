@@ -1,20 +1,25 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using Menu;
-using SlugBase.Features;
-using System;
-using UnityEngine;
 using LizardCosmetics;
+using loremiscExpansion.NPCs.Apostle.lsfUtils.DevtoolsObjects.LocalGravity;
+using loremiscExpansion.NPCs.Boris.lsfUtils.DevtoolsObjects.LocalGravity;
+using loremiscExpansion.NPCs.Collector;
+using loremiscExpansion.NPCs.Collector.lsfUtils.DevtoolsObjects.LocalGravity;
+using Menu;
 using Menu.Remix.MixedUI;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 using RWCustom;
+using SlugBase.Features;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Permissions;
+using UnityEngine;
+using static Pom.Pom;
 
 namespace loremiscExpansion
 {
@@ -32,16 +37,15 @@ namespace loremiscExpansion
         {
             On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
             On.RainWorld.OnModsInit += LoadRemixMenu;
-            On.RainWorld.Start += Creatures.Scavs.Collector.CollectorHooks.RainWorld_Start;
-
-
             try
             {
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
-                On.Player.Update += Player_Update;
+                Conduit.ConduitHooks.ApplyHooks();
 
-                On.RegionState.RainCycleTick += Creatures.Scavs.Collector.CollectorHooks.RegionState_CycleTick;
+                RegisterManagedObject<ApostleSpot, ApostleSpotData, ManagedRepresentation>("ApostleSpot", "Aurelia");
+                RegisterManagedObject<CollectorSpot, CollectorSpotData, ManagedRepresentation>("CollectorSpot", "Aurelia");
+                RegisterManagedObject<BorisSpot, BorisSpotData, ManagedRepresentation>("SepulcherSpot", "Aurelia");
 
                 Logger.LogMessage("loremisc hooks success!");
             }
@@ -49,15 +53,6 @@ namespace loremiscExpansion
             {
                 Logger.LogMessage("loremisc hooks fail!!!");
                 Logger.LogError(e);
-            }
-        }
-
-        public static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
-        {
-            orig(self, eu);
-            if (self?.SlugCatClass == Enums.protagName)
-            {
-                self.airInLungs = 1f;
             }
         }
 

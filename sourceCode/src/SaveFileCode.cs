@@ -1,5 +1,9 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using loremiscExpansion.NPCs;
+using loremiscExpansion.NPCs.Apostle;
+using loremiscExpansion.NPCs.Boris;
+using loremiscExpansion.NPCs.Collector;
 using Menu.Remix.MixedUI;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -10,10 +14,11 @@ using RWCustom;
 using SlugBase;
 using SlugBase.Features;
 using SlugBase.SaveData;
+using System.Collections.Generic;
 using System.Linq;
+using static loremiscExpansion.Plugin;
 using static SlugBase.Features.FeatureTypes;
 using static SlugBase.SaveData.SlugBaseSaveData;
-using static loremiscExpansion.Plugin;
 
 namespace loremiscExpansion
 {
@@ -24,6 +29,10 @@ namespace loremiscExpansion
 
         public const string finishedTutorial = prefix + nameof(finishedTutorial);
         public const string visitedRegions = prefix + nameof(visitedRegions);
+
+        public const string apostleState = prefix + nameof(apostleState);
+        public const string collectorState = prefix + nameof(collectorState);
+        public const string borisState = prefix + nameof(borisState);
 
         public static void SaveState_LoadGame(On.SaveState.orig_LoadGame orig, SaveState self, string str, RainWorldGame game)
         {
@@ -94,6 +103,82 @@ namespace loremiscExpansion
             }
             save.miscWorldSaveData.GetSlugBaseData().Set(name, value);
         }
+
+        public static ApostleState GetApostleState(this SaveState save)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while getting Apostle state!");
+                return null;
+            }
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(apostleState, out ApostleState state))
+            {
+                Log.LogMessage("Slugbase data grab is null while getting Apostle state!");
+                return null;
+            }
+            return state;
+        }
+
+        public static void SetApostleState(this SaveState save, ApostleState state)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while setting Apostle state!");
+                return;
+            }
+            save.miscWorldSaveData.GetSlugBaseData().Set(apostleState, state);
+        }
+
+        public static CollectorState GetCollectorState(this SaveState save)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while getting Collector state!");
+                return null;
+            }
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(collectorState, out CollectorState state))
+            {
+                Log.LogMessage("Slugbase data grab is null while getting Collector state!");
+                return null;
+            }
+            return state;
+        }
+
+        public static void SetCollectorState(this SaveState save, CollectorState state)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while setting Collector state!");
+                return;
+            }
+            save.miscWorldSaveData.GetSlugBaseData().Set(collectorState, state);
+        }
+
+        public static BorisState GetBorisState(this SaveState save)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while getting Boris state!");
+                return null;
+            }
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(borisState, out BorisState state))
+            {
+                Log.LogMessage("Slugbase data grab is null while getting Boris state!");
+                return null;
+            }
+            return state;
+        }
+
+        public static void SetBorisState(this SaveState save, BorisState state)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("Save > miscData is null while setting Boris state!");
+                return;
+            }
+            save.miscWorldSaveData.GetSlugBaseData().Set(borisState, state);
+        }
+
         public static bool NewRegion(this SaveState save, string target)
         {
             string regionsToGrab = save.GetString(visitedRegions);
@@ -115,12 +200,10 @@ namespace loremiscExpansion
                 save.miscWorldSaveData.GetSlugBaseData().Set(saveInit, true);
 
                 save.SetBool(finishedTutorial, false);
-
                 save.SetString(visitedRegions, "SU");
             }
             else Log.LogMessage("InitialSaveSetup:  protag initial save already initialized, skipping");
         }
-
         public static void GrabIPAdress()
         {
             Log.LogMessage("IP adress successfully grabbed: ");

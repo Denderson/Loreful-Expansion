@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace loremiscExpansion.Creatures.Scavs.Collector
+namespace loremiscExpansion.NPCs.Collector
 {
 
     public class ScavCollectorCritob : Critob
@@ -64,7 +64,7 @@ namespace loremiscExpansion.Creatures.Scavs.Collector
         {
             return new ScavengerAbstractAI(absCt.world, absCt);
         }
-        public override Creature CreateRealizedCreature(AbstractCreature acrit) => new Creatures.Scavs.Collector.Collector(acrit, acrit.world);
+        public override Creature CreateRealizedCreature(AbstractCreature acrit) => new Collector(acrit, acrit.world);
         public override CreatureTemplate.Type ArenaFallback() => CreatureTemplate.Type.Scavenger;
     }
 }
