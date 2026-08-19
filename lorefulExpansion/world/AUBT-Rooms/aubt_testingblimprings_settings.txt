@@ -1,0 +1,11 @@
+Template: NONE
+Clouds: 0.6630435
+Grime: 1
+RandomItemDensity: 1
+RandomItemSpearChance: 0.3304347
+Palette: 42067
+EffectColorA: 1
+EffectColorB: 7
+Effects: Fog-0.9565217-29-36, ModifyEffectColorA-0,0.5,0.5-28-91, ModifyEffectColorB-0.9782609,0.8586956,0.3369565-299-93, Flies-0.2282609-311-38, RockFlea-0.3369565-1090-249, 
+PlacedObjects: LightSource><181.1934><709.6992><0.7065217~Environment~411~-229~-27~-375.3975~0~1~None~0~0, LightSource><699><739><0.6086956~Environment~411~-229~8~-295.3975~0~1~None~0~0, LightSource><1140><732><0.7391304~Environment~411~-229~-27~-375.3975~0~1~None~0~0, LocalBlizzard><342.634><515.0871><471~52~50~86.60254~0.3043478~1~0.5, LocalBlizzard><1065><495><471~52~50~86.60254~0.3043478~1~0.5, DeadSeedCob><106.5889><401.4291><, DeadSeedCob><565.5531><376.7148><, SeedCob><612.2744><426.4485><0~0~7~10, DeadSeedCob><1042.388><302.8947><, DeadSeedCob><1166.449><362.4843><, 
+FadePalette: 0, 0.6630435
