@@ -17,6 +17,7 @@ namespace loremiscExpansion.NPCs
     {
         public static List<string> listOfRegions = ["AUSS", "AUBT", "AUTS", "AUFH", "DZ1", "AUFD", "AUND", "AUHZ", "AUSG", "AUTT", "AUFN"];
         public static string playerCurrentRegion = string.Empty;
+        private static readonly Random random = new();
 
         public bool dead;
 
@@ -28,15 +29,18 @@ namespace loremiscExpansion.NPCs
         public string nextRegion;
         public string currentRegion;
 
-        public NPCState() 
+        public NPCState()
         {
             dead = false;
+            encounters = 0;
+            cyclesSinceLastEncounter = 0;
             wanderingScore = 3;
+            visitedRegions = [];
             nextRegion = string.Empty;
-            visitedRegions = new List<string>();
+            currentRegion = string.Empty;
         }
 
-        public NPCState(string context)
+        /*public NPCState(string context)
         {
             string[] actualContext = context?.Split(';');
             if (actualContext != null && actualContext.Length > 2)
@@ -46,15 +50,17 @@ namespace loremiscExpansion.NPCs
                     Log.LogMessage("Wandering score not found!");
                     wanderingScore = 3;
                 }
-                else
-                {
-                    Log.LogMessage("Wandering score found!");
-                    Log.LogMessage(wanderingScore);
-                }
                 nextRegion = actualContext[1];
                 visitedRegions = actualContext[2].Split(',').ToList();
+                currentRegion = visitedRegions.Count > 0 ? visitedRegions[visitedRegions.Count - 1] : listOfRegions[0];
             }
-        }
+            else
+            {
+                currentRegion = listOfRegions[0];
+                nextRegion = string.Empty;
+                visitedRegions = [];
+            }
+        }*/
 
         public virtual void Tick()
         {
@@ -73,13 +79,24 @@ namespace loremiscExpansion.NPCs
 
         public void ChooseNextRegion()
         {
-            List<string> possibleRegions = listOfRegions;
+            List<string> connectedRegions = RegionConnections.GetConnections(currentRegion);
+            if (connectedRegions.Count == 0)
+            {
+                Log.LogMessage($"No known connections for region: {currentRegion}");
+                nextRegion = currentRegion;
+                return;
+            }
+
             List<string> bannedRegions = BannedRegions();
-            if (possibleRegions.All(x => bannedRegions.Contains(x))) visitedRegions.Clear();
-            foreach (string region in possibleRegions) if (bannedRegions.Contains(region)) possibleRegions.Remove(region);
-            Random random = new();
-            int randomIndex = random.Next(listOfRegions.Count);
-            nextRegion = listOfRegions[randomIndex];
+            List<string> validOptions = connectedRegions.Where(r => !bannedRegions.Contains(r)).ToList();
+
+            if (validOptions.Count == 0)
+            {
+                visitedRegions.Clear();
+                validOptions = connectedRegions;
+            }
+
+            nextRegion = validOptions[random.Next(validOptions.Count)];
         }
 
         public virtual void SetWanderingScore(string region)
@@ -143,6 +160,61 @@ namespace loremiscExpansion.NPCs
             ApostleState.LoadApostleSpots();
             CollectorState.LoadCollectorSpots();
             BorisState.LoadBorisSpots();
+        }
+    }
+
+    public static class RegionConnections
+    {
+        public static readonly string[] Regions = ["AUBT", "AUFD", "AUFN", "AUFP", "AUHD", "AULB", "AUND", "AUSS", "AUSG", "AUTS", "AUTT", "AUWE", "DZ1"];
+
+        private static readonly Dictionary<string, int> indexLookup = Regions.Select((name, i) => (name, i)).ToDictionary(x => x.name, x => x.i);
+
+        public static readonly bool[,] Matrix = BuildMatrix();
+
+        private static bool[,] BuildMatrix()
+        {
+            bool[,] m = new bool[Regions.Length, Regions.Length];
+
+            void Connect(string a, string b)
+            {
+                int ia = indexLookup[a];
+                int ib = indexLookup[b];
+                m[ia, ib] = true;
+                m[ib, ia] = true;
+            }
+
+            Connect("DZ1", "AUTT");
+            Connect("DZ1", "AULB");
+            Connect("AUTT", "AUFD");
+            Connect("AUTT", "AUFN");
+            Connect("AUSG", "AULB");
+            Connect("AUSG", "AUBT");
+            Connect("AUBT", "AUFD");
+            Connect("AUBT", "AUWE");
+            Connect("AUFN", "AUSS");
+            Connect("AUSS", "AUWE");
+            Connect("AUWE", "AUTS");
+            Connect("AUFD", "AUTS");
+            Connect("AULB", "AUFP");
+            Connect("AUFP", "AUHD");
+            Connect("AUFP", "AUTS");
+            Connect("AUFN", "AUND");
+
+            return m;
+        }
+
+        public static bool AreConnected(string a, string b)
+        {
+            if (!indexLookup.TryGetValue(a, out int ia) || !indexLookup.TryGetValue(b, out int ib)) return false;
+            return Matrix[ia, ib];
+        }
+
+        public static List<string> GetConnections(string region)
+        {
+            List<string> result = new();
+            if (!indexLookup.TryGetValue(region, out int idx)) return result;
+            for (int i = 0; i < Regions.Length; i++) if (Matrix[idx, i]) result.Add(Regions[i]);
+            return result;
         }
     }
 }

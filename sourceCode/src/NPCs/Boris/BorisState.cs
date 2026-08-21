@@ -14,12 +14,25 @@ namespace loremiscExpansion.NPCs.Boris
         public int residue = 0;
         public int cyclesSinceLastResidue = 0;
         public int questProgression = 0;
+        public bool metApostle = false;
+        public bool metCollector = false;
+
+        public BorisState() : base() 
+        {
+            residue = 0;
+            cyclesSinceLastResidue = 0;
+            questProgression = 0;
+            metApostle = false;
+            metCollector = false;
+
+            currentRegion = "AUSS";
+        }
 
         public static List<string> borisSpots = [];
         public override List<string> BannedRegions()
         {
             List<string> bannedRegions = base.BannedRegions();
-            List<string> extraBannedRegions = new() { "AUND" };
+            List<string> extraBannedRegions = ["AUND"];
             if (!string.IsNullOrEmpty(playerCurrentRegion)) extraBannedRegions.Add(playerCurrentRegion);
             return bannedRegions.Union(extraBannedRegions).ToList();
         }

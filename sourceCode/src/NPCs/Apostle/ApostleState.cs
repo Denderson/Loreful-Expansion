@@ -17,6 +17,17 @@ namespace loremiscExpansion.NPCs.Apostle
         public bool givenBorisResidue = false;
         public bool huntingBoris = false;
 
+        public ApostleState () : base ()
+        {
+            currentPlayerReputation = 0;
+            pearls = 0;
+            attacks = 0;
+            givenBorisResidue = false;
+            huntingBoris = false;
+
+            currentRegion = "AUTT";
+        }
+
         public static List<string> apostleSpots = [];
         public override List<string> BannedRegions()
         {

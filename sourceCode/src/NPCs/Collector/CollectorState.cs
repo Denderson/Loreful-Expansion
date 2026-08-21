@@ -18,6 +18,17 @@ namespace loremiscExpansion.NPCs.Collector
         public bool givenBorisResidue = false;
         public bool huntingBoris = false;
 
+        public CollectorState() : base()
+        {
+            currentPlayerReputation = 0;
+            pearls = 0;
+            attacks = 0;
+            givenBorisResidue = false;
+            huntingBoris = false;
+
+            currentRegion = "AUSG";
+        }
+
         public static List<string> collectorSpots = [];
         public override List<string> BannedRegions()
         {
