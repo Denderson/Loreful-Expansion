@@ -1,0 +1,10 @@
+Template: NONE
+CeilingDrips: 1
+Grime: 0.08695652
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: ModifyEffectColorA-0.1086956,0.3043478,0.6086956-33-92, ModifyEffectColorB-0,0.5,0.1521739-291-91, RockFlea-0.423913-31-35, SkyBloom-0.5-288-37, 
+PlacedObjects: LightSource><383.4487><428.4773><0.08695652~EffectColor1~42~48~50~86.60254~0~1~None~0~0, LightSource><404><529><0.08695652~EffectColor1~42~48~50~86.60254~0~1~None~0~0, LightSource><362><488><0.08695652~EffectColor1~42~48~50~86.60254~0~1~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory02.ogg><63.35345><200.3639><0.25><1, OMNI><RWTW_AmbDrips_01.ogg><69.18921><125.5648><0.2282609><1, OMNI><RWTW_AmbDrips_03.ogg><258.65><123.3823><0.25><0.2956522, 
+FadePalette: 8, 0.25
