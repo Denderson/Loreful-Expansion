@@ -2,13 +2,17 @@ CONDITIONAL LINKS
 END CONDITIONAL LINKS
 
 ROOMS
+AUBT_testingcustomeffects : DISCONNECTED
+AUBT_testingcustomeffects2 : DISCONNECTED
+AUBT_testingblimprings : DISCONNECTED
+
 AUBT_memory01 : DISCONNECTED, DISCONNECTED, DISCONNECTED : SWARMROOM
 
 AUBT_secretF : AUBT_vulturetanks07
 
 AUBT_vulturetanksshelter01 : AUBT_vulturetanks04 : SHELTER
 AUBT_vulturetanksshelter02 : AUBT_vulturetanks18 : SHELTER
-AUBT_vulturetanks01 : AUBT_vulturetanks02, DISCONNECTED, AUBT_muddytunnels12
+AUBT_vulturetanks01 : AUBT_vulturetanks02, AUBT_muddytunnels13, AUBT_muddytunnels12
 AUBT_vulturetanks02 : AUBT_vulturetanks03, AUBT_vulturetanks01
 AUBT_vulturetanks03 : AUBT_vulturetanks15, AUBT_vulturetanks25, AUBT_vulturetanks04, AUBT_vulturetanks02
 AUBT_vulturetanks04 : AUBT_vulturetanks07, AUBT_vulturetanks03, AUBT_vulturetanksshelter01, AUBT_vulturetanks05
@@ -37,6 +41,7 @@ AUBT_vulturetanks26 : AUBT_vulturetanks16, AUBT_vulturetanks15
 
 
 AUBT_muddytunnelsshelter01 : AUBT_muddytunnels01 : SHELTER
+AUBT_muddytunnelsshelter02 : AUBT_muddytunnels15 : SHELTER
 AUBT_muddytunnels01 : AUBT_muddytunnelsshelter01, AUBT_muddytunnels11, AUBT_muddytunnels02
 AUBT_muddytunnels02 : AUBT_muddytunnels01, AUBT_muddytunnels03
 AUBT_muddytunnels03 : AUBT_muddytunnels04, AUBT_muddytunnels02, AUBT_muddytunnels06 : SCAVOUTPOST
@@ -49,6 +54,10 @@ AUBT_muddytunnels09 : AUBT_muddytunnels07, AUBT_muddytunnels08 : SWARMROOM
 AUBT_muddytunnels10 : AUBT_muddytunnels04, DISCONNECTED
 AUBT_muddytunnels11 : AUBT_muddytunnels12, AUBT_muddytunnels01
 AUBT_muddytunnels12 : AUBT_vulturetanks01, AUBT_muddytunnels11
+AUBT_muddytunnels13 : AUBT_muddytunnels14, AUBT_vulturetanks01
+AUBT_muddytunnels14 : AUBT_muddytunnels15, AUBT_muddytunnels13, DISCONNECTED
+AUBT_muddytunnels15 : DISCONNECTED, AUBT_muddytunnelsshelter02, AUBT_muddytunnels16, AUBT_muddytunnels14
+AUBT_muddytunnels16 : DISCONNECTED, AUBT_muddytunnels15
 END ROOMS
 
 CREATURES
@@ -90,6 +99,14 @@ AUBT_muddytunnels10 : 2-White-1
 AUBT_muddytunnels11 : 2-White-1
 AUBT_muddytunnels11 : 3-BigNeedle-1
 AUBT_muddytunnels11 : 3-SmallNeedle-2
+AUBT_muddytunnels13 : 2-Pink-1
+AUBT_muddytunnels13 : 3-Pink-1
+AUBT_muddytunnels15 : 4-Salamander-1
+AUBT_muddytunnels15 : 5-Salamander-1
+AUBT_muddytunnels15 : 6-Salamander-1
+AUBT_muddytunnels16 : 2-White-1
+AUBT_muddytunnels16 : 3-Pink-1
+AUBT_muddytunnels16 : 4-Pink-1
 
 OFFSCREEN : 0-Vulture-3
 OFFSCREEN : 0-Scavenger-10

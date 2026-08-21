@@ -1,0 +1,7 @@
+Template: NONE
+CeilingDrips: 1
+Clouds: 0
+Grime: 1
+Palette: 42068
+EffectColorB: 3
+FadePalette: 42067, 0.6086956

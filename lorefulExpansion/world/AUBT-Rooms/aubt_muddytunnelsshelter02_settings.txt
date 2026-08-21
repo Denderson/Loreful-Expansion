@@ -1,0 +1,16 @@
+Template: NONE
+CeilingDrips: 1
+WaveSpeed: 0.5
+WaveLength: 0.75
+WaveAmplitude: 0.04860936
+SecondWaveLength: 0.1666667
+SecondWaveAmplitude: 0
+Grime: 0.1086956
+Palette: 42068
+EffectColorA: 0
+EffectColorB: 13
+Effects: ModifyEffectColorA-0.1086956,0.3043478,0.6086956-25-98, ModifyEffectColorB-0,0.5,0.2065217-280-103, SkyBloom-1-26-44, RockFlea-0.5-269-47, 
+PlacedObjects: ShelterSpawnPoint><691.4433><574.0513><, NoSpearStickZone><693.8024><480.0311><130~307, InsectGroup><332.4382><601.0677><234~-5~-132~-71~Moth~0.2065217, InsectGroup><1133.617><559.5881><-7~217~-112~-73~Moth~0.2065217, LightSource><238.8001><742.2454><0.3043478~EffectColor1~260~-307~-109~-347.3975~0~0~None~0~0, LightSource><1223><732><0.25~EffectColor1~-371~-330~-109~-347.3975~0~0~None~0~0, LightSource><429.5602><620.563><0.1521739~Environment~140~-155~181~-76.39746~0~1~None~0~0, LightSource><1007><661><0.1521739~Environment~140~-155~181~-76.39746~0~1~None~0~0, LightSource><419><360><0.1086956~Environment~-6~-146~181~-76.39746~0~1~None~0~0, LightSource><1068><408><0.1086956~Environment~-6~-146~-317~-96.39746~0~1~None~0~0, LightSource><856><430><0.08695652~Environment~-7~-131~-98~-247.3975~0~1~None~0~0, LightSource><1234><257><0.1630435~EffectColor1~-277~237~-276~-46.39749~0~0~None~0~0, LightSource><237><248><0.1630435~EffectColor1~300~202~62~-54.39749~0~0~None~0~0, 
+AmbientSounds: OMNI><RWTW_AmbDrips_01.ogg><837.6782><591.1592><0.3369565><0.8043478, OMNI><RWTW_AmbDrips_03.ogg><846.1151><515.6636><0.25><0.6086956, 
+FadePalette: 42066, 0.1630435
+MorePalette0: 8, 0.3369565
