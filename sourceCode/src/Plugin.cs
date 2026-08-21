@@ -39,6 +39,8 @@ namespace loremiscExpansion
             On.RainWorld.OnModsInit += LoadRemixMenu;
             try
             {
+                Log = Logger;
+
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
                 Conduit.ConduitHooks.ApplyHooks();

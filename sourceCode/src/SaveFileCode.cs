@@ -39,7 +39,7 @@ namespace loremiscExpansion
             Log.LogMessage("Loading savestate!");
             orig(self, str, game);
 
-            if (self?.saveStateNumber != Enums.protagName) return;
+            if (self?.saveStateNumber != Enums.protag) return;
             if (self.miscWorldSaveData == null || self.deathPersistentSaveData == null)
             {
                 Log.LogMessage("SaveState_LoadGame: save data not ready, skipping loremiscExpansion setup");

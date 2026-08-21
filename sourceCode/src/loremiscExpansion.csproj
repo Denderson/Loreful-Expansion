@@ -19,6 +19,9 @@
       <Reference Include="Pom">
         <HintPath>..\..\..\..\..\Downloads\MODDING\REFERENCES\Pom.dll</HintPath>
       </Reference>
+      <Reference Include="Unity.Mathematics">
+        <HintPath>..\..\..\..\..\Downloads\MODDING\REFERENCES\Unity.Mathematics.dll</HintPath>
+      </Reference>
     </ItemGroup>
     
     <Target Name="GenerateMod" AfterTargets="PostBuildEvent">
