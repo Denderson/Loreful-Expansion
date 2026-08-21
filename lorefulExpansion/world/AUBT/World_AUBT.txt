@@ -2,13 +2,17 @@ CONDITIONAL LINKS
 END CONDITIONAL LINKS
 
 ROOMS
-AUBT_testingcustomeffects : DISCONNECTED
-AUBT_testingcustomeffects2 : DISCONNECTED
-AUBT_testingblimprings : DISCONNECTED
-
 AUBT_memory01 : DISCONNECTED, DISCONNECTED, DISCONNECTED : SWARMROOM
 
 AUBT_secretF : AUBT_vulturetanks07
+
+AUBT_ballastterminalsshelter01 : AUBT_ballastterminals03 : SHELTER
+AUBT_ballastterminals03 : AUBT_ballastterminals04, AUBT_ballastterminalsshelter01, AUBT_vulturetanks14
+AUBT_ballastterminals04 : AUBT_ballastterminals05, AUBT_ballastterminals03
+AUBT_ballastterminals05 : AUBT_ballastterminals08, DISCONNECTED, DISCONNECTED, DISCONNECTED, AUBT_ballastterminals04
+AUBT_ballastterminals08 : AUBT_ballastterminals13, DISCONNECTED, DISCONNECTED, DISCONNECTED, DISCONNECTED, DISCONNECTED, AUBT_ballastterminals05
+AUBT_ballastterminals13 : AUBT_ballastterminals14, AUBT_ballastterminals08
+AUBT_ballastterminals14 : DISCONNECTED, AUBT_ballastterminals13
 
 AUBT_vulturetanksshelter01 : AUBT_vulturetanks04 : SHELTER
 AUBT_vulturetanksshelter02 : AUBT_vulturetanks18 : SHELTER
@@ -25,7 +29,7 @@ AUBT_vulturetanks10 : AUBT_vulturetanks13, AUBT_vulturetanks11, AUBT_vulturetank
 AUBT_vulturetanks11 : AUBT_vulturetanks10, AUBT_vulturetanks21, AUBT_vulturetanks25, AUBT_vulturetanks24
 AUBT_vulturetanks12 : AUBT_vulturetanks13, AUBT_vulturetanks24
 AUBT_vulturetanks13 : AUBT_vulturetanks14, AUBT_vulturetanks10, AUBT_vulturetanks12
-AUBT_vulturetanks14 : DISCONNECTED, AUBT_vulturetanks13
+AUBT_vulturetanks14 : AUBT_ballastterminals03, AUBT_vulturetanks13
 AUBT_vulturetanks15 : AUBT_vulturetanks26, AUBT_vulturetanks17, AUBT_vulturetanks03, AUBT_vulturetanks16
 AUBT_vulturetanks16 : AUBT_vulturetanks26, AUBT_vulturetanks15
 AUBT_vulturetanks17 : DISCONNECTED, AUBT_vulturetanks18, AUBT_vulturetanks23, AUBT_vulturetanks15
@@ -61,6 +65,12 @@ AUBT_muddytunnels16 : DISCONNECTED, AUBT_muddytunnels15
 END ROOMS
 
 CREATURES
+AUBT_ballastterminals05 : 5-Blue-1
+AUBT_ballastterminals05 : 6-Blue-1
+AUBT_ballastterminals08 : 7-White-1
+AUBT_ballastterminals08 : 8-Blue-1
+AUBT_ballastterminals14 : 2-Blue-1
+
 AUBT_vulturetanks04 : 4-Black-2
 AUBT_vulturetanks05 : 3-Black-1
 AUBT_vulturetanks05 : 4-Black-1
