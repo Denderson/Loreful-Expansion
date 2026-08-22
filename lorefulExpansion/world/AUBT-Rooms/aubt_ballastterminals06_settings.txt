@@ -1,0 +1,13 @@
+Template: NONE
+CeilingDrips: 0.6956522
+Clouds: 0.25
+Grime: 0.1086956
+RandomItemDensity: 0.75
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: SkyBloom-0.8586956-40-135, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-40-40, ModifyEffectColorB-0,0.5,0.3586957-295-39, RockFlea-0.4891304-296-134, 
+PlacedObjects: DeadVultureGrub><434.8431><231.573><-164~-189~7~10, DangleFruit><612.0842><604.3186><-90~-103~3~5, DangleFruit><659><575><-90~-103~3~5, DangleFruit><956><594><-90~-103~3~5, DangleFruit><782><601><-90~-103~3~5, CustomDecal><40.94107><49.80905><0~765~1364~764~1362~-1~0~0~0~1~0~bigredtag~0.1630435~1~0.1630435~1~0.1630435~1~0.1630435~1, InsectGroup><737.1742><542.8482><116~99~0~0~TinyDragonFly~0.3586957, LightSource><1139.067><689.4197><0.1847826~EffectColor1~0~118~-228~-126.3975~0~1~None~0~0, LightSource><1219><690><0.1847826~EffectColor1~0~118~-228~-126.3975~0~1~None~0~0, LightSource><650.3591><312.358><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><669><314><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><690><313><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><650><271><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><689><273><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><868><312><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><888><312><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><849><272><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, LightSource><868><273><0.4456522~EffectColor1~-15~52~-409~31.60254~0~0~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory04.ogg><15.94061><243.3106><0.3369565><0.8043478, OMNI><AM_IND-Warehouse01.ogg><17.30884><170.5589><0.3369565><1, OMNI><RWTW_AmbDrips_01.ogg><106.3066><18.30103><0.2608696><1, OMNI><RWTW_AmbDrips_02.ogg><6.404114><98.42551><0.2065217><0.5108696, 
+FadePalette: 42068, 0.3369565
+MorePalette0: 8, 0.1413043
