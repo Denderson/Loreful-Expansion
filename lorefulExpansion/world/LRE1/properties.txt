@@ -1,4 +1,0 @@
-Room Setting Templates: 1, 2
-Subregion: Template
-
-
