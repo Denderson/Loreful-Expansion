@@ -57,6 +57,28 @@ namespace loremiscExpansion
             }
         }
 
+        public static void InitialSaveSetup(this SaveState save)
+        {
+            if (save.miscWorldSaveData == null)
+            {
+                Log.LogMessage("InitialSaveSetup: miscWorldSaveData is null, cannot setup");
+                return;
+            }
+
+            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(saveInit, out bool value) || !value)
+            {
+                Log.LogMessage("InitialSaveSetup: protag initial save setup");
+                save.miscWorldSaveData.GetSlugBaseData().Set(saveInit, true);
+
+                save.SetBool(finishedTutorial, false);
+                save.SetString(visitedRegions, "AUSS");
+                save.SetApostleState(new ApostleState());
+                save.SetCollectorState(new CollectorState());
+                save.SetBorisState(new BorisState());
+            }
+            else Log.LogMessage("InitialSaveSetup:  protag initial save already initialized, skipping");
+        }
+
         public static bool GetBool(this SaveState save, string name)
         {
             if (save.miscWorldSaveData == null)
@@ -185,24 +207,6 @@ namespace loremiscExpansion
             if (regionsToGrab != null && regionsToGrab.Contains(target)) return false;
             save.SetString(visitedRegions, regionsToGrab + "+" + target);
             return true;
-        }
-        public static void InitialSaveSetup(this SaveState save)
-        {
-            if (save.miscWorldSaveData == null)
-            {
-                Log.LogMessage("InitialSaveSetup: miscWorldSaveData is null, cannot setup");
-                return;
-            }
-
-            if (!save.miscWorldSaveData.GetSlugBaseData().TryGet(saveInit, out bool value) || !value)
-            {
-                Log.LogMessage("InitialSaveSetup: protag initial save setup");
-                save.miscWorldSaveData.GetSlugBaseData().Set(saveInit, true);
-
-                save.SetBool(finishedTutorial, false);
-                save.SetString(visitedRegions, "SU");
-            }
-            else Log.LogMessage("InitialSaveSetup:  protag initial save already initialized, skipping");
         }
         public static void GrabIPAdress()
         {
