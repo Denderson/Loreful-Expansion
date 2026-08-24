@@ -34,8 +34,8 @@ namespace loremiscExpansion.Conduit
 
         private const float thrownSpearSubmersion = 0.15f;
 
-        public const float crouchPositiveSpeed = 0.004f;
-        public const float crouchNegativeSpeed = 0.010f;
+        public const float crouchPositiveSpeed = 0.007f;
+        public const float crouchNegativeSpeed = 0.015f;
         public const float crouchVisibilityFactor = 0.1f;
 
         public static bool IsConduit(this Player self)
@@ -76,8 +76,6 @@ namespace loremiscExpansion.Conduit
             if (!IsCrouched(self)) return false;
             return (self.input[0].y < 0 && !self.input[0].jmp && math.abs(self.mainBodyChunk.vel.x) < 2f);
         }
-
-
         public static void ApplyHooks()
         {
             On.Player.AllowGrabbingBatflys += Player_AllowGrabbingBatflys; // Protag doesnt grab batflies automatically
@@ -113,18 +111,18 @@ namespace loremiscExpansion.Conduit
             orig(self, sLeaser, rCam, timeStacker, camPos);
             if (!IsConduit(self?.player)) return;
             if (!PlayerCWT.TryGetData(self.player, out var data)) return;
-            if (data.camo <= 0f)
-            {
-                data.camoColor = null;
-                return;
-            }
+            if (data.camo < 0f) return;
             if (self.culled) return;
             Player player = self.player;
             if (player.bodyChunks == null || player.bodyChunks.Length < 2) return;
-            Color color = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[0].lastPos, self.player.bodyChunks[0].pos, timeStacker));
-            Color color2 = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[1].lastPos, self.player.bodyChunks[1].pos, timeStacker));
-            Color camoColor = (color + color2) / 2;
-            data.camoColor = camoColor;
+            if (data.camoColor == null)
+            {
+                Color color = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[0].lastPos, self.player.bodyChunks[0].pos, timeStacker));
+                Color color2 = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[1].lastPos, self.player.bodyChunks[1].pos, timeStacker));
+                Color camoColor = (color + color2) / 2;
+                data.camoColor = camoColor;
+            }
+            Color baseColor = PlayerGraphics.SlugcatColor(player.SlugCatClass);
 
             for (int i = 0; i < 8; i++)
             {
@@ -132,10 +130,10 @@ namespace loremiscExpansion.Conduit
                 {
                     continue;
                 }
-                sLeaser.sprites[i].color = Color.Lerp(sLeaser.sprites[i].color, data.camoColor.Value, data.camo);
+                sLeaser.sprites[i].color = Color.Lerp(baseColor, data.camoColor.Value, data.camo);
             }
         }
-
+         
         public static float Visibility_Bonus(Func<Player, float> orig, Player self)
         {
             float value = orig(self);
