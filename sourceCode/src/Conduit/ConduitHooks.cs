@@ -1,4 +1,6 @@
 ﻿using loremiscExpansion.CWTs;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 using MoreSlugcats;
 using RWCustom;
@@ -7,11 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.Mathematics;
 using UnityEngine;
 using Watcher;
-using Random = UnityEngine.Random;
 using static loremiscExpansion.Plugin;
-using Unity.Mathematics;
+using Random = UnityEngine.Random;
 
 namespace loremiscExpansion.Conduit
 {
@@ -38,11 +40,11 @@ namespace loremiscExpansion.Conduit
         public const float crouchNegativeSpeed = 0.015f;
         public const float crouchVisibilityFactor = 0.1f;
 
+        public const float swimmingTurningMultiplier = 2.5f;
+
         public static bool IsConduit(this Player self)
         {
-            Log.LogMessage("Checking if Player is Conduit!");
             bool result = self != null && self.SlugCatClass == Enums.protag;
-            Log.LogMessage(result);
             return result;
         }
 
@@ -104,6 +106,33 @@ namespace loremiscExpansion.Conduit
             new Hook(typeof(BodyChunk).GetProperty(nameof(BodyChunk.submersion)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(BodyChunk_submersion))); // Makes spears thrown by conduit less affected by water
             On.Spear.Update += Spear_Update; // Makes underwater spears thrown by conduit spawn bubbles
             On.Spear.ChangeMode += Spear_ChangeMode; // Makes spears no longer count as thrown by conduit once they hit something
+
+            IL.Player.UpdateAnimation += Player_UpdateAnimation; // Makes protag easier to turn around underwater
+        }
+
+        private static void Player_UpdateAnimation(ILContext il)
+        {
+            ILCursor cursor = new(il);
+
+            bool foundAngleCall = cursor.TryGotoNext(MoveType.After, instruction => instruction.MatchCall(typeof(Vector2), "Angle"));
+
+            if (!foundAngleCall)
+            {
+                Debug.LogError("Vector2.Angle call not found in Player.UpdateAnimation");
+                return;
+            }
+
+            cursor.Emit(OpCodes.Ldarg_0); // pushing self (Player)
+            cursor.EmitDelegate<Func<float, Player, float>>(SwimAngle);
+        }
+
+        private static float SwimAngle(float rawAngle, Player self)
+        {
+            if (self?.SlugCatClass != Enums.protag)
+            {
+                return rawAngle;
+            }
+            return rawAngle * swimmingTurningMultiplier;
         }
 
         private static void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, Vector2 camPos)
@@ -636,7 +665,7 @@ namespace loremiscExpansion.Conduit
             {
                 Log.LogMessage("Crouch spring!");
                 float dir = self.flipDirection != 0 ? self.flipDirection : 1f;
-                Vector2 lungeForce = new(dir * 8f, 5.5f);
+                Vector2 lungeForce = new(dir * 10f, 7f);
                 self.bodyChunks[0].vel += lungeForce;
                 self.bodyChunks[1].vel += lungeForce * 0.6f;
                 self.animation = Player.AnimationIndex.None;
