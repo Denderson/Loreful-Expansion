@@ -1,13 +1,15 @@
 ﻿using loremiscExpansion.CWTs;
+using MonoMod.RuntimeDetour;
 using MoreSlugcats;
 using RWCustom;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Watcher;
-using RWCustom;
+using Random = UnityEngine.Random;
 using static loremiscExpansion.Plugin;
 
 namespace loremiscExpansion.Conduit
@@ -27,7 +29,13 @@ namespace loremiscExpansion.Conduit
         public static int maxDodgeRollWindow = 10;
 
         public static float rollSpeed = 10f;
-        public static float rollSpeedLerp = 0.35f;
+        public static float rollSpeedLarp = 0.35f;
+
+        private const float thrownSpearSubmersion = 0.15f;
+
+        public const int crouchPositiveSpeed = 1;
+        public const int crouchNegativeSpeed = 3;
+        public const float crouchVisibilityFactor = 0.1f;
 
         public static bool IsConduit(this Player self)
         {
@@ -39,8 +47,7 @@ namespace loremiscExpansion.Conduit
 
         public static bool IsCrouched(this Player self)
         {
-            return self?.bodyMode == Player.BodyModeIndex.Crawl;
-            // TODO
+            return (self?.bodyMode == Player.BodyModeIndex.Crawl || self.animation == Player.AnimationIndex.DownOnFours) && (self.bodyMode != Player.BodyModeIndex.CorridorClimb);
         }
 
         public static bool IsRolling(this Player self)
@@ -84,7 +91,64 @@ namespace loremiscExpansion.Conduit
             On.Player.Update += Player_Update; // Everything
             On.Player.UpdateBodyMode += Player_UpdateBodyMode; // Rolling, TODO: underwater and poles
 
-            // TODO: Camouflage
+            new Hook(typeof(Player).GetProperty(nameof(Player.VisibilityBonus)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(Visibility_Bonus))); // Makes crouching cause protag to be less visible
+            // TODO: Make camo protag to change colour like white lizard
+
+            new Hook(typeof(BodyChunk).GetProperty(nameof(BodyChunk.submersion)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(BodyChunk_get_submersion))); // Makes spears thrown by conduit less affected by water
+            On.Spear.Update += Spear_Update; // Makes underwater spears thrown by conduit spawn bubbles
+            On.Spear.ChangeMode += Spear_ChangeMode; // Makes spears no longer count as thrown by conduit once they hit something
+        }
+
+        public static float Visibility_Bonus(Func<Player, float> orig, Player self)
+        {
+            float value = orig(self);
+            if (PlayerCWT.TryGetData(self, out PlayerCWT.DataClass data))
+            {
+                return Math.Max(-1f, value - data.camo);
+            }
+            else
+            {
+                return orig(self);
+            }
+        }
+
+        private static void Spear_ChangeMode(On.Spear.orig_ChangeMode orig, Spear self, Weapon.Mode newMode)
+        {
+            orig(self, newMode);
+            if (!SpearCWT.TryGetData(self, out var data)) return;
+            if (data.thrownByProtag && newMode != Weapon.Mode.Thrown) data.thrownByProtag = false;
+        }
+
+        private static void Spear_Update(On.Spear.orig_Update orig, Spear self, bool eu)
+        {
+            orig(self, eu);
+            if (!SpearCWT.TryGetData(self, out var data)) return;
+            if (!data.thrownByProtag) return;
+            if (Random.value < self.firstChunk.vel.magnitude / 7f)
+            {
+                Bubble bubble = new(self.firstChunk.pos + Custom.RNV() * Random.value * 4f, Custom.RNV() * Mathf.Lerp(6f, 16f, Random.value), bottomBubble: false, fakeWaterBubble: true);
+                self.room.AddObject(bubble);
+                bubble.age = 600 - Random.Range(20, Random.Range(30, 80));
+            }
+        }
+
+        public static float BodyChunk_get_submersion(Func<BodyChunk, float> orig, BodyChunk self)
+        {
+            float real = orig(self);
+            if (IsConduitSpear(self))
+            {
+                return real * thrownSpearSubmersion;
+            }
+            return real;
+        }
+
+        private static bool IsConduitSpear(BodyChunk chunk)
+        {
+            if (chunk.owner is Spear spear && SpearCWT.TryGetData(spear, out var data) && data.thrownByProtag)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static void Player_UpdateBodyMode(On.Player.orig_UpdateBodyMode orig, Player self)
@@ -388,27 +452,17 @@ namespace loremiscExpansion.Conduit
             }
 
             bool jumpPressed = self.input[0].jmp && !self.input[1].jmp;
+            bool specialPressed = self.input[0].spec && !self.input[1].spec;
             bool downHeld = self.input[0].y < 0;
             bool upHeld = self.input[0].y > 0;
 
-            if (jumpPressed)
-            {
-                if (data.rolling)
-                {
-                    self.SetRolling(false);
-                }
-                if (upHeld && data.rolling)
-                {
-                    self.input[0].jmp = false;
-                }
-                if (downHeld && !data.rolling)
-                {
-                    self.SetRolling(true);
-                    self.input[0].jmp = false;
-                }
-            }
+            if (jumpPressed && data.rolling) self.SetRolling(false); // Jumping exits the roll
+            else if (specialPressed) self.SetRolling(!data.rolling); // Special enters or exits the roll, opposite of current
 
-            if (data.rolling)
+            if (downHeld && self.IsCrouched()) data.crouchingDuration += crouchPositiveSpeed;
+            else data.crouchingDuration -= crouchNegativeSpeed;
+
+            if (data.rolling) // Makes rolls faster and infinite
             {
                 self.standing = false;
                 self.animation = Player.AnimationIndex.Roll;
@@ -418,8 +472,8 @@ namespace loremiscExpansion.Conduit
                 self.stopRollingCounter = 0;
 
                 float targetSpeed = rollSpeed * self.rollDirection;
-                self.bodyChunks[0].vel.x = Mathf.Lerp(self.bodyChunks[0].vel.x, targetSpeed, rollSpeedLerp);
-                self.bodyChunks[1].vel.x = Mathf.Lerp(self.bodyChunks[1].vel.x, targetSpeed, rollSpeedLerp);
+                self.bodyChunks[0].vel.x = Mathf.Lerp(self.bodyChunks[0].vel.x, targetSpeed, rollSpeedLarp);
+                self.bodyChunks[1].vel.x = Mathf.Lerp(self.bodyChunks[1].vel.x, targetSpeed, rollSpeedLarp);
             }
 
             orig(self, eu);
@@ -537,14 +591,13 @@ namespace loremiscExpansion.Conduit
             }
             if (!PlayerCWT.TryGetData(self, out var data)) return;
 
-            bool wasCrouching = (self?.bodyMode == Player.BodyModeIndex.Crawl || self.animation == Player.AnimationIndex.DownOnFours);
-            bool inTunnel = (self.bodyMode == Player.BodyModeIndex.CorridorClimb);
+            bool wasCrouching = IsCrouched(self);
 
             if (data.rolling) self.SetRolling(false);
 
             orig(self);
 
-            if (wasCrouching && !inTunnel)
+            if (wasCrouching)
             {
                 Log.LogMessage("Crouch spring!");
                 float dir = self.flipDirection != 0 ? self.flipDirection : 1f;

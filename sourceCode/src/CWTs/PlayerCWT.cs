@@ -31,6 +31,8 @@ namespace loremiscExpansion.CWTs
             public float sporePoison = 0;
 
             public int rollIframes = 0;
+
+            public float camo = 0f;
         }
     }
 }
