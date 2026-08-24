@@ -33,6 +33,7 @@ namespace loremiscExpansion.CWTs
             public int rollIframes = 0;
 
             public float camo = 0f;
+            public UnityEngine.Color? camoColor = null;
         }
     }
 }

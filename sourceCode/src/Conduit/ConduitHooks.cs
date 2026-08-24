@@ -11,6 +11,7 @@ using UnityEngine;
 using Watcher;
 using Random = UnityEngine.Random;
 using static loremiscExpansion.Plugin;
+using Unity.Mathematics;
 
 namespace loremiscExpansion.Conduit
 {
@@ -33,7 +34,7 @@ namespace loremiscExpansion.Conduit
 
         private const float thrownSpearSubmersion = 0.15f;
 
-        public const float crouchPositiveSpeed = 0.005f;
+        public const float crouchPositiveSpeed = 0.004f;
         public const float crouchNegativeSpeed = 0.010f;
         public const float crouchVisibilityFactor = 0.1f;
 
@@ -69,6 +70,14 @@ namespace loremiscExpansion.Conduit
             self.room.PlaySound(SoundID.Slugcat_Roll_Init, self.mainBodyChunk, loop: false, 1f, 1f);
         }
 
+        private static bool IsCamouflaging(this Player self)
+        {
+            if (!IsConduit(self)) return false;
+            if (!IsCrouched(self)) return false;
+            return (self.input[0].y < 0 && !self.input[0].jmp && math.abs(self.mainBodyChunk.vel.x) < 2f);
+        }
+
+
         public static void ApplyHooks()
         {
             On.Player.AllowGrabbingBatflys += Player_AllowGrabbingBatflys; // Protag doesnt grab batflies automatically
@@ -92,11 +101,39 @@ namespace loremiscExpansion.Conduit
             On.Player.UpdateBodyMode += Player_UpdateBodyMode; // Rolling, TODO: underwater and poles
 
             new Hook(typeof(Player).GetProperty(nameof(Player.VisibilityBonus)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(Visibility_Bonus))); // Makes crouching cause protag to be less visible
-            // TODO: Make camo protag to change colour like white lizard
+            On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites; //  Makes player the colour of stuff behind it when camouflaging
 
-            new Hook(typeof(BodyChunk).GetProperty(nameof(BodyChunk.submersion)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(BodyChunk_get_submersion))); // Makes spears thrown by conduit less affected by water
+            new Hook(typeof(BodyChunk).GetProperty(nameof(BodyChunk.submersion)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(BodyChunk_submersion))); // Makes spears thrown by conduit less affected by water
             On.Spear.Update += Spear_Update; // Makes underwater spears thrown by conduit spawn bubbles
             On.Spear.ChangeMode += Spear_ChangeMode; // Makes spears no longer count as thrown by conduit once they hit something
+        }
+
+        private static void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, Vector2 camPos)
+        {
+            orig(self, sLeaser, rCam, timeStacker, camPos);
+            if (!IsConduit(self?.player)) return;
+            if (!PlayerCWT.TryGetData(self.player, out var data)) return;
+            if (data.camo <= 0f)
+            {
+                data.camoColor = null;
+                return;
+            }
+            if (self.culled) return;
+            Player player = self.player;
+            if (player.bodyChunks == null || player.bodyChunks.Length < 2) return;
+            Color color = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[0].lastPos, self.player.bodyChunks[0].pos, timeStacker));
+            Color color2 = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[1].lastPos, self.player.bodyChunks[1].pos, timeStacker));
+            Color camoColor = (color + color2) / 2;
+            data.camoColor = camoColor;
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (sLeaser.sprites[i] == null)
+                {
+                    continue;
+                }
+                sLeaser.sprites[i].color = Color.Lerp(sLeaser.sprites[i].color, data.camoColor.Value, data.camo);
+            }
         }
 
         public static float Visibility_Bonus(Func<Player, float> orig, Player self)
@@ -132,7 +169,7 @@ namespace loremiscExpansion.Conduit
             }
         }
 
-        public static float BodyChunk_get_submersion(Func<BodyChunk, float> orig, BodyChunk self)
+        public static float BodyChunk_submersion(Func<BodyChunk, float> orig, BodyChunk self)
         {
             float real = orig(self);
             if (IsConduitSpear(self))
@@ -459,8 +496,8 @@ namespace loremiscExpansion.Conduit
             if (jumpPressed && data.rolling) self.SetRolling(false); // Jumping exits the roll
             else if (specialPressed) self.SetRolling(!data.rolling); // Special enters or exits the roll, opposite of current
 
-            if (downHeld && self.IsCrouched()) data.camo += crouchPositiveSpeed;
-            else data.camo -= crouchNegativeSpeed;
+            if (self.IsCamouflaging()) data.camo = Math.Min(1f, data.camo + crouchPositiveSpeed); // If camouflaging, increases camo up to 1
+            else data.camo = Math.Max(0f, data.camo - crouchNegativeSpeed); // If not camouflaging, decreases camo down to 0
 
             if (data.rolling) // Makes rolls faster and infinite
             {
