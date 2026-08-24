@@ -33,8 +33,8 @@ namespace loremiscExpansion.Conduit
 
         private const float thrownSpearSubmersion = 0.15f;
 
-        public const int crouchPositiveSpeed = 1;
-        public const int crouchNegativeSpeed = 3;
+        public const float crouchPositiveSpeed = 0.005f;
+        public const float crouchNegativeSpeed = 0.010f;
         public const float crouchVisibilityFactor = 0.1f;
 
         public static bool IsConduit(this Player self)
@@ -459,8 +459,8 @@ namespace loremiscExpansion.Conduit
             if (jumpPressed && data.rolling) self.SetRolling(false); // Jumping exits the roll
             else if (specialPressed) self.SetRolling(!data.rolling); // Special enters or exits the roll, opposite of current
 
-            if (downHeld && self.IsCrouched()) data.crouchingDuration += crouchPositiveSpeed;
-            else data.crouchingDuration -= crouchNegativeSpeed;
+            if (downHeld && self.IsCrouched()) data.camo += crouchPositiveSpeed;
+            else data.camo -= crouchNegativeSpeed;
 
             if (data.rolling) // Makes rolls faster and infinite
             {
