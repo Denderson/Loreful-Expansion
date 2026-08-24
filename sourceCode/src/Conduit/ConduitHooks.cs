@@ -34,6 +34,8 @@ namespace loremiscExpansion.Conduit
         public static float rollSpeed = 10f;
         public static float rollSpeedLarp = 0.35f;
 
+        public static int maxWallBounceWindow = 5;
+
         private const float thrownSpearSubmersion = 0.15f;
 
         public const float crouchPositiveSpeed = 0.007f;
@@ -41,6 +43,8 @@ namespace loremiscExpansion.Conduit
         public const float crouchVisibilityFactor = 0.1f;
 
         public const float swimmingTurningMultiplier = 2.5f;
+
+        public const int maxCricketJumpCooldown = 20;
 
         public static bool IsConduit(this Player self)
         {
@@ -68,7 +72,7 @@ namespace loremiscExpansion.Conduit
             if (!value) return;
             data.rollAnimation = 20;
             self.animation = Player.AnimationIndex.Roll;
-            if (duration > 0) data.temporaryRollDuration = duration;
+            if (duration > 0) data.rollDuration = duration;
             self.room.PlaySound(SoundID.Slugcat_Roll_Init, self.mainBodyChunk, loop: false, 1f, 1f);
         }
 
@@ -84,21 +88,20 @@ namespace loremiscExpansion.Conduit
             On.Player.Blink += Player_Blink; // Protag cannot blink
             On.Player.CanBeGrabbed += Player_CanBeGrabbed; // Protag cannot grab slugpups (they are irresponsible)
             On.Player.CanBeSwallowed += Player_CanBeSwallowed; // Protag cannot swallow items
-            On.Player.CanEatMeat += Player_CanEatMeat; // TODO: Change Protags diet
             On.Player.CanIPickThisUp += Player_CanIPickThisUp; // Protag cannot grab slugpups (they are irresponsible)
             On.Player.Die += Player_Die; // Protag stops rolling and emitting air when dying
             On.Player.Jump += Player_Jump; // Cricket jump
             On.Player.JumpOnChunk += Player_JumpOnChunk; // Roll bounce off creatures
             On.Player.LungUpdate += Lung_Update; // Protag has breath reserves they can use
-            On.Player.MovementUpdate += Player_MovementUpdate; // Rolling, TODO: underwater and poles
+            On.Player.MovementUpdate += Player_MovementUpdate; // Rolling
             On.Player.SpearStick += Player_SpearStick; // Spears bounce off Protag if they are rolling
             On.Player.Stun += Player_Stun; // Protag stops rolling and gets the current air reserve interruped when stunned
             On.Player.SwallowObject += Player_SwallowObject; // Protag cannot swallow items
-            On.Player.TerrainImpact += Player_TerrainImpact; // Roll bounce off ground, TODO: Roll bounce off walls
+            On.Player.TerrainImpact += Player_TerrainImpact; // Roll bounce off ground and walls
             On.Player.ThrownSpear += Player_ThrownSpear; // Protag can throw spears underwater
             On.Player.ThrowObject += Player_ThrowObject; // Protag can throw items in any direction regardless of state
             On.Player.Update += Player_Update; // Everything
-            On.Player.UpdateBodyMode += Player_UpdateBodyMode; // Rolling, TODO: underwater and poles
+            On.Player.UpdateBodyMode += Player_UpdateBodyMode; // Rolling
 
             new Hook(typeof(Player).GetProperty(nameof(Player.VisibilityBonus)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(Visibility_Bonus))); // Makes crouching cause protag to be less visible
             On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites; //  Makes player the colour of stuff behind it when camouflaging
@@ -162,7 +165,7 @@ namespace loremiscExpansion.Conduit
                 sLeaser.sprites[i].color = Color.Lerp(baseColor, data.camoColor.Value, data.camo);
             }
         }
-         
+
         public static float Visibility_Bonus(Func<Player, float> orig, Player self)
         {
             float value = orig(self);
@@ -243,10 +246,9 @@ namespace loremiscExpansion.Conduit
             orig(self, eu);
             if (!IsConduit(self)) return;
             if (!PlayerCWT.TryGetData(self, out var data)) return;
-            if (data.dodgeRollWindow > 0)
-            {
-                data.dodgeRollWindow--;
-            }
+            if (data.dodgeRollWindow > 0) data.dodgeRollWindow--;
+            if (data.wallBounceWindow > 0) data.wallBounceWindow--;
+            if (data.cricketJumpCooldown > 0) data.cricketJumpCooldown--;
             self.eyesClosedTime = 0;
             self.blind = 0;
             if (self.State is PlayerState state && state.permanentDamageTracking > 0) state.permanentDamageTracking -= 0.0002;
@@ -412,7 +414,6 @@ namespace loremiscExpansion.Conduit
             if (!IsConduit(self)) return;
             if (!SpearCWT.TryGetData(spear, out var spearData)) return;
             spearData.thrownByProtag = true;
-            // TODO: Make spears thrown by protag ignore water slowdown (see monitor lizard in lsf)
         }
 
         private static void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
@@ -422,33 +423,48 @@ namespace loremiscExpansion.Conduit
                 orig(self, chunk, direction, speed, firstContact);
                 return;
             }
+            if (!PlayerCWT.TryGetData(self, out var data)) return;
 
             bool wasRolling = IsRolling(self);
-            bool rollBouncePounce = wasRolling && firstContact && self.wantToJump > 0 && direction.y < 0;
+            bool rollBouncePounce = wasRolling && self.wantToJump > 0 && firstContact && self.bodyMode != Player.BodyModeIndex.CorridorClimb && direction.y < 0;
+            bool rollBounceWall = wasRolling && self.wantToJump > 0 && firstContact && self.bodyMode != Player.BodyModeIndex.CorridorClimb && direction.x != 0 && direction.x == self.rollDirection;
 
-            if (rollBouncePounce) self.SetRolling(false);
+            if (wasRolling) self.SetRolling(false);
 
             orig(self, chunk, direction, speed, firstContact);
-
             if (rollBouncePounce)
             {
-                Log.LogMessage("Roll bounce pounce!");
+                Log.LogMessage("Roll bounce off ground!");
                 self.room.PlaySound(SoundID.Slugcat_Sectret_Super_Wall_Jump, self.mainBodyChunk, loop: false, 1f, 1f);
-
-                self.bodyChunks[1].pos = self.bodyChunks[0].pos;
-                self.bodyChunks[0].pos += new Vector2(0f, 10f);
-
+                
                 self.bodyChunks[0].vel = new Vector2(self.bodyChunks[0].vel.x, 17f);
                 self.bodyChunks[1].vel = new Vector2(self.bodyChunks[1].vel.x, 17f);
 
-                self.animation = Player.AnimationIndex.RocketJump;
                 self.room.ScreenMovement(self.mainBodyChunk.pos, new Vector2(0f, 1f), 0.1f);
 
                 for (int i = 0; i < 7; i++)
                 {
                     self.room.AddObject(new WaterDrip(self.mainBodyChunk.pos + new Vector2(0f, self.mainBodyChunk.rad), Custom.DegToVec(Random.value * 180f) * Mathf.Lerp(10f, 17f, Random.value), waterColor: false));
                 }
-                self.SetRolling(true);
+                self.SetRolling(true, 30);
+            }
+            else if (rollBounceWall)
+            {
+                Log.LogMessage("Roll bounce off a wall!");
+                self.room.PlaySound(SoundID.Slugcat_Sectret_Super_Wall_Jump, self.mainBodyChunk, loop: false, 1f, 1f);
+
+                self.rollDirection = -direction.x;
+                self.rollCounter = 0;
+
+                float bounceSpeed = Mathf.Max(rollSpeed, speed * 0.8f);
+                self.bodyChunks[0].vel.x = bounceSpeed * self.rollDirection;
+                self.bodyChunks[1].vel.x = bounceSpeed * self.rollDirection;
+
+                for (int i = 0; i < 7; i++)
+                {
+                    self.room.AddObject(new WaterDrip(self.mainBodyChunk.pos + new Vector2(0f, self.mainBodyChunk.rad), Custom.DegToVec(Random.value * 180f) * Mathf.Lerp(10f, 17f, Random.value), waterColor: false));
+                }
+                self.SetRolling(true, 30);
             }
         }
 
@@ -506,10 +522,10 @@ namespace loremiscExpansion.Conduit
             self.flipFromSlide = false;
             self.whiplashJump = false;
 
-            if (data.temporaryRollDuration > 0)
+            if (data.rollDuration > 0)
             {
-                data.temporaryRollDuration--;
-                if (data.temporaryRollDuration == 0)
+                data.rollDuration--;
+                if (data.rollDuration == 0)
                 {
                     self.SetRolling(false);
                 }
@@ -517,11 +533,13 @@ namespace loremiscExpansion.Conduit
 
             bool jumpPressed = self.input[0].jmp && !self.input[1].jmp;
             bool specialPressed = self.input[0].spec && !self.input[1].spec;
+            bool specialHeld = self.input[0].spec && self.input[1].spec;
             bool downHeld = self.input[0].y < 0;
             bool upHeld = self.input[0].y > 0;
 
             if (jumpPressed && data.rolling) self.SetRolling(false); // Jumping exits the roll
-            else if (specialPressed) self.SetRolling(!data.rolling); // Special enters or exits the roll, opposite of current
+            else if (specialPressed) self.SetRolling(!data.rolling, 60); // Special enters or exits the roll, opposite of current
+            else if (data.rolling && specialHeld) data.rollDuration++;
 
             if (self.IsCamouflaging()) data.camo = Math.Min(1f, data.camo + crouchPositiveSpeed); // If camouflaging, increases camo up to 1
             else data.camo = Math.Max(0f, data.camo - crouchNegativeSpeed); // If not camouflaging, decreases camo down to 0
@@ -560,7 +578,7 @@ namespace loremiscExpansion.Conduit
             if (!IsConduit(self)) return;
             if (!PlayerCWT.TryGetData(self, out var data)) return;
 
-            if (self.airInLungs - self.slugcatStats.drownThreshold < 0.1f)
+            if (self.airInLungs - self.slugcatStats.drownThreshold < 0.1f || self.submerged && self.input[0].spec && !self.input[1].spec)
             {
                 self.ActivateBreathBubble();
             }
@@ -568,11 +586,11 @@ namespace loremiscExpansion.Conduit
             {
                 data.breathTimer--;
                 float currentBreath = (float)data.breathTimer / (float)maxBreathTime;
-                if (Random.value < Mathf.InverseLerp(0f, 0.3f, currentBreath))
+                if (Random.value < 0.05f)
                 {
                     Bubble bubble = new(self.firstChunk.pos + Custom.RNV() * Random.value * 4f, Custom.RNV() * Mathf.Lerp(6f, 16f, Random.value) * Mathf.InverseLerp(0f, 0.45f, currentBreath), bottomBubble: false, fakeWaterBubble: false);
                     self.room.AddObject(bubble);
-                    bubble.age = 600 - Random.Range(20, Random.Range(30, 80));
+                    bubble.age = 40;
                     for (int i = 0; i < self.room.abstractRoom.creatures.Count; i++)
                     {
                         if ((self.room.abstractRoom.creatures[i].rippleLayer != self.abstractPhysicalObject.rippleLayer && !self.room.abstractRoom.creatures[i].rippleBothSides && !self.abstractPhysicalObject.rippleBothSides) || self.room.abstractRoom.creatures[i].realizedCreature == null)
@@ -663,14 +681,16 @@ namespace loremiscExpansion.Conduit
 
             if (wasCrouching)
             {
-                Log.LogMessage("Crouch spring!");
+                Log.LogMessage("Cricket jump!");
                 float dir = self.flipDirection != 0 ? self.flipDirection : 1f;
-                Vector2 lungeForce = new(dir * 10f, 7f);
+                Vector2 lungeForce = new(dir * 9f, 7f);
+                if (self.mainBodyChunk.vel.x < 3f) lungeForce.x += 3f;
                 self.bodyChunks[0].vel += lungeForce;
                 self.bodyChunks[1].vel += lungeForce * 0.6f;
                 self.animation = Player.AnimationIndex.None;
                 self.bodyMode = Player.BodyModeIndex.Default;
                 self.room.AddObject(new ExplosionSpikes(self.room, self.bodyChunks[1].pos + new Vector2(0f, 0f - self.bodyChunks[1].rad), 3, 7f, 5f, 5.5f, 40f, new Color(1f, 1f, 1f, 0.5f)));
+                data.cricketJumpCooldown = maxCricketJumpCooldown;
             }
             else if (data.dodgeRollWindow > 0)
             {

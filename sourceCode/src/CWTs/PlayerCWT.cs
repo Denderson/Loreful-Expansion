@@ -20,10 +20,13 @@ namespace loremiscExpansion.CWTs
         {
             public bool rolling = false;
             public int rollAnimation = 0;
-            public int temporaryRollDuration = 0;
+            public int rollDuration = 0;
 
             public int dodgeRollWindow = 0;
             public int dodgeRollDirection = 0;
+            public int wallBounceWindow = 0;
+
+            public int cricketJumpCooldown = 0;
 
             public int rollCooldown = 0;
             public int breathOrbs = 7;
