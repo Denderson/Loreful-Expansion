@@ -426,13 +426,14 @@ namespace loremiscExpansion.Conduit
             if (!PlayerCWT.TryGetData(self, out var data)) return;
 
             bool wasRolling = IsRolling(self);
-            bool rollBouncePounce = wasRolling && self.wantToJump > 0 && firstContact && self.bodyMode != Player.BodyModeIndex.CorridorClimb && direction.y < 0;
+            bool rollBounceGround = wasRolling && self.wantToJump > 0 && firstContact && self.bodyMode != Player.BodyModeIndex.CorridorClimb && direction.y < 0;
             bool rollBounceWall = wasRolling && self.wantToJump > 0 && firstContact && self.bodyMode != Player.BodyModeIndex.CorridorClimb && direction.x != 0 && direction.x == self.rollDirection;
 
-            if (wasRolling) self.SetRolling(false);
+            if (rollBounceGround || rollBounceWall) self.SetRolling(false);
 
             orig(self, chunk, direction, speed, firstContact);
-            if (rollBouncePounce)
+
+            if (rollBounceGround)
             {
                 Log.LogMessage("Roll bounce off ground!");
                 self.room.PlaySound(SoundID.Slugcat_Sectret_Super_Wall_Jump, self.mainBodyChunk, loop: false, 1f, 1f);
