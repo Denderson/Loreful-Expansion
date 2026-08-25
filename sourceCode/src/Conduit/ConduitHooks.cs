@@ -46,6 +46,8 @@ namespace loremiscExpansion.Conduit
 
         public const int maxCricketJumpCooldown = 20;
 
+        public const float resistanceDamageMultiplier = 0.4f;
+
         public static bool IsConduit(this Player self)
         {
             bool result = self != null && self.SlugCatClass == Enums.protag;
@@ -82,6 +84,7 @@ namespace loremiscExpansion.Conduit
             if (!IsCrouched(self)) return false;
             return (self.input[0].y < 0 && !self.input[0].jmp && math.abs(self.mainBodyChunk.vel.x) < 2f);
         }
+
         public static void ApplyHooks()
         {
             On.Player.AllowGrabbingBatflys += Player_AllowGrabbingBatflys; // Protag doesnt grab batflies automatically
@@ -111,6 +114,38 @@ namespace loremiscExpansion.Conduit
             On.Spear.ChangeMode += Spear_ChangeMode; // Makes spears no longer count as thrown by conduit once they hit something
 
             IL.Player.UpdateAnimation += Player_UpdateAnimation; // Makes protag easier to turn around underwater
+
+            On.Creature.Violence += Creature_Violence; // Makes protag take less damage when protecteds
+        }
+
+        private static void Creature_Violence(On.Creature.orig_Violence orig, Creature self, BodyChunk source, Vector2? directionAndMomentum, BodyChunk hitChunk, PhysicalObject.Appendage.Pos hitAppendage, Creature.DamageType type, float damage, float stunBonus)
+        {
+            if (self is not Player player || !IsConduit(player))
+            {
+                orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+                return;
+            }
+            if (!PlayerCWT.TryGetData(player, out var data) || data.resistanceFrames <= 0)
+            {
+                orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+                return;
+            }
+            if (type == Creature.DamageType.Electric || type == Creature.DamageType.Explosion || type == Creature.DamageType.None || type == Creature.DamageType.Water)
+            {
+                orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+                return;
+            }
+
+            orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, 0f, stunBonus * 0.5f);
+
+            if (player.State is PlayerState state)
+            {
+                state.permanentDamageTracking += 0.4f * damage;
+                if (state.permanentDamageTracking > 1f)
+                {
+                    player.Die();
+                }    
+            }
         }
 
         private static void Player_UpdateAnimation(ILContext il)
@@ -249,6 +284,7 @@ namespace loremiscExpansion.Conduit
             if (data.dodgeRollWindow > 0) data.dodgeRollWindow--;
             if (data.wallBounceWindow > 0) data.wallBounceWindow--;
             if (data.cricketJumpCooldown > 0) data.cricketJumpCooldown--;
+            if (data.resistanceFrames > 0) data.resistanceFrames--;
             self.eyesClosedTime = 0;
             self.blind = 0;
             if (self.State is PlayerState state && state.permanentDamageTracking > 0) state.permanentDamageTracking -= 0.0002;
@@ -260,7 +296,8 @@ namespace loremiscExpansion.Conduit
                 if (data.sporePoison > 0.2f && Random.value < 0.5f) self.Stun(Random.Range(2, (int)Mathf.Lerp(8f, 16f, data.sporePoison)));
                 if (data.sporePoison >= 1f) self.Die();
             }
-            else data.sporePoison -= sporepuffPoisonRecovery;
+            else if (data.sporePoison > 0f) data.sporePoison -= sporepuffPoisonRecovery;
+            if (self.IsCrouched() || self.IsRolling()) data.resistanceFrames = Math.Max(5, data.resistanceFrames);
         }
 
         private static void Player_ThrowObject(On.Player.orig_ThrowObject orig, Player self, int grasp, bool eu)
@@ -490,9 +527,9 @@ namespace loremiscExpansion.Conduit
         public static bool Player_SpearStick(On.Player.orig_SpearStick orig, Player self, Weapon source, float dmg, BodyChunk chunk, PhysicalObject.Appendage.Pos appPos, Vector2 direction)
         {
             bool value = orig(self, source, dmg, chunk, appPos, direction);
-            if (IsConduit(self))
+            if (IsConduit(self) && PlayerCWT.TryGetData(self, out var data) && data.resistanceFrames > 0 && (self.playerState.permanentDamageTracking + (dmg *  resistanceDamageMultiplier) < 1f))
             {
-                if (IsRolling(self)) return false;
+                return false;
             }
             return value;
         }
@@ -508,7 +545,6 @@ namespace loremiscExpansion.Conduit
             data.breathTimer = 0;
             data.breathOrbs = 0;
         }
-
 
         public static void Player_MovementUpdate(On.Player.orig_MovementUpdate orig, Player self, bool eu)
         {

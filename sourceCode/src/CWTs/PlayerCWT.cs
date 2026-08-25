@@ -37,6 +37,8 @@ namespace loremiscExpansion.CWTs
 
             public float camo = 0f;
             public UnityEngine.Color? camoColor = null;
+
+            public int resistanceFrames = 0;
         }
     }
 }
