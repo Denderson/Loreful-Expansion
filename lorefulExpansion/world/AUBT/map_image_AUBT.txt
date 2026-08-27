@@ -1,6 +1,8 @@
-AUBT_memory01: 1213,1296,228,163
+AUBT_memory01: 1050,1972,228,163
 AUBT_secretF: 666,335,72,43
 AUBT_ballastterminalsshelter01: 593,484,72,43
+AUBT_ballastterminals01: 891,1616,72,83
+AUBT_ballastterminals02: 806,1785,228,163
 AUBT_ballastterminals03: 529,1605,72,43
 AUBT_ballastterminals04: 640,1629,72,83
 AUBT_ballastterminals05: 640,1719,72,203
@@ -9,8 +11,10 @@ AUBT_ballastterminals07: 563,1814,72,43
 AUBT_ballastterminals08: 627,1931,98,203
 AUBT_ballastterminals09: 552,1989,72,43
 AUBT_ballastterminals10: 549,2058,72,43
+AUBT_ballastterminals11: 807,1972,228,163
 AUBT_ballastterminals13: 552,2117,72,43
 AUBT_ballastterminals14: 640,2143,72,83
+AUBT_ballastterminals22: 717,1972,72,43
 AUBT_vulturetanksshelter01: 862,2443,72,43
 AUBT_vulturetanksshelter02: 1067,1556,72,43
 AUBT_vulturetanks01: 1062,1206,72,123
