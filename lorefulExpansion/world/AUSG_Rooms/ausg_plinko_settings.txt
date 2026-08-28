@@ -1,0 +1,7 @@
+Template: NONE
+Grime: 0.3586957
+Palette: 6756
+EffectColorA: 18
+EffectColorB: 12
+Effects: ReplaceEffectColorB-0-20-20-Color-0.3478261-0.3369565-0.5652174, ReplaceEffectColorA-0-360-103-Color-0.6304348-0.2826087-0.2826087, Bloom-0.3478261-0-0, Contrast-0-231-32, 
+PlacedObjects: FloatMud><316.4374><71.81982><592~57~15, 
