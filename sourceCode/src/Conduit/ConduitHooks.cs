@@ -1,14 +1,19 @@
 ﻿using loremiscExpansion.CWTs;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using MonoMod.RuntimeDetour;
 using MoreSlugcats;
 using RWCustom;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.Mathematics;
 using UnityEngine;
 using Watcher;
-using RWCustom;
 using static loremiscExpansion.Plugin;
+using Random = UnityEngine.Random;
 
 namespace loremiscExpansion.Conduit
 {
@@ -25,18 +30,33 @@ namespace loremiscExpansion.Conduit
         public static float sporepuffPoisonRecovery = 0.003f;
 
         public static int maxDodgeRollWindow = 10;
+
+        public static float rollSpeed = 10f;
+        public static float rollSpeedLarp = 0.35f;
+
+        public static int maxWallBounceWindow = 5;
+
+        private const float thrownSpearSubmersion = 0.15f;
+
+        public const float crouchPositiveSpeed = 0.007f;
+        public const float crouchNegativeSpeed = 0.015f;
+        public const float crouchVisibilityFactor = 0.1f;
+
+        public const float swimmingTurningMultiplier = 2.5f;
+
+        public const int maxCricketJumpCooldown = 20;
+
+        public const float resistanceDamageMultiplier = 0.4f;
+
         public static bool IsConduit(this Player self)
         {
-            Log.LogMessage("Checking if Player is Conduit!");
             bool result = self != null && self.SlugCatClass == Enums.protag;
-            Log.LogMessage(result);
             return result;
         }
 
         public static bool IsCrouched(this Player self)
         {
-            return self?.bodyMode == Player.BodyModeIndex.Crawl;
-            // TODO
+            return (self?.bodyMode == Player.BodyModeIndex.Crawl || self.animation == Player.AnimationIndex.DownOnFours) && (self.bodyMode != Player.BodyModeIndex.CorridorClimb);
         }
 
         public static bool IsRolling(this Player self)
@@ -54,8 +74,15 @@ namespace loremiscExpansion.Conduit
             if (!value) return;
             data.rollAnimation = 20;
             self.animation = Player.AnimationIndex.Roll;
-            if (duration > 0) data.temporaryRollDuration = duration;
+            if (duration > 0) data.rollDuration = duration;
             self.room.PlaySound(SoundID.Slugcat_Roll_Init, self.mainBodyChunk, loop: false, 1f, 1f);
+        }
+
+        private static bool IsCamouflaging(this Player self)
+        {
+            if (!IsConduit(self)) return false;
+            if (!IsCrouched(self)) return false;
+            return (self.input[0].y < 0 && !self.input[0].jmp && math.abs(self.mainBodyChunk.vel.x) < 2f);
         }
 
         public static void ApplyHooks()
@@ -64,41 +91,200 @@ namespace loremiscExpansion.Conduit
             On.Player.Blink += Player_Blink; // Protag cannot blink
             On.Player.CanBeGrabbed += Player_CanBeGrabbed; // Protag cannot grab slugpups (they are irresponsible)
             On.Player.CanBeSwallowed += Player_CanBeSwallowed; // Protag cannot swallow items
-            On.Player.CanEatMeat += Player_CanEatMeat; // TODO: Change Protags diet
             On.Player.CanIPickThisUp += Player_CanIPickThisUp; // Protag cannot grab slugpups (they are irresponsible)
             On.Player.Die += Player_Die; // Protag stops rolling and emitting air when dying
             On.Player.Jump += Player_Jump; // Cricket jump
             On.Player.JumpOnChunk += Player_JumpOnChunk; // Roll bounce off creatures
             On.Player.LungUpdate += Lung_Update; // Protag has breath reserves they can use
-            On.Player.MovementUpdate += Player_MovementUpdate; // TODO
+            On.Player.MovementUpdate += Player_MovementUpdate; // Rolling
             On.Player.SpearStick += Player_SpearStick; // Spears bounce off Protag if they are rolling
             On.Player.Stun += Player_Stun; // Protag stops rolling and gets the current air reserve interruped when stunned
             On.Player.SwallowObject += Player_SwallowObject; // Protag cannot swallow items
-            On.Player.TerrainImpact += Player_TerrainImpact; // Roll bounce off ground, TODO: Roll bounce off walls
+            On.Player.TerrainImpact += Player_TerrainImpact; // Roll bounce off ground and walls
             On.Player.ThrownSpear += Player_ThrownSpear; // Protag can throw spears underwater
             On.Player.ThrowObject += Player_ThrowObject; // Protag can throw items in any direction regardless of state
             On.Player.Update += Player_Update; // Everything
-            On.Player.UpdateBodyMode += Player_UpdateBodyMode; // TODO: Remove slides and replace with dodge rolls
+            On.Player.UpdateBodyMode += Player_UpdateBodyMode; // Rolling
 
-            // TODO: Camouflage
+            new Hook(typeof(Player).GetProperty(nameof(Player.VisibilityBonus)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(Visibility_Bonus))); // Makes crouching cause protag to be less visible
+            On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites; //  Makes player the colour of stuff behind it when camouflaging
 
+            new Hook(typeof(BodyChunk).GetProperty(nameof(BodyChunk.submersion)).GetGetMethod(), typeof(ConduitHooks).GetMethod(nameof(BodyChunk_submersion))); // Makes spears thrown by conduit less affected by water
+            On.Spear.Update += Spear_Update; // Makes underwater spears thrown by conduit spawn bubbles
+            On.Spear.ChangeMode += Spear_ChangeMode; // Makes spears no longer count as thrown by conduit once they hit something
 
+            IL.Player.UpdateAnimation += Player_UpdateAnimation; // Makes protag easier to turn around underwater
+
+            On.Creature.Violence += Creature_Violence; // Makes protag take less damage when protecteds
+        }
+
+        private static void Creature_Violence(On.Creature.orig_Violence orig, Creature self, BodyChunk source, Vector2? directionAndMomentum, BodyChunk hitChunk, PhysicalObject.Appendage.Pos hitAppendage, Creature.DamageType type, float damage, float stunBonus)
+        {
+            if (self is not Player player || !IsConduit(player))
+            {
+                orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+                return;
+            }
+            if (!PlayerCWT.TryGetData(player, out var data) || data.resistanceFrames <= 0)
+            {
+                orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+                return;
+            }
+            if (type == Creature.DamageType.Electric || type == Creature.DamageType.Explosion || type == Creature.DamageType.None || type == Creature.DamageType.Water)
+            {
+                orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+                return;
+            }
+
+            orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, 0f, stunBonus * 0.5f);
+
+            if (player.State is PlayerState state)
+            {
+                state.permanentDamageTracking += 0.4f * damage;
+                if (state.permanentDamageTracking > 1f)
+                {
+                    player.Die();
+                }    
+            }
+        }
+
+        private static void Player_UpdateAnimation(ILContext il)
+        {
+            ILCursor cursor = new(il);
+
+            bool foundAngleCall = cursor.TryGotoNext(MoveType.After, instruction => instruction.MatchCall(typeof(Vector2), "Angle"));
+
+            if (!foundAngleCall)
+            {
+                Debug.LogError("Vector2.Angle call not found in Player.UpdateAnimation");
+                return;
+            }
+
+            cursor.Emit(OpCodes.Ldarg_0); // pushing self (Player)
+            cursor.EmitDelegate<Func<float, Player, float>>(SwimAngle);
+        }
+
+        private static float SwimAngle(float rawAngle, Player self)
+        {
+            if (self?.SlugCatClass != Enums.protag)
+            {
+                return rawAngle;
+            }
+            return rawAngle * swimmingTurningMultiplier;
+        }
+
+        private static void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, Vector2 camPos)
+        {
+            orig(self, sLeaser, rCam, timeStacker, camPos);
+            if (!IsConduit(self?.player)) return;
+            if (!PlayerCWT.TryGetData(self.player, out var data)) return;
+            if (data.camo < 0f) return;
+            if (self.culled) return;
+            Player player = self.player;
+            if (player.bodyChunks == null || player.bodyChunks.Length < 2) return;
+            if (data.camoColor == null)
+            {
+                Color color = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[0].lastPos, self.player.bodyChunks[0].pos, timeStacker));
+                Color color2 = rCam.PixelColorAtCoordinate(Vector2.Lerp(self.player.bodyChunks[1].lastPos, self.player.bodyChunks[1].pos, timeStacker));
+                Color camoColor = (color + color2) / 2;
+                data.camoColor = camoColor;
+            }
+            Color baseColor = PlayerGraphics.SlugcatColor(player.SlugCatClass);
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (sLeaser.sprites[i] == null)
+                {
+                    continue;
+                }
+                sLeaser.sprites[i].color = Color.Lerp(baseColor, data.camoColor.Value, data.camo);
+            }
+        }
+
+        public static float Visibility_Bonus(Func<Player, float> orig, Player self)
+        {
+            float value = orig(self);
+            if (PlayerCWT.TryGetData(self, out PlayerCWT.DataClass data))
+            {
+                return Math.Max(-1f, value - data.camo);
+            }
+            else
+            {
+                return orig(self);
+            }
+        }
+
+        private static void Spear_ChangeMode(On.Spear.orig_ChangeMode orig, Spear self, Weapon.Mode newMode)
+        {
+            orig(self, newMode);
+            if (!SpearCWT.TryGetData(self, out var data)) return;
+            if (data.thrownByProtag && newMode != Weapon.Mode.Thrown) data.thrownByProtag = false;
+        }
+
+        private static void Spear_Update(On.Spear.orig_Update orig, Spear self, bool eu)
+        {
+            orig(self, eu);
+            if (!SpearCWT.TryGetData(self, out var data)) return;
+            if (!data.thrownByProtag) return;
+            if (Random.value < self.firstChunk.vel.magnitude / 7f)
+            {
+                Bubble bubble = new(self.firstChunk.pos + Custom.RNV() * Random.value * 4f, Custom.RNV() * Mathf.Lerp(6f, 16f, Random.value), bottomBubble: false, fakeWaterBubble: true);
+                self.room.AddObject(bubble);
+                bubble.age = 600 - Random.Range(20, Random.Range(30, 80));
+            }
+        }
+
+        public static float BodyChunk_submersion(Func<BodyChunk, float> orig, BodyChunk self)
+        {
+            float real = orig(self);
+            if (IsConduitSpear(self))
+            {
+                return real * thrownSpearSubmersion;
+            }
+            return real;
+        }
+
+        private static bool IsConduitSpear(BodyChunk chunk)
+        {
+            if (chunk.owner is Spear spear && SpearCWT.TryGetData(spear, out var data) && data.thrownByProtag)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static void Player_UpdateBodyMode(On.Player.orig_UpdateBodyMode orig, Player self)
         {
             orig(self);
+            if (!IsConduit(self)) return;
+            if (!PlayerCWT.TryGetData(self, out var data)) return;
+            if (data.rolling)
+            {
+                bool enteringTunnel = self.bodyMode == Player.BodyModeIndex.CorridorClimb || self.enteringShortCut.HasValue;
+                bool climbing = self.bodyMode == Player.BodyModeIndex.ClimbingOnBeam || self.bodyMode == Player.BodyModeIndex.ClimbIntoShortCut || self.bodyMode == Player.BodyModeIndex.WallClimb;
+                bool swimming = self.bodyMode == Player.BodyModeIndex.Swimming || self.bodyMode == Player.BodyModeIndex.ZeroG || self.submerged;
+                bool hitWall = self.bodyChunks[0].ContactPoint.x == self.rollDirection || self.bodyChunks[1].ContactPoint.x == self.rollDirection;
+
+                if (enteringTunnel || climbing || swimming || hitWall)
+                {
+                    self.SetRolling(false);
+                    return;
+                }
+
+                self.bodyMode = Player.BodyModeIndex.Default;
+                self.animation = Player.AnimationIndex.Roll;
+            }
         }
 
         public static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
         {
             orig(self, eu);
-            if (!IsConduit(self))  return;
+            if (!IsConduit(self)) return;
             if (!PlayerCWT.TryGetData(self, out var data)) return;
-            if (data.dodgeRollWindow > 0)
-            {
-                data.dodgeRollWindow--;
-            }
+            if (data.dodgeRollWindow > 0) data.dodgeRollWindow--;
+            if (data.wallBounceWindow > 0) data.wallBounceWindow--;
+            if (data.cricketJumpCooldown > 0) data.cricketJumpCooldown--;
+            if (data.resistanceFrames > 0) data.resistanceFrames--;
             self.eyesClosedTime = 0;
             self.blind = 0;
             if (self.State is PlayerState state && state.permanentDamageTracking > 0) state.permanentDamageTracking -= 0.0002;
@@ -110,7 +296,8 @@ namespace loremiscExpansion.Conduit
                 if (data.sporePoison > 0.2f && Random.value < 0.5f) self.Stun(Random.Range(2, (int)Mathf.Lerp(8f, 16f, data.sporePoison)));
                 if (data.sporePoison >= 1f) self.Die();
             }
-            else data.sporePoison -= sporepuffPoisonRecovery;
+            else if (data.sporePoison > 0f) data.sporePoison -= sporepuffPoisonRecovery;
+            if (self.IsCrouched() || self.IsRolling()) data.resistanceFrames = Math.Max(5, data.resistanceFrames);
         }
 
         private static void Player_ThrowObject(On.Player.orig_ThrowObject orig, Player self, int grasp, bool eu)
@@ -189,24 +376,25 @@ namespace loremiscExpansion.Conduit
             }
             else if (self.grasps[grasp].grabbed is Frog)
             {
+                IntVector2 throwDir = new(self.ThrowDirection, 0);
+                bool isVertical = self.input[0].y != 0;
+                bool isHorizontal = self.input[0].x != 0;
+
+                if (isVertical && !isHorizontal)
+                {
+                    throwDir = new IntVector2(0, self.input[0].y);
+                }
+                Vector2 vector = self.firstChunk.pos + throwDir.ToVector2() * 10f + new Vector2(0f, 4f);
+                if (self.room.GetTile(vector).Solid)
+                {
+                    vector = self.mainBodyChunk.pos;
+                }
+
                 if (!(self.grasps[grasp].grabbed as Frog).bloodBank)
                 {
                     if (self.graphicsModule != null)
                     {
                         (self.graphicsModule as PlayerGraphics).ThrowObject(grasp, self.grasps[grasp].grabbed);
-                    }
-                    IntVector2 throwDir = new(self.ThrowDirection, 0);
-                    bool isVertical = self.input[0].y != 0;
-                    bool isHorizontal = self.input[0].x != 0;
-
-                    if (isVertical && !isHorizontal)
-                    {
-                        throwDir = new IntVector2(0, self.input[0].y);
-                    }
-                    Vector2 vector = self.firstChunk.pos + throwDir.ToVector2() * 10f + new Vector2(0f, 4f);
-                    if (self.room.GetTile(vector).Solid)
-                    {
-                        vector = self.mainBodyChunk.pos;
                     }
                     (self.grasps[grasp].grabbed as Frog).ImmuneToLatch = self;
                     (self.grasps[grasp].grabbed as Frog).throwLatch = true;
@@ -220,6 +408,25 @@ namespace loremiscExpansion.Conduit
                     (self.grasps[grasp].grabbed as Frog).jumpStun = 40;
                     self.TossObject(grasp, eu);
                 }
+
+                Vector2 throwBoost = -throwDir.ToVector2().normalized * throwboostVelocity;
+                if (throwDir.x == 0 && throwDir.y == 0) throwBoost = new Vector2(-self.flipDirection, 0f) * throwboostVelocity;
+
+                bool onGround = self.bodyChunks[0].ContactPoint.y == -1 || self.bodyChunks[1].ContactPoint.y == -1;
+                if (onGround && !isVertical)
+                {
+                    Log.LogMessage("Dodge throw!");
+                    throwBoost *= 0.8f;
+                    self.animation = Player.AnimationIndex.Roll;
+                    self.rollDirection = -throwDir.x;
+                    self.rollCounter = 0;
+                    self.SetRolling(true, 80);
+                    data.dodgeRollWindow = maxDodgeRollWindow;
+                    data.dodgeRollDirection = System.Math.Sign(-throwDir.x);
+                }
+
+                self.bodyChunks[0].vel += throwBoost;
+                self.bodyChunks[1].vel += throwBoost * 0.8f;
             }
             else
             {
@@ -244,7 +451,6 @@ namespace loremiscExpansion.Conduit
             if (!IsConduit(self)) return;
             if (!SpearCWT.TryGetData(spear, out var spearData)) return;
             spearData.thrownByProtag = true;
-            // TODO: Make spears thrown by protag ignore water slowdown (see monitor lizard in lsf)
         }
 
         private static void Player_TerrainImpact(On.Player.orig_TerrainImpact orig, Player self, int chunk, RWCustom.IntVector2 direction, float speed, bool firstContact)
@@ -254,31 +460,49 @@ namespace loremiscExpansion.Conduit
                 orig(self, chunk, direction, speed, firstContact);
                 return;
             }
+            if (!PlayerCWT.TryGetData(self, out var data)) return;
 
-            bool rollBouncePounce = IsRolling(self) && self.wantToJump > 0 && direction.y < 0;
-            self.SetRolling(false);
+            bool wasRolling = IsRolling(self);
+            bool rollBounceGround = wasRolling && self.wantToJump > 0 && firstContact && self.bodyMode != Player.BodyModeIndex.CorridorClimb && direction.y < 0;
+            bool rollBounceWall = wasRolling && self.wantToJump > 0 && firstContact && self.bodyMode != Player.BodyModeIndex.CorridorClimb && direction.x != 0 && direction.x == self.rollDirection;
+
+            if (rollBounceGround || rollBounceWall) self.SetRolling(false);
 
             orig(self, chunk, direction, speed, firstContact);
 
-            if (rollBouncePounce)
+            if (rollBounceGround)
             {
-                Log.LogMessage("Roll bounce pounce!");
+                Log.LogMessage("Roll bounce off ground!");
                 self.room.PlaySound(SoundID.Slugcat_Sectret_Super_Wall_Jump, self.mainBodyChunk, loop: false, 1f, 1f);
-
-                self.bodyChunks[1].pos = self.bodyChunks[0].pos;
-                self.bodyChunks[0].pos += new Vector2(0f, 10f);
-
+                
                 self.bodyChunks[0].vel = new Vector2(self.bodyChunks[0].vel.x, 17f);
                 self.bodyChunks[1].vel = new Vector2(self.bodyChunks[1].vel.x, 17f);
 
-                self.animation = Player.AnimationIndex.RocketJump;
                 self.room.ScreenMovement(self.mainBodyChunk.pos, new Vector2(0f, 1f), 0.1f);
 
                 for (int i = 0; i < 7; i++)
                 {
                     self.room.AddObject(new WaterDrip(self.mainBodyChunk.pos + new Vector2(0f, self.mainBodyChunk.rad), Custom.DegToVec(Random.value * 180f) * Mathf.Lerp(10f, 17f, Random.value), waterColor: false));
                 }
-                self.SetRolling(true);
+                self.SetRolling(true, 30);
+            }
+            else if (rollBounceWall)
+            {
+                Log.LogMessage("Roll bounce off a wall!");
+                self.room.PlaySound(SoundID.Slugcat_Sectret_Super_Wall_Jump, self.mainBodyChunk, loop: false, 1f, 1f);
+
+                self.rollDirection = -direction.x;
+                self.rollCounter = 0;
+
+                float bounceSpeed = Mathf.Max(rollSpeed, speed * 0.8f);
+                self.bodyChunks[0].vel.x = bounceSpeed * self.rollDirection;
+                self.bodyChunks[1].vel.x = bounceSpeed * self.rollDirection;
+
+                for (int i = 0; i < 7; i++)
+                {
+                    self.room.AddObject(new WaterDrip(self.mainBodyChunk.pos + new Vector2(0f, self.mainBodyChunk.rad), Custom.DegToVec(Random.value * 180f) * Mathf.Lerp(10f, 17f, Random.value), waterColor: false));
+                }
+                self.SetRolling(true, 30);
             }
         }
 
@@ -293,6 +517,7 @@ namespace loremiscExpansion.Conduit
             orig(self, st);
             if (!IsConduit(self)) return;
             if (!PlayerCWT.TryGetData(self, out var data)) return;
+            if (st < 10) return;
             data.rolling = false;
             data.rollCooldown = 40;
             data.rollAnimation = 0;
@@ -302,10 +527,10 @@ namespace loremiscExpansion.Conduit
         public static bool Player_SpearStick(On.Player.orig_SpearStick orig, Player self, Weapon source, float dmg, BodyChunk chunk, PhysicalObject.Appendage.Pos appPos, Vector2 direction)
         {
             bool value = orig(self, source, dmg, chunk, appPos, direction);
-            if (IsConduit(self))
+            if (IsConduit(self) && PlayerCWT.TryGetData(self, out var data) && data.resistanceFrames > 0 && (self.playerState.permanentDamageTracking + (dmg *  resistanceDamageMultiplier) < 1f))
             {
-                if (IsRolling(self)) return false;
-            }    
+                return false;
+            }
             return value;
         }
 
@@ -321,33 +546,56 @@ namespace loremiscExpansion.Conduit
             data.breathOrbs = 0;
         }
 
-
         public static void Player_MovementUpdate(On.Player.orig_MovementUpdate orig, Player self, bool eu)
         {
             if (!IsConduit(self)) { orig(self, eu); return; }
             if (!PlayerCWT.TryGetData(self, out var data)) { orig(self, eu); return; }
 
-            if (data.temporaryRollDuration > 0)
+            if (self.animation == Player.AnimationIndex.BellySlide || self.animation == Player.AnimationIndex.Flip)
             {
-                data.temporaryRollDuration--;
-                if (data.temporaryRollDuration == 0)
+                self.animation = Player.AnimationIndex.None;
+            }
+            self.rocketJumpFromBellySlide = false;
+            self.flipFromSlide = false;
+            self.whiplashJump = false;
+
+            if (data.rollDuration > 0)
+            {
+                data.rollDuration--;
+                if (data.rollDuration == 0)
                 {
                     self.SetRolling(false);
                 }
             }
 
-            if (data.rolling)
+            bool jumpPressed = self.input[0].jmp && !self.input[1].jmp;
+            bool specialPressed = self.input[0].spec && !self.input[1].spec;
+            bool specialHeld = self.input[0].spec && self.input[1].spec;
+            bool downHeld = self.input[0].y < 0;
+            bool upHeld = self.input[0].y > 0;
+
+            if (jumpPressed && data.rolling) self.SetRolling(false); // Jumping exits the roll
+            else if (specialPressed) self.SetRolling(!data.rolling, 60); // Special enters or exits the roll, opposite of current
+            else if (data.rolling && specialHeld) data.rollDuration++;
+
+            if (self.IsCamouflaging()) data.camo = Math.Min(1f, data.camo + crouchPositiveSpeed); // If camouflaging, increases camo up to 1
+            else data.camo = Math.Max(0f, data.camo - crouchNegativeSpeed); // If not camouflaging, decreases camo down to 0
+
+            if (data.rolling) // Makes rolls faster and infinite
             {
                 self.standing = false;
                 self.animation = Player.AnimationIndex.Roll;
                 if (self.rollDirection == 0) self.rollDirection = self.flipDirection != 0 ? self.flipDirection : 1;
-                self.bodyMode = Player.BodyModeIndex.Default;
+
+                self.rollCounter = 0;
+                self.stopRollingCounter = 0;
+
+                float targetSpeed = rollSpeed * self.rollDirection;
+                self.bodyChunks[0].vel.x = Mathf.Lerp(self.bodyChunks[0].vel.x, targetSpeed, rollSpeedLarp);
+                self.bodyChunks[1].vel.x = Mathf.Lerp(self.bodyChunks[1].vel.x, targetSpeed, rollSpeedLarp);
             }
 
             orig(self, eu);
-
-            // TODO: Make pressing jump + down cause you to start rolling
-            // TODO: Disable slides and their variants
         }
 
         public static void ActivateBreathBubble(this Player self)
@@ -367,7 +615,7 @@ namespace loremiscExpansion.Conduit
             if (!IsConduit(self)) return;
             if (!PlayerCWT.TryGetData(self, out var data)) return;
 
-            if (self.airInLungs - self.slugcatStats.drownThreshold < 0.1f)
+            if (self.airInLungs - self.slugcatStats.drownThreshold < 0.1f || self.submerged && self.input[0].spec && !self.input[1].spec)
             {
                 self.ActivateBreathBubble();
             }
@@ -375,11 +623,11 @@ namespace loremiscExpansion.Conduit
             {
                 data.breathTimer--;
                 float currentBreath = (float)data.breathTimer / (float)maxBreathTime;
-                if (Random.value < Mathf.InverseLerp(0f, 0.3f, currentBreath))
+                if (Random.value < 0.05f)
                 {
                     Bubble bubble = new(self.firstChunk.pos + Custom.RNV() * Random.value * 4f, Custom.RNV() * Mathf.Lerp(6f, 16f, Random.value) * Mathf.InverseLerp(0f, 0.45f, currentBreath), bottomBubble: false, fakeWaterBubble: false);
                     self.room.AddObject(bubble);
-                    bubble.age = 600 - Random.Range(20, Random.Range(30, 80));
+                    bubble.age = 40;
                     for (int i = 0; i < self.room.abstractRoom.creatures.Count; i++)
                     {
                         if ((self.room.abstractRoom.creatures[i].rippleLayer != self.abstractPhysicalObject.rippleLayer && !self.room.abstractRoom.creatures[i].rippleBothSides && !self.abstractPhysicalObject.rippleBothSides) || self.room.abstractRoom.creatures[i].realizedCreature == null)
@@ -462,49 +710,37 @@ namespace loremiscExpansion.Conduit
             }
             if (!PlayerCWT.TryGetData(self, out var data)) return;
 
-            bool wasCrouching = (self?.bodyMode == Player.BodyModeIndex.Crawl || self.animation == Player.AnimationIndex.DownOnFours);
-            bool wasRolling = IsRolling(self);
-            self.SetRolling(false);
+            bool wasCrouching = IsCrouched(self);
+
+            if (data.rolling) self.SetRolling(false);
 
             orig(self);
 
-            if (wasCrouching && self.crawlTurnDelay < 0 && self.timeSinceInCorridorMode <= 0)
+            if (wasCrouching)
             {
-                Log.LogMessage("Crouch spring!");
+                Log.LogMessage("Cricket jump!");
                 float dir = self.flipDirection != 0 ? self.flipDirection : 1f;
-                Vector2 lungeForce = new(dir * 10f, 6f);
+                Vector2 lungeForce = new(dir * 9f, 7f);
+                if (self.mainBodyChunk.vel.x < 3f) lungeForce.x += 3f;
                 self.bodyChunks[0].vel += lungeForce;
                 self.bodyChunks[1].vel += lungeForce * 0.6f;
                 self.animation = Player.AnimationIndex.None;
                 self.bodyMode = Player.BodyModeIndex.Default;
                 self.room.AddObject(new ExplosionSpikes(self.room, self.bodyChunks[1].pos + new Vector2(0f, 0f - self.bodyChunks[1].rad), 3, 7f, 5f, 5.5f, 40f, new Color(1f, 1f, 1f, 0.5f)));
+                data.cricketJumpCooldown = maxCricketJumpCooldown;
             }
             else if (data.dodgeRollWindow > 0)
             {
                 Log.LogMessage("Dodge roll!");
                 float dir = 1f;
                 if (data.dodgeRollDirection < 0) dir = -1f;
-                Vector2 lungeForce = new(dir * 6f, 5f);
+                Vector2 lungeForce = new(dir * 5f, 4f);
                 self.bodyChunks[0].vel += lungeForce;
                 self.bodyChunks[1].vel += lungeForce * 0.8f;
                 self.animation = Player.AnimationIndex.None;
                 self.bodyMode = Player.BodyModeIndex.Default;
                 self.standing = true;
-                
             }
-            else if (wasRolling)
-            {
-                Log.LogMessage("Roll bounce!");
-                float dir = self.input[0].x != 0 ? self.input[0].x : self.flipDirection;
-                if (dir == 0) dir = 1f;
-
-                Vector2 bounce = new(dir * 7f, 10f);
-                self.bodyChunks[0].vel = bounce;
-                self.bodyChunks[1].vel = bounce * 0.8f;
-                self.SetRolling(true, 80);
-            }
-            
-
         }
 
         public static bool Player_CanIPickThisUp(On.Player.orig_CanIPickThisUp orig, Player self, PhysicalObject obj)

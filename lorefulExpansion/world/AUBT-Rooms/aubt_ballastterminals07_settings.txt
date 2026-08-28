@@ -1,0 +1,13 @@
+Template: NONE
+CeilingDrips: 0.6956522
+Clouds: 0.25
+Grime: 0.1086956
+RandomItemDensity: 0.6630435
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: SkyBloom-0.8586956-40-133, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-21-36, ModifyEffectColorB-0,0.5,0.4021739-278-38, RockFlea-0.4021739-294-134, 
+PlacedObjects: VultureGrub><1048.183><236.4188><0~0~7~10, CustomDecal><38.34186><56.07236><0~762~1362~756~1365~-13~0~0~0~1~0~bigredtag~0.1630435~1~0.1630435~1~0.1630435~1~0.1630435~1, LightSource><469.1762><413.5946><0.25~Environment~314~11~50~86.60254~0~1~None~0~0, LightSource><923.5667><395.17><0.25~Environment~-236~187~50~86.60254~0~1~None~0~0, LightSource><131.9481><697.7776><0.3369565~EffectColor1~250~-66~21~-110.3975~0~0~None~0~0, LightSource><1292.7><601.5066><0.4565217~EffectColor1~-322~59~-271~-249.3975~0~0~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory04.ogg><15.94061><243.3106><0.3369565><0.8043478, OMNI><AM_IND-Warehouse01.ogg><17.30884><170.5589><0.3369565><1, OMNI><RWTW_AmbDrips_01.ogg><106.3066><18.30103><0.2608696><1, OMNI><RWTW_AmbDrips_02.ogg><6.404114><98.42551><0.2065217><0.5108696, 
+FadePalette: 42068, 0.25
+MorePalette0: 8, 0.1086956

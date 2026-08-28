@@ -43,7 +43,7 @@ namespace loremiscExpansion
 
                 On.SaveState.LoadGame += SaveFileCode.SaveState_LoadGame;
 
-                //NPCs.NPCStateHooks.ApplyHooks();
+                NPCs.NPCStateHooks.ApplyHooks();
                 Conduit.ConduitHooks.ApplyHooks();
 
                 RegisterManagedObject<ApostleSpot, ApostleSpotData, ManagedRepresentation>("ApostleSpot", "Aurelia");

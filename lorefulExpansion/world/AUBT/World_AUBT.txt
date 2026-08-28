@@ -7,12 +7,20 @@ AUBT_memory01 : DISCONNECTED, DISCONNECTED, DISCONNECTED : SWARMROOM
 AUBT_secretF : AUBT_vulturetanks07
 
 AUBT_ballastterminalsshelter01 : AUBT_ballastterminals03 : SHELTER
+AUBT_ballastterminals01 : AUBT_ballastterminals02, AUBT_vulturetanks17
+AUBT_ballastterminals02 : DISCONNECTED, DISCONNECTED, AUBT_ballastterminals01
 AUBT_ballastterminals03 : AUBT_ballastterminals04, AUBT_ballastterminalsshelter01, AUBT_vulturetanks14
 AUBT_ballastterminals04 : AUBT_ballastterminals05, AUBT_ballastterminals03
-AUBT_ballastterminals05 : AUBT_ballastterminals08, DISCONNECTED, DISCONNECTED, DISCONNECTED, AUBT_ballastterminals04
-AUBT_ballastterminals08 : AUBT_ballastterminals13, DISCONNECTED, DISCONNECTED, DISCONNECTED, DISCONNECTED, DISCONNECTED, AUBT_ballastterminals05
-AUBT_ballastterminals13 : AUBT_ballastterminals14, AUBT_ballastterminals08
+AUBT_ballastterminals05 : AUBT_ballastterminals08, AUBT_ballastterminals07, DISCONNECTED, AUBT_ballastterminals06, AUBT_ballastterminals04
+AUBT_ballastterminals06 : AUBT_ballastterminals07, AUBT_ballastterminals05
+AUBT_ballastterminals07 : DISCONNECTED, AUBT_ballastterminals05, AUBT_ballastterminals06
+AUBT_ballastterminals08 : AUBT_ballastterminals13, DISCONNECTED, AUBT_ballastterminals10, AUBT_ballastterminals22, AUBT_ballastterminals09, DISCONNECTED, AUBT_ballastterminals05
+AUBT_ballastterminals09 : AUBT_ballastterminals10, AUBT_ballastterminals08
+AUBT_ballastterminals10 : AUBT_ballastterminals08, DISCONNECTED, AUBT_ballastterminals09
+AUBT_ballastterminals11 : DISCONNECTED, DISCONNECTED, AUBT_ballastterminals22 : SWARMROOM
+AUBT_ballastterminals13 : AUBT_ballastterminals14, DISCONNECTED, AUBT_ballastterminals08
 AUBT_ballastterminals14 : DISCONNECTED, AUBT_ballastterminals13
+AUBT_ballastterminals22 : AUBT_ballastterminals08, AUBT_ballastterminals11
 
 AUBT_vulturetanksshelter01 : AUBT_vulturetanks04 : SHELTER
 AUBT_vulturetanksshelter02 : AUBT_vulturetanks18 : SHELTER
@@ -32,7 +40,7 @@ AUBT_vulturetanks13 : AUBT_vulturetanks14, AUBT_vulturetanks10, AUBT_vulturetank
 AUBT_vulturetanks14 : AUBT_ballastterminals03, AUBT_vulturetanks13
 AUBT_vulturetanks15 : AUBT_vulturetanks26, AUBT_vulturetanks17, AUBT_vulturetanks03, AUBT_vulturetanks16
 AUBT_vulturetanks16 : AUBT_vulturetanks26, AUBT_vulturetanks15
-AUBT_vulturetanks17 : DISCONNECTED, AUBT_vulturetanks18, AUBT_vulturetanks23, AUBT_vulturetanks15
+AUBT_vulturetanks17 : AUBT_ballastterminals01, AUBT_vulturetanks18, AUBT_vulturetanks23, AUBT_vulturetanks15
 AUBT_vulturetanks18 : AUBT_vulturetanks19, AUBT_vulturetanks17, AUBT_vulturetanksshelter02
 AUBT_vulturetanks19 : AUBT_vulturetanks20, AUBT_vulturetanks18
 AUBT_vulturetanks20 : AUBT_vulturetanks19 : SWARMROOM
@@ -65,11 +73,32 @@ AUBT_muddytunnels16 : DISCONNECTED, AUBT_muddytunnels15
 END ROOMS
 
 CREATURES
+AUBT_memory01 : 6-TubeWorm-2
+AUBT_ballastterminals01 : 2-SmallNeedle-1
+AUBT_ballastterminals02 : 3-Cyan-1
+AUBT_ballastterminals02 : 4-Blue-1
+AUBT_ballastterminals02 : 5-BigNeedle-1
+AUBT_ballastterminals02 : 5-SmallNeedle-3
+AUBT_ballastterminals02 : 6-SquidcadaA-2
 AUBT_ballastterminals05 : 5-Blue-1
 AUBT_ballastterminals05 : 6-Blue-1
-AUBT_ballastterminals08 : 7-White-1
+AUBT_ballastterminals05 : 7-BigNeedle-1
+AUBT_ballastterminals05 : 7-SmallNeedle-3
+AUBT_ballastterminals08 : 7-BigNeedle-1
+AUBT_ballastterminals08 : 7-SmallNeedle-4
 AUBT_ballastterminals08 : 8-Blue-1
+AUBT_ballastterminals09 : 2-EggBug-1
+AUBT_ballastterminals09 : 3-Cyan-1
+AUBT_ballastterminals10 : 3-BigNeedle-1
+AUBT_ballastterminals10 : 3-SmallNeedle-3
+AUBT_ballastterminals10 : 4-EggBug-1
+AUBT_ballastterminals11 : 3-BigNeedle-1
+AUBT_ballastterminals11 : 3-SmallNeedle-4
+AUBT_ballastterminals11 : 4-CicadaA-2
+AUBT_ballastterminals11 : 5-CicadaB-2
+AUBT_ballastterminals11 : 6-Blue-1
 AUBT_ballastterminals14 : 2-Blue-1
+AUBT_ballastterminals22 : 2-Cyan-1
 
 AUBT_vulturetanks04 : 4-Black-2
 AUBT_vulturetanks05 : 3-Black-1
@@ -118,8 +147,9 @@ AUBT_muddytunnels16 : 2-White-1
 AUBT_muddytunnels16 : 3-Pink-1
 AUBT_muddytunnels16 : 4-Pink-1
 
-OFFSCREEN : 0-Vulture-3
-OFFSCREEN : 0-Scavenger-10
+OFFSCREEN : 0-Vulture-4
+OFFSCREEN : 0-Scavenger-14
+OFFSCREEN : 0-SkyWhale-5
 END CREATURES
 
 BAT MIGRATION BLOCKAGES
