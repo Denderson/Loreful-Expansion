@@ -1,0 +1,12 @@
+Template: NONE
+CeilingDrips: 0.6956522
+Clouds: 1
+Grime: 0.1195652
+RandomItemDensity: 0.8043478
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: SkyBloom-1-38-136, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-39-42, ModifyEffectColorB-0,0.5,0.3369565-294-41, RockFlea-0.3369565-294-136, 
+PlacedObjects: LightSource><668.4247><352.4353><0.1195652~EffectColor1~-3~129~50~86.60254~0~1~None~0~0, LightSource><892><346><0.1195652~EffectColor1~-3~129~50~86.60254~0~1~None~0~0, Mushroom><364.1091><437.0824><0~0~2~3, Mushroom><522.8935><253.3607><0~0~2~3, Mushroom><551.4474><251.7824><0~0~2~3, DataPearl><885.3317><432.3921><0~0~0~0~Misc~0, LightSource><213><229><0.3043478~EffectColor1~121~177~50~86.60254~0~0~None~0~0, LightSource><831><662><0.3043478~EffectColor1~-337~-48~-188~-457.3975~0~0~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory03.ogg><631.4565><593.5548><0.3695652><1, OMNI><RWTW_AmbDrips_02.ogg><815.421><595.8963><0.2065217><1, OMNI><RWTW_AmbDrips_01.ogg><816.0795><523.1046><0.2391304><0.4521739, 
+FadePalette: 42068, 0.3369565
