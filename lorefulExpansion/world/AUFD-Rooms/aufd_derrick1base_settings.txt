@@ -1,0 +1,15 @@
+Template: NONE
+CeilingDrips: 0.4021739
+WaveSpeed: 0
+WaveLength: 0
+SecondWaveLength: 0
+Clouds: 0.25
+Grime: 0.5652174
+RandomItemDensity: 0.4021739
+RandomItemSpearChance: 0.3086956
+WaterReflectionAlpha: 0
+Palette: 98
+EffectColorA: 13
+EffectColorB: 6
+Effects: Fog-0.4565217-20-20, SkyBloom-0.1630435-27-93, 
+PlacedObjects: LanternOnStick><184.2553><450.0501><22~-113, LanternOnStick><232.646><411.1708><-53~-150, CustomDecal><185.9471><363.9429><-2~70~80~82~67~-2~250~51~0~1~0~scavmark cross~0.7934783~0.4130435~0.7934783~0.4130435~0.7934783~0.4130435~0.7934783~0.4130435, CustomDecal><200.9489><426.5211><4~66~73~77~54~21~2.000015~-3~0~1~0~scavmark arrow~0.7608696~0.4130435~0.7608696~0.4130435~0.7608696~0.4130435~0.7608696~0.4130435, DandelionPatch><404.7908><369.8042><0~100, ReliableSpear><227.6429><344.1689><, ReliableSpear><1252.3><344.253><, DeadTokenStalk><223.4824><1245.051><36~-39, DeadTokenStalk><236.6406><1278.358><24~-73, SeedCob><354.1662><2090.068><0~0~7~10, DeadSeedCob><343.1881><2034.318><, 
