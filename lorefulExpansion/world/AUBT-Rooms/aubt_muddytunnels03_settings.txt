@@ -1,6 +1,6 @@
 Template: NONE
 CeilingDrips: 0.6086956
-Clouds: 0
+Clouds: 0.3043478
 Grime: 0.1086956
 BkgDroneNoThreatVolume: 0
 RandomItemDensity: 0.6086956

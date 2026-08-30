@@ -1,0 +1,7 @@
+Template: NONE
+Clouds: 0.25
+Grime: 0.3804348
+Palette: 98
+EffectColorB: 6
+Effects: Fog-0.5760869-20-20, SkyBloom-0.1847826-15-75, 
+PlacedObjects: SeedCob><353.4361><648.1896><0~0~7~10, SeedCob><303.3506><697.3829><0~0~7~10, 

@@ -1,0 +1,11 @@
+Template: NONE
+CeilingDrips: 0.6956522
+Clouds: 0.25
+Grime: 0.1086956
+Palette: 42067
+EffectColorA: 0
+EffectColorB: 13
+Effects: SkyBloom-1-39-127, ModifyEffectColorA-0.1086956,0.3043478,0.6086956-20-20, ModifyEffectColorB-0,0.5,0.3369565-285-17, RockFlea-0.2608696-297-117, 
+PlacedObjects: CosmeticSlimeMold2><929.2753><495.3016><-70~-20, CosmeticSlimeMold2><492.3397><515.6195><-30~88, CustomDecal><142.5798><240.1449><270~532~1243~411~1234~-76~-32~206~0~1~0~bigredtag~0.2065217~1~0.2065217~1~0.2065217~1~0.2065217~1, LightSource><184.1909><282.4405><0.1086956~EffectColor1~11~159~50~86.60254~0~0~None~0~0, LightSource><387><283><0.1086956~EffectColor1~11~159~50~86.60254~0~1~None~0~0, LightSource><280><289><0.1086956~EffectColor2~11~159~50~86.60254~0~1~None~0~0, LightSource><816><608><0.1086956~EffectColor1~-28~42~-25~-50.39746~0~1~None~0~0, LightFixture><490.4037><531.122><SlimeMoldLight~17.32051~-10~21, LightFixture><921.4495><484.2637><SlimeMoldLight~17.32051~-10~36, InsectGroup><1036.131><377.1508><0~100~0~0~StandardFly~0.4021739, DeadTokenStalk><875.1565><455.4456><37~71, LightSource><737><255><0.423913~EffectColor1~68~171~50~86.60254~0~0~None~0~0, LightBeam><488.9472><491.265><-194~-2~-196~84~66~87~-43.03503~58~0.6065216~0.1630435~0~1~None~0~0, LightBeam><937.2294><540.9347><203~-126~215~-195~-17~-348~-86~-411~0.6065212~0.1630434~0~1~None~0~0, 
+AmbientSounds: OMNI><AM_IND-Factory03.ogg><312.8519><91.82793><0.3369565><1, OMNI><RWTW_AmbDrips_01.ogg><495.2382><87.44965><0.2826087><1, OMNI><RWTW_AmbDrips_04.ogg><307.3314><19.10751><0.25><0.8043478, DIR><AM_ENV-Pasture.ogg><817.5711><586.8394><0.3043478><1><91.35226><0, DIR><AM_ENV-Woods.ogg><802.9385><482.3097><0.25><1><92.65069><0, 
+FadePalette: 42068, 0.25
