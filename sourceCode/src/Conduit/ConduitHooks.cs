@@ -17,6 +17,7 @@ using Random = UnityEngine.Random;
 
 namespace loremiscExpansion.Conduit
 {
+
     public static class ConduitHooks
     {
         public static int armorChunk = 1;
@@ -44,9 +45,13 @@ namespace loremiscExpansion.Conduit
 
         public const float swimmingTurningMultiplier = 2.5f;
 
-        public const int maxCricketJumpCooldown = 20;
+        public const int maxCricketJumpCooldown = 40;
 
         public const float resistanceDamageMultiplier = 0.4f;
+
+        public const int cooldownGain = 80;
+        public const int maxCooldown = 120;
+        public const int otherMoveCooldownLoss = 40;
 
         public static bool IsConduit(this Player self)
         {
@@ -144,7 +149,7 @@ namespace loremiscExpansion.Conduit
                 if (state.permanentDamageTracking > 1f)
                 {
                     player.Die();
-                }    
+                }
             }
         }
 
@@ -226,6 +231,7 @@ namespace loremiscExpansion.Conduit
             orig(self, eu);
             if (!SpearCWT.TryGetData(self, out var data)) return;
             if (!data.thrownByProtag) return;
+            if (self.Submersion < 0.8f) return;
             if (Random.value < self.firstChunk.vel.magnitude / 7f)
             {
                 Bubble bubble = new(self.firstChunk.pos + Custom.RNV() * Random.value * 4f, Custom.RNV() * Mathf.Lerp(6f, 16f, Random.value), bottomBubble: false, fakeWaterBubble: true);
@@ -285,6 +291,7 @@ namespace loremiscExpansion.Conduit
             if (data.wallBounceWindow > 0) data.wallBounceWindow--;
             if (data.cricketJumpCooldown > 0) data.cricketJumpCooldown--;
             if (data.resistanceFrames > 0) data.resistanceFrames--;
+            data.moveCooldowns.Tick();
             self.eyesClosedTime = 0;
             self.blind = 0;
             if (self.State is PlayerState state && state.permanentDamageTracking > 0) state.permanentDamageTracking -= 0.0002;
@@ -298,6 +305,15 @@ namespace loremiscExpansion.Conduit
             }
             else if (data.sporePoison > 0f) data.sporePoison -= sporepuffPoisonRecovery;
             if (self.IsCrouched() || self.IsRolling()) data.resistanceFrames = Math.Max(5, data.resistanceFrames);
+        }
+
+        public static float BoostedVel(float currentVel, float throwVel)
+        {
+            if ((currentVel >= 0f) == (throwVel >= 0f) && Mathf.Abs(currentVel) > Mathf.Abs(throwVel))
+            {
+                return currentVel + throwVel * 0.5f;
+            }
+            return throwVel;
         }
 
         private static void Player_ThrowObject(On.Player.orig_ThrowObject orig, Player self, int grasp, bool eu)
@@ -317,10 +333,9 @@ namespace loremiscExpansion.Conduit
             if (self.grasps[grasp].grabbed is Weapon weapon)
             {
                 IntVector2 throwDir = new(self.ThrowDirection, 0);
-                bool isVertical = self.input[0].y != 0;
-                bool isHorizontal = self.input[0].x != 0;
+                bool isVertical = self.input[0].y != 0 && self.input[0].x == 0;
 
-                if (isVertical && !isHorizontal)
+                if (isVertical)
                 {
                     throwDir = new IntVector2(0, self.input[0].y);
                 }
@@ -355,8 +370,14 @@ namespace loremiscExpansion.Conduit
                     data.dodgeRollDirection = System.Math.Sign(-throwDir.x);
                 }
 
-                self.bodyChunks[0].vel += throwBoost;
-                self.bodyChunks[1].vel += throwBoost * 0.8f;
+                throwBoost.x = BoostedVel(self.bodyChunks[0].vel.x, throwBoost.x);
+                throwBoost.y = BoostedVel(self.bodyChunks[0].vel.y, throwBoost.y);
+
+                self.bodyChunks[0].vel.x = throwBoost.x;
+                self.bodyChunks[0].vel.y = throwBoost.y;
+                self.bodyChunks[1].vel.x = throwBoost.x * 0.8f;
+                self.bodyChunks[1].vel.y = throwBoost.y * 0.8f;
+
 
                 if (self.grasps[grasp].grabbed is ScavengerBomb bomb && throwDir.y == 1 && self.bodyMode != Player.BodyModeIndex.ZeroG)
                 {
@@ -474,9 +495,13 @@ namespace loremiscExpansion.Conduit
             {
                 Log.LogMessage("Roll bounce off ground!");
                 self.room.PlaySound(SoundID.Slugcat_Sectret_Super_Wall_Jump, self.mainBodyChunk, loop: false, 1f, 1f);
-                
-                self.bodyChunks[0].vel = new Vector2(self.bodyChunks[0].vel.x, 17f);
-                self.bodyChunks[1].vel = new Vector2(self.bodyChunks[1].vel.x, 17f);
+
+                float groundBounceScale = data.moveCooldowns.GetCooldownExhaustion(ConduitMove.GroundBounce);
+                data.moveCooldowns.IncreaseCooldown(ConduitMove.GroundBounce);
+
+                float bounceY = 17f * groundBounceScale;
+                self.bodyChunks[0].vel = new Vector2(self.bodyChunks[0].vel.x, bounceY);
+                self.bodyChunks[1].vel = new Vector2(self.bodyChunks[1].vel.x, bounceY);
 
                 self.room.ScreenMovement(self.mainBodyChunk.pos, new Vector2(0f, 1f), 0.1f);
 
@@ -494,7 +519,10 @@ namespace loremiscExpansion.Conduit
                 self.rollDirection = -direction.x;
                 self.rollCounter = 0;
 
-                float bounceSpeed = Mathf.Max(rollSpeed, speed * 0.8f);
+                float wallBounceScale = data.moveCooldowns.GetCooldownExhaustion(ConduitMove.WallBounce);
+                data.moveCooldowns.IncreaseCooldown(ConduitMove.WallBounce);
+
+                float bounceSpeed = Mathf.Max(rollSpeed, speed * 0.8f) * wallBounceScale;
                 self.bodyChunks[0].vel.x = bounceSpeed * self.rollDirection;
                 self.bodyChunks[1].vel.x = bounceSpeed * self.rollDirection;
 
@@ -527,7 +555,7 @@ namespace loremiscExpansion.Conduit
         public static bool Player_SpearStick(On.Player.orig_SpearStick orig, Player self, Weapon source, float dmg, BodyChunk chunk, PhysicalObject.Appendage.Pos appPos, Vector2 direction)
         {
             bool value = orig(self, source, dmg, chunk, appPos, direction);
-            if (IsConduit(self) && PlayerCWT.TryGetData(self, out var data) && data.resistanceFrames > 0 && (self.playerState.permanentDamageTracking + (dmg *  resistanceDamageMultiplier) < 1f))
+            if (IsConduit(self) && PlayerCWT.TryGetData(self, out var data) && data.resistanceFrames > 0 && (self.playerState.permanentDamageTracking + (dmg * resistanceDamageMultiplier) < 1f))
             {
                 return false;
             }
@@ -662,8 +690,12 @@ namespace loremiscExpansion.Conduit
                 orig(self);
                 return;
             }
-            bool wasRolling = IsRolling(self);
-            if (!wasRolling)
+            if (!IsRolling(self))
+            {
+                orig(self);
+                return;
+            }
+            if (!PlayerCWT.TryGetData(self, out var data))
             {
                 orig(self);
                 return;
@@ -684,18 +716,13 @@ namespace loremiscExpansion.Conduit
                 awayFromCreature = awayFromCreature.normalized;
 
                 Vector2 bounce = new(awayFromCreature.x * 7f, Mathf.Abs(awayFromCreature.y) * 5f + 6f);
+                bounce *= data.moveCooldowns.GetCooldownExhaustion(ConduitMove.CreatureBounce);
+                data.moveCooldowns.IncreaseCooldown(ConduitMove.CreatureBounce);
+
                 self.bodyChunks[0].vel = bounce;
                 self.bodyChunks[1].vel = bounce * 0.7f;
 
-                targetCreature.Violence(
-                    self.bodyChunks[0],
-                    awayFromCreature * -5f,
-                    targetChunk,
-                    null,
-                    Creature.DamageType.Blunt,
-                    0.6f,
-                    1.2f
-                );
+                targetCreature.Violence(self.bodyChunks[0], awayFromCreature * -4f, targetChunk, null, Creature.DamageType.Blunt, 0.2f, 40f);
 
                 self.SetRolling(true);
             }
@@ -722,6 +749,10 @@ namespace loremiscExpansion.Conduit
                 float dir = self.flipDirection != 0 ? self.flipDirection : 1f;
                 Vector2 lungeForce = new(dir * 9f, 7f);
                 if (self.mainBodyChunk.vel.x < 3f) lungeForce.x += 3f;
+
+                lungeForce *= data.moveCooldowns.GetCooldownExhaustion(ConduitMove.CricketJump);
+                data.moveCooldowns.IncreaseCooldown(ConduitMove.CricketJump);
+
                 self.bodyChunks[0].vel += lungeForce;
                 self.bodyChunks[1].vel += lungeForce * 0.6f;
                 self.animation = Player.AnimationIndex.None;
@@ -735,6 +766,10 @@ namespace loremiscExpansion.Conduit
                 float dir = 1f;
                 if (data.dodgeRollDirection < 0) dir = -1f;
                 Vector2 lungeForce = new(dir * 5f, 4f);
+
+                lungeForce *= data.moveCooldowns.GetCooldownExhaustion(ConduitMove.DodgeRoll);
+                data.moveCooldowns.IncreaseCooldown(ConduitMove.DodgeRoll);
+
                 self.bodyChunks[0].vel += lungeForce;
                 self.bodyChunks[1].vel += lungeForce * 0.8f;
                 self.animation = Player.AnimationIndex.None;
